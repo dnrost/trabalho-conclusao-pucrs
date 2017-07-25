@@ -1,0 +1,151 @@
+\chapter*{Anexo C --- Manual de utilização}
+\label{manual}
+%\addtocontents{toc}{\protect\contentsline {chapter}{Anexo C --- Manual de utilização}{82}}
+Neste anexo é apresentado o manual de utilização do sistema Desview. É mostrado como inserir equipamentos, tarefas e variáveis no protótipo e como utilizar as visualizações implementadas.
+\section*{\textit{Login}}
+Para utilizar o sistema é necessário possuir uma conta com usuário e senha. Assim, a tela de \textit{login} é mostrada no início da aplicação, como ilustra a Figura \ref{fig:login}. Caso não possuir um usuário, crie um, e se esquecer da senha utilize o \textit{link} de recuperação de senha.
+\begin{figure}[!h]
+\centering
+\includegraphics[width=8cm, height=5cm]{imagens-tc2/manual/login.jpg}
+\caption{Tela de \textit{login} do sistema.}
+\label{fig:login}
+\end{figure}
+\section*{Inserção de equipamentos, de tarefas e de variáveis}
+\label{sec:insere}
+Após entrar no sistema é aberta a tela inicial do sistema, conforme ilustra a Figura \ref{fig:telaprincipal}. Para iniciar as monitorações é necessário inserir equipamentos e a seguir inserir tarefas, com variáveis de MIB a serem monitoradas.
+\par Para inserir equipamentos e tarefas, utilize o menu \textit{Tools}, a seguir selecione \textit{Insert} e \textit{Equipment} ou \textit{Task} (Figura \ref{fig:inserir-equip}). Também é possível inserir tarefas através do botão \textit{New} da janela principal.
+\begin{figure}
+\centering
+\includegraphics[width=12cm]{imagens-tc2/manual/telaprincipal.jpg}
+\caption{Tela inicial do sistema com tarefas e visualizações.}
+\label{fig:telaprincipal}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=8cm, height=3cm]{imagens-tc2/manual/inserir-equip.jpg}
+\caption{Inserindo equipamentos e tarefas.}
+\label{fig:inserir-equip}
+\end{figure}
+\par Ao inserir equipamentos, é necessário informar o IP do equipamento, o nome do equipamento, comunidade de leitura e de escrita, \textit{timeout}, número de \textit{retries} e porta de acesso SNMP, como apresentado na Figura \ref{fig:inserir-equip-dados}.
+\par Para inserir tarefas, os dados necessários são os seguintes: nome da tarefa, equipamento em que será efetuada a leitura das variáveis, variáveis de MIB a serem monitoradas, data de início e fim e intervalo entre as leituras, como apresentado na Figura \ref{fig:insere-task}. Cada variável a ser inserida pode possuir \textit{thresholds} superior e inferior ao serem monitoradas. Para inserir os \textit{thresholds}, selecione um elemento da árvore apresentada na Figura \ref{fig:insere-task}, à esquerda e selecione \textit{Insert \& Thresholds}. Será apresentada a janela de edição dos valores ilustrada na Figura \ref{fig:thresholds}, na qual deve ser inseridos e salvos os valores desejados. A variável é então adicionada à tarefa e passa a ser monitorada juntamente com as demais variáveis que venham a ser adicionadas à tarefa.
+\begin{figure}
+\centering
+\includegraphics[width=8cm, height=5cm]{imagens-tc2/manual/inserir-equipamento.jpg}
+\caption{Inserção de equipamentos.}
+\label{fig:inserir-equip-dados}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=8cm, height=7cm]{imagens-tc2/manual/inserirtarefa.jpg}
+\caption{Inserção de tarefas e variáveis.}
+\label{fig:insere-task}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=8cm, height=3cm]{imagens-tc2/manual/thresholds.jpg}
+\caption{Definição de \textit{thresholds} de variáveis.}
+\label{fig:thresholds}
+\end{figure}
+\section*{Edição de equipamentos, de tarefas e de variáveis}
+Para editar um equipamento, uma tarefa ou dados de uma variável associada a uma tarefa deve-se utilizar o menu \textit{Tools}, \textit{Edit} e a seguir \textit{Equipment} ou \textit{Task}, como representado na Figura \ref{fig:editar}. Nas janelas de edição dos dados já cadastrados que serão apresentadas, deve-se inserir e salvar as alterações desejadas.
+\begin{figure}[!h]
+\centering
+\includegraphics[width=8cm, height=3cm]{imagens-tc2/manual/editar.jpg}
+\caption{Edição de equipamentos e tarefas.}
+\label{fig:editar}
+\end{figure}
+\section*{Remoção de equipamentos, tarefas e variáveis}
+Para remover uma tarefa selecione a tarefa desejada na tabela de tarefas em monitoração da janela principal (Figura \ref{fig:telaprincipal}), utilize o menu \textit{Tools}, \textit{Delete} e a seguir \textit{Task}, como representado na Figura \ref{fig:remover}. Para remover um equipamento inicialmente selecione \textit{Equipment}, após será apresentada uma janela como a mostrada na Figura \ref{fig:removerequipamento}, escolha o equipamento desejado e remova-o. Também é possível tornar uma tarefa invisível, ou seja, apenas mantendo-a no banco de dados, porém sem aparecer na janela de tarefas e sem efetuar leituras. Assim, os dados estatísticos da mesma não são removidos do banco de dados. Para remover variáveis abra a tarefa desejada e remova utilizando o botão \textit{Remove}, mostrado na Figura \ref{fig:insere-task}.
+\begin{figure}
+\centering
+\includegraphics[width=8cm, height=3cm]{imagens-tc2/manual/remover.jpg}
+\caption{Remover de equipamentos e tarefas.}
+\label{fig:remover}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=10cm, height=5cm]{imagens-tc2/manual/removerequipamento.jpg}
+\caption{Janela de escolha de equipamento a ser deletado.}
+\label{fig:removerequipamento}
+\end{figure}
+\section*{Parar e iniciar tarefas}
+As tarefas cadastradas que estejam executando podem ser paradas caso desejado. Também é possível iniciar uma tarefa que esteja parada. Essas ações podem ser executadas através dos botões \textit{Start} e \textit{Stop}, mostrados na Figura \ref{fig:botoes}. Tarefas que possuem o estado \textit{Stopped} não são lidas pelo escalonador, ou seja, não realizam consultas SNMP nem inserem o resultado das consultas no banco de dados. Também é possível atualizar a tela com as tarefas e verificar o estado de cada uma das tarefas, criar uma nova tarefa e editar uma tarefa já cadastrada. 
+\begin{figure}[!h]
+\centering
+\includegraphics[width=7cm, height=2cm]{imagens-tc2/manual/botoes.jpg}
+\caption{Botões de ações para as tarefas.}
+\label{fig:botoes}
+\end{figure}
+\section*{Exportar dados}
+O protótipo permite exportar dados nos formatos texto (TXT) e PDF. Para exportar os dados lidos de leituras, deve-se utilizar o menu \textit{File}, a seguir \textit{Export}. Escolha o formato de exportação como mostrado na Figura \ref{fig:export}. A seguir, informe o diretório a ser salvo o arquivo.
+\begin{figure}[!h]
+\centering
+\includegraphics[width=7cm, height=4cm]{imagens-tc2/manual/telaexport.jpg}
+\caption{Tela de escolha de formatos de exportação.}
+\label{fig:export}
+\end{figure}
+\section*{Utilizando as visualizações}
+São oferecidas as seguintes visualizações no sistema (Figura \ref{fig:visualizations}):
+\begin{itemize}
+\item Visualização em linhas;
+\item Visualização em espirais;
+\item Visualização em esferas;
+\item \textit{Chart} de monitoração em tempo real de variáveis;
+\item \textit{Chart} polar, de barras e de linhas.
+\end{itemize}
+\begin{figure}[!h]
+\centering
+\includegraphics[width=7cm]{imagens-tc2/manual/visulizations.jpg}
+\caption{Tela de escolha de visualizações a serem plotadas.}
+\label{fig:visualizations}
+\end{figure}
+\subsection*{Visualizações em \textit{charts}}
+O \textit{chart} de tempo real tem por objetivo a monitoração de até 5 variáveis de diferentes tarefas e assim, verificar o valor atual de cada uma variáveis e monitorá-las a partir de um \textit{threshold}, informando se algum dos valores lidos das variáveis passou do \textit{threshold} informado.
+\begin{figure}[!h]
+\centering
+\includegraphics[width=7cm, height=5cm]{imagens-tc2/manual/escolhavariaveisrt.jpg}
+\caption{Janela de escolha de variáveis.}
+\label{fig:escrt}
+\end{figure}
+\begin{figure}[!h]
+\centering
+\includegraphics[width=10cm, height=8cm]{imagens-tc2/manual/rt.jpg}
+\caption{Exemplo de gráfico de tempo real gerado.}
+\label{fig:rt}
+\end{figure}
+\par Os demais \textit{charts} são utilizados para verificar estatísticas das leituras efetuadas. O protótipo possui \textit{charts} em formato de barras, de linhas e gráfico polar. Para utilizar informe os dados solicitados para construção do \textit{chart}, como: ano, mês e variável para que o gráfico seja plotado.
+\subsection*{Visualizações em OpenGL}
+\subsubsection*{Gráfico 2D de linhas e de espirais}
+Para gerar os gráficos 2D de linhas ou de espirais, inicialmente é necessário escolher qual é a tarefa que se deseja visualizar, como mostrado na Figura \ref{fig:selecttask}, após são gerados os gráficos mostrando se os valores lidos estão dentro, acima ou abaixo do intervalo determinado como normal para a variável, como mostrado na Figura \ref{fig:linhasespirais}, que apresenta os dois gráficos monitorando diferentes variáveis.
+\begin{figure}[!h]
+\centering
+\includegraphics[width=10cm, height=5cm]{imagens-tc2/manual/selecaotasklinhaseespirais.jpg}
+\caption{Janela de seleção de tarefas para gráficos OpenGL.}
+\label{fig:selecttask}
+\end{figure}
+\begin{figure}[!h]
+\centering
+\includegraphics[width=10cm, height=5cm]{imagens-tc2/manual/linhas-espirais.jpg}
+\caption{Exemplo de gráfico de linhas e de espirais gerados.}
+\label{fig:linhasespirais}
+\end{figure}
+\subsubsection*{Gráfico 3D}
+Para gerar os gráficos 3D de esferas, inicialmente é necessário escolher qual é a tarefa que se deseja visualizar, como mostrado na Figura \ref{fig:selecttask}. Após são plotadas sequências de gráficos 3D informando as médias das variáveis nos meses do ano e o estado da média em relação aos \textit{thresholds}, ao clicar em uma das variáveis é trazido a média dos dias do ano Figura \ref{fig:3dm3}, novamente informando a média em relação aos \textit{thresholds}. Dois exemplos de imagens geradas pela visualização em esferas são mostrado na Figura \ref{fig:3dm} e Figura \ref{fig:3dm2}.
+\begin{figure}
+\centering
+\includegraphics[width=10cm]{imagens-tc2/estudo-caso/3d1.jpg}
+\caption{Exemplo 1 de gráfico em esferas.}
+\label{fig:3dm}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=10cm]{imagens-tc2/estudo-caso/3d2.jpg}
+\caption{Exemplo 2 de gráfico em esferas.}
+\label{fig:3dm2}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=10cm]{imagens-tc2/revisao/3d2.png}
+\caption{Nível de dias de uma tarefa selecionada.}
+\label{fig:3dm3}
+\end{figure}

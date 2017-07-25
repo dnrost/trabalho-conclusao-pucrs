@@ -1,0 +1,60 @@
+\select@language {brazilian}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Modelo cl\'assico de visualiza\c c\~ao \cite {HABER}.}}{14}{figure.2.1}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Modelo de refer\^encia de visualiza\c c\~ao \cite {CAR99}.}}{14}{figure.2.2}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Imagem gerada com a utiliza\c c\~ao da t\'ecnica de \textit {treemap}, retirada de RDI \cite {prisma}.}}{17}{figure.2.3}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Imagem gerada utilizando a t\'ecnica de dispers\~ao, retirada de RDI \cite {prisma}.}}{17}{figure.2.4}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Exemplo de gr\'afico com coordenadas paralelas, retirado de RDI \cite {prisma}.}}{18}{figure.2.5}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Integra\c c\~ao entre as \'areas funcionais de Ger\^encia de Redes \cite {WIKI-pt}.}}{20}{figure.2.6}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces A MIB-2.}}{22}{figure.2.7}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Exemplo de gr\'afico gerado pelo Cacti \cite {CACTI}.}}{29}{figure.3.1}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Imagens geradas pelo MRTG, retiradas de Switch \cite {switch}.}}{31}{figure.3.2}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Exemplo de gr\'afico gerado pelo Nagios \cite {NAGIOS}.}}{32}{figure.3.3}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Exemplo de gr\'afico gerado pelo OpenNMS.}}{33}{figure.3.4}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Gr\'afico gerado pela ferramenta \textit {Management Traffic Analyzer} \cite {SALVADOR}.}}{34}{figure.3.5}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Gr\'afico com as tr\^es t\'ecnicas utilizadas no Prisma (\textit {treemap}, dispers\~ao e coordenadas paralelas) para o mesmo conjunto de dados de entrada \cite {KAUER}.}}{35}{figure.3.6}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Exemplo de um Mapa Auto-Organiz\'avel retirado de Germano \cite {som}. O mapa bi-dimensional gerado representa as posi\c c\~oes dos nodos em rela\c c\~ao aos nodos vizinhos. O objetivo \'e que os nodos que forem topologicamente pr\'oximos respondam de maneira semelhante a entradas semelhantes.}}{36}{figure.3.7}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Mapeamento de dados de entrada 6-D em 2-D atrav\'es de Mapas Auto-Organiz\'aveis, onde os dados de entrada correspondem a 6 diferentes vetores com apenas um n\'umero `1' em cada vetor. Figura retirada de Nayak \cite {nayak}.}}{37}{figure.3.8}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Casos de uso do sistema.}}{41}{figure.4.1}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Modelagem do banco de dados do sistema.}}{43}{figure.4.2}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Tela principal do prot\'otipo.}}{44}{figure.4.3}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Tela de inser\c c\~ao de equipamentos.}}{45}{figure.4.4}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Tela de inser\c c\~ao de tarefas e de vari\'aveis associadas.}}{45}{figure.4.5}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Gr\'afico de tempo real obtido, informando que a vari\'avel em monitora\c c\~ao passou do \textit {threshold} informado.}}{48}{figure.4.6}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Gr\'afico polar obtido a partir de leituras efetuadas em uma vari\'avel durante um m\^es.}}{49}{figure.4.7}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Gr\'afico de barras contendo o valor m\IeC {\'\i }nimo, o valor m\'aximo e a m\'edia dos valores lidos de tr\^es vari\'aveis.}}{49}{figure.4.8}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Gr\'afico de linhas contendo a m\'edia de todos os valores lidos durante os meses de determinado ano.}}{50}{figure.4.9}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Gr\'afico OpenGL 2D - linhas.}}{51}{figure.4.10}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Gr\'afico OpenGL 2D - espirais.}}{51}{figure.4.11}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Gr\'afico OpenGL 3D - esferas n\IeC {\'\i }vel de var\IeC {\'\i }aveis distribu\IeC {\'\i }das nos meses do ano.}}{52}{figure.4.12}
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Gr\'afico OpenGL 3D - esferas mostrando os dias do m\^es para a vari\'avel selecionada.}}{52}{figure.4.13}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Modelo conceitual de classes do sistema}}{74}{figure.5.1}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Modelo conceitual de classes: parte 1 - pacote \textit {model}.}}{75}{figure.5.2}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Modelo conceitual de classes: parte 2 - pacote \textit {controller}.}}{76}{figure.5.3}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Modelo conceitual de classes: parte 3 - pacote \textit {util}.}}{77}{figure.5.4}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Modelo conceitual de classes: parte 4 - pacote \textit {graphics}.}}{78}{figure.5.5}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Modelo conceitual de classes: parte 5 - pacote \textit {chart}s.}}{79}{figure.5.6}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Modelo conceitual de classes: parte 6 - pacote \textit {view}.}}{80}{figure.5.7}
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Tela de \textit {login} do sistema.}}{81}{figure.5.8}
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Tela inicial do sistema com tarefas e visualiza\c c\~oes.}}{82}{figure.5.9}
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Inserindo equipamentos e tarefas.}}{82}{figure.5.10}
+\contentsline {figure}{\numberline {5.11}{\ignorespaces Inser\c c\~ao de equipamentos.}}{83}{figure.5.11}
+\contentsline {figure}{\numberline {5.12}{\ignorespaces Inser\c c\~ao de tarefas e vari\'aveis.}}{83}{figure.5.12}
+\contentsline {figure}{\numberline {5.13}{\ignorespaces Defini\c c\~ao de \textit {thresholds} de vari\'aveis.}}{84}{figure.5.13}
+\contentsline {figure}{\numberline {5.14}{\ignorespaces Edi\c c\~ao de equipamentos e tarefas.}}{84}{figure.5.14}
+\contentsline {figure}{\numberline {5.15}{\ignorespaces Remover de equipamentos e tarefas.}}{85}{figure.5.15}
+\contentsline {figure}{\numberline {5.16}{\ignorespaces Janela de escolha de equipamento a ser deletado.}}{85}{figure.5.16}
+\contentsline {figure}{\numberline {5.17}{\ignorespaces Bot\~oes de a\c c\~oes para as tarefas.}}{85}{figure.5.17}
+\contentsline {figure}{\numberline {5.18}{\ignorespaces Tela de escolha de formatos de exporta\c c\~ao.}}{86}{figure.5.18}
+\contentsline {figure}{\numberline {5.19}{\ignorespaces Tela de escolha de visualiza\c c\~oes a serem plotadas.}}{87}{figure.5.19}
+\contentsline {figure}{\numberline {5.20}{\ignorespaces Janela de escolha de vari\'aveis.}}{87}{figure.5.20}
+\contentsline {figure}{\numberline {5.21}{\ignorespaces Exemplo de gr\'afico de tempo real gerado.}}{88}{figure.5.21}
+\contentsline {figure}{\numberline {5.22}{\ignorespaces Janela de sele\c c\~ao de tarefas para gr\'aficos OpenGL.}}{88}{figure.5.22}
+\contentsline {figure}{\numberline {5.23}{\ignorespaces Exemplo de gr\'afico de linhas e de espirais gerados.}}{89}{figure.5.23}
+\contentsline {figure}{\numberline {5.24}{\ignorespaces Exemplo 1 de gr\'afico em esferas.}}{89}{figure.5.24}
+\contentsline {figure}{\numberline {5.25}{\ignorespaces Exemplo 2 de gr\'afico em esferas.}}{90}{figure.5.25}
+\contentsline {figure}{\numberline {5.26}{\ignorespaces N\IeC {\'\i }vel de dias de uma tarefa selecionada.}}{90}{figure.5.26}

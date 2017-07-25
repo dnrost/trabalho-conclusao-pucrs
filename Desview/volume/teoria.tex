@@ -1,0 +1,520 @@
+\chapter{Introdução}
+\label{capitulo:introducao}
+Neste capítulo é feita uma contextualização do trabalho desenvolvido, além de apresentar a sua motivação e os objetivos do trabalho. Ao final do capítulo é feita uma descrição da organização do texto. 
+\section{Contextualização}
+\label{secao:contextualizacao}
+A Visualização de Informação (\textit{VISINFO})\abbrev{VISINFO} {Visualização de Informação} é uma área de aplicação da Computação Gráfica (\textit{CG})\abbrev{CG} {Computação Gráfica} que se utiliza de diferentes técnicas e algoritmos com o objetivo de facilitar a análise de um grande volume de dados, gerados por diversas fontes, através de representações gráficas manipuláveis. A representação visual destes volumes de dados visa facilitar o seu entendimento e tem se mostrado de grande importância nos últimos anos, para diversas organizações que necessitam analisar e extrair informações dos diversos dados gerados. De acordo com Card, Mackinlay e Shneiderman \cite{CAR99}, a VISINFO consiste na utilização de representações visuais e interativas de dados abstratos, suportadas por computador, para ampliar a cognição e encontrar relações e características presentes em um conjunto de dados.
+\par A VISINFO tem por objetivo facilitar o entendimento das informações proporcionando uma representação visual de um conjunto de dados de uma forma mais simples e intuitiva, facilitando o entendimento do significado e das relações entre os dados pertencentes a um conjunto. Torna-se muito mais fácil para uma pessoa entender o significado de uma imagem do que de vários dados isolados \cite{ESTIVALET}.
+\par A Gerência de Rede de Computadores (\textit{GRC})\abbrev{GRC} {Gerência de Redes de Computadores} é uma área de redes de computadores que se preocupa em garantir que um determinado conjunto de ações, procedimentos e políticas sejam tomados para manter sempre ativa uma determinada rede, pelo fato da importância que as redes têm desenvolvido nos últimos anos e ao porte e à complexidade que elas têm adquirido para a maioria das organizações. Sem um controle efetivo, os recursos das redes de computadores (que normalmente são heterogêneos), não proporcionariam os retornos desejados para os quais foram concebidos. Dessa forma, alguns dos principais objetivos da área de GRC podem ser definidos como: garantir a qualidade da infraestrutura de rede; identificar padrões e tendências de uso; planejar o crescimento da rede e identificar e resolver problemas o mais breve possível \cite{WIKI-pt}.
+\section{Motivação}
+\label{secao:motivacao}
+A visualização possui um importante papel no entendimento, exploração e análise de um conjunto de dados, porém, no contexto de gerenciamento de infraestrutura de sistemas, a maioria das ferramentas disponíveis de visualização é limitada a informações tabulares e linhas de tempo informando eventos ocorridos. Como o número de dispositivos sendo monitorados tende a crescer e a infraestrutura que os comporta torna-se cada vez mais complexa, é importante que sejam implementadas ferramentas com visualizações mais efetivas e que explorem técnicas de análise de dados no gerenciamento de sistemas. 
+\par Sistemas de GRC que utilizam técnicas de VISINFO para representar e organizar as informações de redes têm sido desenvolvidos em áreas como topologia de redes e gerenciamento de falhas ocorridas em elementos de rede, tais como o sistema OpenNMS \cite{opennms} (apresentado no capítulo \ref{capitulo:relacionados}). Como a VISINFO permite a criação de abordagens abstratas e intuitivas para transmitir as informações de forma que os usuários explorem e compreendam muitas informações de uma só vez, pode-se desenvolver uma ferramenta que seja capaz de prover essa funcionalidade no gerenciamento de desempenho de redes de computadores também. Essa representação visual é desejável porque, por um lado abstrai detalhes do conjunto de informações e, por outro, propicia uma organização desse conjunto de dados segundo algum critério \cite{FREITAS}. O uso de uma ferramenta visual que apresente um grande conjunto de informações pode auxiliar os administradores de redes a se anteciparem a possíveis problemas que venham a ocorrer na rede, aumentando o desempenho da rede e, consequentemente, a confiabilidade da mesma.
+\section{Objetivos} 
+\label{secao:objetivos}
+O objetivo geral deste trabalho é o projeto e o desenvolvimento de um sistema de VISINFO de desempenho no gerenciamento de redes de computadores. Este sistema permite a visualização, através do uso de técnicas de VISINFO, do desempenho de uma rede de computadores por meio de gráficos 2D e 3D. Além disso, o protótipo desenvolvido realiza a coleta e o armazenamento dos dados de variáveis de equipamentos de rede para visualização dos dados em tempo real, ou então, para posterior análise através de gráficos dos valores armazenados das leituras.
+\par Assim, o trabalho une as práticas e os conhecimentos adquiridos ao longo da faculdade nas disciplinas de Redes de Computadores, Engenharia de \textit{Software} e CG, em uma ferramenta para a resolução de inúmeros problemas. Assim, o sistema descrito permite auxiliar o administrador da rede a antecipar-se a problemas que venham a ocorrer ou estejam ocorrendo em uma rede, além da análise dos dados para, então, com o auxílio de representações gráficas simples e/ou mais elaboradas, encontrar relações entre os dados e, assim, tomar atitudes que possam auxiliar o desenvolvimento de uma rede de computadores e evitar a degradação do sistema.
+\section{Organização do texto}
+\label{secao:organizacao}
+O presente trabalho de conclusão (\textit{TC})\abbrev{TC} {Trabalho de Conclusão} está dividido em cinco capítulos estruturados da seguinte forma: 
+o Capítulo \ref{capitulo:introducao} apresenta uma introdução, com a contextualização das áreas de VISINFO e GRC, motivação e objetivos do trabalho; o Capítulo \ref{capitulo:fundamentacao} apresenta a fundamentação teórica sobre a área de VISINFO e GRC; o Capítulo \ref{capitulo:relacionados} descreve trabalhos relacionados com este trabalho; o Capítulo \ref{capitulo:trab} , por sua vez, apresenta maiores detalhes relativos ao trabalho implementado, como ambiente de desenvolvimento, funcionalidades, escopo e modelagem do sistema e o Capítulo \ref{capitulo:conclusoes} apresenta as conclusões obtidas com o trabalho desenvolvido e trabalhos futuros.
+\chapter{Fundamentação Teórica}
+\label{capitulo:fundamentacao}
+Neste capítulo é apresentado o referencial teórico relativo às áreas relacionadas ao presente trabalho. É feita uma introdução e são abordadas características das áreas de VISINFO e de GRC. São mencionadas aplicações, modelos de referência, vantagens e técnicas utilizadas para o desenvolvimento de aplicações com VISINFO. Também são apresentadas as áreas funcionais de GRC, a arquitetura de gerenciamento, além de uma breve introdução ao protocolo SNMP e ao gerenciamento de desempenho.
+\section{Visualização de Informações}
+\label{secao:visualizacao}
+\subsection{Introdução}
+\label{secao:definicao-visualizacao}
+A VISINFO é uma área emergente da Ciência da Computação que estuda técnicas para apresentar dados e informações de forma visual, de tal modo que as relações entre esses dados sejam mais bem compreendidas ou informações novas sejam descobertas. O principal objetivo do uso de técnicas de VISINFO é auxiliar no entendimento de um determinado assunto e a partir de um conjunto de dados alfanuméricos gerar representações gráficas. Sem a utilização de técnicas de visualização para a análise de certo conjunto de informações, seria necessário um esforço muito maior para compreender e relacionar dados entre si \cite{NASCIMENTO}.
+\par Dessa forma, a área de VISINFO se apresenta como um campo de estudo de grande utilidade, uma vez que agrega técnicas que facilitam o entendimento de informações a partir da representação visual de vários conjuntos de dados \cite{NASCIMENTO}.
+
+\subsection{Dados e Representações Visuais}
+\label{secao:dados-representacoes}
+Dados descrevem fenômenos (ou processos) que são objeto de estudo ou análise. Dessa forma, dados podem ser caracterizados de acordo com diferentes critérios e a identificação dessas características é a consideração inicial a ser feita na escolha da técnica de visualização a ser utilizada \cite{FREITAS}. Um primeiro critério para caracterizar atributos é a classe (ou tipo) de informação que representam. Atributos podem representar propriedades ou relações entre os dados. Um segundo critério de caracterização dos atributos, dependente do primeiro, é quanto ao tipo de dado que representa a identificação de entidade relacionada. Finalmente, um terceiro critério para a caracterização é de acordo com a dimensão e a natureza do domínio onde estão representados. Um sumário da caracterização dos dados e exemplos de domínios podem ser observados na Tabela \ref{tabela-caracterizacao}, retirada de Freitas \cite{FREITAS}.
+\begin{table}[h]
+\caption{Sumário da caracterização dos dados com exemplos de diferentes domínios \cite{FREITAS}.}
+\centering
+\begin{tabular}{ccc} \hline Critério & \multicolumn{1}{c}{Classe} & Exemplo \\ 
+\hline
+\hline
+\multirow{4}{2cm}{Classe de Informação} 
+& Escalar & Temperatura.\\
+& Vetorial & Grandezas físicas associadas \\
+& Tensorial & à dinâmica de fluidos. \\
+& Relacionamento & \textit{Links} em um hiperdocumento. \\
+\hline
+\multirow{3}{2cm}{Tipos dos valores}
+& Alfanumérico & Valor de identificação. \\ 
+& Numérico (inteiro, real) & Temperatura.\\
+& Simbólico & \textit{Links} em um hiperdocumento.\\
+\hline
+\multirow{3}{2cm}{Natureza do domínio}
+& Discreto & Marcas de automóveis. \\ 
+& Contínuo & Superfície de um terreno.\\
+& Contínuo-discretizado & Anos (tempo discretizado). \\
+\hline
+\multirow{4}{2cm}{Natureza do domínio}
+& 1D & Fenômeno ocorrendo no tempo. \\ 
+& 2D & Superfície de um terreno.\\
+& 3D & Volume de dados médicos. \\
+& \textit{n}-D & Dados de uma população. \\
+\hline
+\end{tabular}
+\label{tabela-caracterizacao}
+\end{table}
+\par Segundo \cite{FREITAS}, ``representações gráficas ou visuais correspondem às `figuras' ou `imagens' empregadas para representar o conjunto de dados em análise. Além dos tradicionais gráficos de pontos, de linhas, de tortas, de barras e histogramas de frequência, os quais nos permitem observar relações entre atributos, uma série de representações gráficas mais ou menos complexas são empregadas para codificar através de elementos visuais tanto valores como relacionamentos entre entidades ou elementos de dados''. Um resumo dessas representações pode ser observado na Tabela \ref{tabela-representacoes}, retirada de Freitas \cite{FREITAS}.
+\begin{table}[h]
+\caption{Classes de representações visuais \cite{FREITAS}.}
+\centering
+\begin{tabular}{ccc} \hline Classe & \multicolumn{1}{c}{Tipo} & Utilização \\ 
+\hline
+\hline
+\multirow{5}{2cm}{Gráficos 2D, 3D}
+& Pontos & Representação da distribuição dos \\ 
+& Circulares & elementos no espaço domínio,\\
+& Linhas & representação da \\
+& Barras & dependência/correlação \\
+& Superfícies (para 3D) & entre os atributos.\\
+\hline
+\multirow{4}{2cm}{Ícones, glifos e objetos geométricos}
+& Elementos geométricos 2D ou 3D & Representação de entidades\\ 
+& diversos & em um contexto, representação\\
+& & de grupos de atributos \\
+& & de diversos tipos.\\
+\hline
+\multirow{8}{2cm}{Mapas}
+& de pseudo-cores & Representação de campos escalares\\ 
+& & ou de categorias.\\
+& de linhas & Representação de linhas de contorno\\
+& & de regiões ou isovalores. \\
+& de superfícies & Idem, no espaço 3D. \\
+& de ícones e símbolos diversos & Representação de grupos de\\
+& & atributos (categorias, escalares,\\
+& & vetoriais, tensoriais).\\
+\hline
+\multirow{4}{2cm}{Diagramas}
+& Nodos e arestas & Representação de relacionamentos\\ 
+& & diversos: É-um, É-parte-de,\\
+& & comunicação, sequência \\
+& & referência, etc. \\
+\hline
+\end{tabular}
+\label{tabela-representacoes}
+\end{table} 
+\subsection{Modelo de Referência de Visualização}
+\label{secao:modelo-visualizacao}
+Segundo \cite{FREITAS}, ``um modelo de referência de visualização permite a identificação dos componentes essenciais a serem considerados na utilização de uma determinada técnica ou no desenvolvimento de uma nova. O modelo clássico de visualização, proposto por Harber e McNabb (\cite{FREITAS} \textit{apud} \cite{HABER}), mostrado na Figura \ref{fig:rep1} é um \textit{pipeline} simples, onde dados sofrem filtragem e mapeamento para alguma representação geométrica, a qual, finalmente passa por um processo de geração de imagem (\textit{rendering}).  Outro modelo, proposto por Card, Mackinlay e Shneiderman (\cite{FREITAS} \textit{apud} \cite{CAR99}), descreve visualização como uma sequência de mapeamentos `ajustáveis' de dados para uma representação visual de modo a possibilitar interação do usuário com o espaço de informação. A sequência de mapeamento encontra-se reproduzida na Figura \ref{fig:rep2}. 
+Neste modelo, os `dados brutos' (coletados ou gerados por algum processo) são transformados em tabelas, ou seja, descrições relacionais que incluem metadados. O uso de tabelas é uma simplificação desnecessária, pois os dados podem ser representados em outros tipos quaisquer de estruturas de dados, dependendo da aplicação.
+\par Além da transformação inicial dos dados brutos em descrições relacionais, novas transformações podem ser aplicadas, seja para agregar novos dados ao conjunto inicial (por exemplo, calcular grandezas estatísticas), quer para converter os dados originais para outros tipos ou reorganizar o conjunto de dados (por exemplo, classificação).
+\par As tabelas relacionais são, então, mapeadas para estruturas ou representações visuais. Estas estruturas visuais são, por sua vez, exibidas em imagens. Operações sobre essas representações visuais correspondem a transformações visuais e objetivam, genericamente, mostrar informações adicionais sobre elementos do conjunto de dados através de mudança do ponto de observação, manipulação geométrica ou indicação de região/subconjunto de interesse''.
+\begin{figure}[h]
+\centering
+\includegraphics[height=6cm,width=10cm]{imagens-proposta/vis-class.jpg}
+\caption{Modelo clássico de visualização \cite{HABER}.}
+\label{fig:rep1}
+\end{figure}
+\begin{figure}[h]
+\centering
+\includegraphics[height=6cm,width=11cm]{imagens-proposta/ref-vis.jpg}
+\caption{Modelo de referência de visualização \cite{CAR99}.}
+\label{fig:rep2}
+\end{figure}
+\subsection{Vantagens}
+\label{secao:vantagens-visualizacao}
+Dentre as vantagens que podem ser associadas ao uso de VISINFO podem ser citadas as seguintes \cite{NASCIMENTO}: 
+\begin{itemize}
+\item Uma grande quantidade de informações pode ser condensada em apenas uma única e simples imagem que representa essa informação de forma a ser facilmente entendível;
+\item O processo de visualização trabalha com o sentido humano da visão, que é o mais capaz de perceber informações por unidade de tempo. O sentido da visão é paralelo e rápido, sendo possível prestar atenção em determinado objeto sem perder de vista (obviamente, com menos detalhes) o que está acontecendo ao redor;
+\item O sentido humano da visão é treinado para reconhecer padrões, sendo possível identificar e lidar com diversos novos problemas do cotidiano com a utilização de padrões já vistos e que envolvam o processamento visual de informações. A constatação de padrões ou características visuais presentes em imagens contribui de forma significativa para o processo de compreensão, mais do que a simples observação dos dados em sua forma bruta.
+\end{itemize}
+\par A construção de uma visualização que possibilite a observação desses padrões pode ser obtida organizando os dados segundo algum critério definido e apresentando-os de modo visual. Isto se torna vantajoso, pois une uma grande quantidade de informação relevante que estava dispersa em uma ou várias formas visuais, facilitando a análise desses dados e consequente uso da maior quantidade de informação possível.
+\subsection{Aplicações}
+\label{secao:aplicacoes-visualizacao}
+As técnicas de VISINFO têm sido utilizadas em diversas áreas tais como: monitoramento de bolsas de valores e estudo de mercados; consultas a bancos de dados através de técnicas de \textit{data mining}, envolvendo áreas como jogos, tendências de consumo de produtos e sistemas de informações geográficos e engenharia de \textit{software}, através da utilização de visualizações que auxiliem o programador a analisar e entender o funcionamento de um programa, em um nível maior de abstração quando comparado a uma simples análise do código fonte. 
+\par As técnicas de VISINFO têm sido usadas também na área de redes de computadores com a finalidade de realizar análises da grande quantidade de dados gerados, aplicando filtros sobre esses dados a fim de perceber padrões que essas redes apresentam, e apresentando várias informações simultaneamente em uma única imagem.
+\subsection{Técnicas}
+\label{secao:tecnicas-visualizacao} 
+As técnicas de VISINFO procuram representar graficamente dados de um determinado domínio de aplicação de forma que, a partir das relações espaciais exibidas, o ser humano interprete e compreenda as informações apresentadas e, finalmente, deduza novos conhecimentos. Elas têm o potencial de auxiliar na análise visual e exploração de grandes conjuntos de dados, através do emprego de mecanismos que buscam tanto representar visualmente os dados, quanto permitir ao usuário a interação com estas representações. 
+\par Em uma VISINFO, os dados são abstratos e não há necessariamente uma representação geométrica inerente aos mesmos. Uma imagem é gerada com base nos relacionamentos e informações que podem ser inferidos acerca dos dados.
+O processo de se gerar uma visualização, basicamente, consiste em mapear os atributos dos dados abstratos em atributos visuais de uma imagem.
+Os dados abstratos a serem visualizados podem ser classificados nas seguintes categorias principais \cite{CAR99}:
+\begin{itemize}
+\item Nominal --- conjunto de elementos distintos, sem uma relação de ordem entre eles. Exemplo: melão, maçã, melancia, morango;
+\item Ordinal --- conjunto de elementos distintos, mas com uma relação de ordem entre os mesmos. Exemplo: primeiro, segundo, terceiro, ..., ou segunda, terça, quarta, ... ; 
+\item Quantitativo --- faixa de valores numéricos. Essa categoria pode ser dividida em intervalos (com valores discretos) e razão (representando uma faixa contínua de valores).
+\end{itemize}
+\par Para o desenvolvimento de sistemas que utilizem técnicas de VISINFO deve-se considerar a melhor forma de se mapear informações para uma representação gráfica que facilite a sua interpretação pelos usuários. Deve-se, também, fornecer meios para limitar ou filtrar a quantidade de informação a ser interpretada, mas mantendo o usuário ciente do espaço total de informações.
+\par É necessário, também, possibilitar formas de manipulação do conjunto de dados, tanto geométrica (rotações e \textit{zoom} na representação gráfica, por exemplo) como analiticamente (redução ou expansão do conjunto de dados exibido de acordo com algum critério determinado pelo usuário).
+\par De acordo com Card, Mackinlay e Shneiderman \cite{CAR99}, as estruturas dimensionais de representação são as seguintes: as estruturas unidimensionais, que são tipicamente empregadas para a apresentação de documentos de texto ou de linhas do tempo, podendo
+ser combinadas com um segundo ou terceiro eixo para mostrar comparação entre valores; as estruturas visuais bidimensionais, como gráficos de linhas, barras, pizza e mapas, que são mais apropriadas para apresentar dados estatísticos, descrever funções matemáticas ou visualizar informações geográficas; e para dados com \textit{n} dimensões (\textit{n} maior que 3), quando técnicas mais elaboradas são necessárias, tais como, \textit{Multidimensional Scalling}, Coordenadas Paralelas, \textit{treemap}, dispersão e \textit{Glyphs}.
+\par Para ilustrar, a seguir são apresentadas brevemente três técnicas de VISINFO \cite{prisma}: 
+\begin{enumerate}
+\item \textit{Treemap} --- técnica baseada no preenchimento de espaços. Os itens são ordenados por um valor de atributo que é representado por um retângulo de área proporcional ao valor deste atributo. É uma técnica ideal para representar dados hierárquicos e fazer correlações entre dados e grupos de dados. 
+A Figura \ref{fig:tree}, retirada de RDI \cite{prisma}, mostra uma imagem gerada com a utilização da técnica de \textit{treemap}.
+\begin{figure}[htbp]
+\centering
+\includegraphics{imagens-relatorio/treemap.jpg}
+\caption{Imagem gerada com a utilização da técnica de \textit{treemap}, retirada de RDI \cite{prisma}.}
+\label{fig:tree}
+\end{figure}
+\item Dispersão --- técnica baseada na ideia de gráfico X-Y, ou seja, os eixos são configuráveis por atributo. Cada ponto ou coordenada representa um conjunto de valores de atributos. É uma técnica ideal para identificação de grupos de dados por afinidade de características.
+A Figura \ref{fig:dis}, retirada de RDI \cite{prisma}, mostra uma imagem gerada com a utilização da técnica de dispersão.
+\begin{figure}[htbp]
+\centering
+\includegraphics{imagens-relatorio/dispersao.jpg}
+\caption{Imagem gerada utilizando a técnica de dispersão, retirada de RDI \cite{prisma}.}
+\label{fig:dis}
+\end{figure}
+\item Coordenadas paralelas --- técnica proposta por Inselberg \cite{ins}, mapeia um espaço \textit{n}-dimensional em uma estrutura bidimensional que usa \textit{n} eixos paralelos verticais equidistantes, denominados coordenadas. Os eixos verticais representam as dimensões ou atributos dos dados e uma linha representando cada item de dado conecta os eixos nos seus respectivos valores, permitindo a observação de padrões e tendências nos dados \cite{silva}.
+A Figura \ref{fig:coo}, retirada de RDI \cite{prisma}, mostra um gráfico utilizando coordenadas paralelas.
+\begin{figure}[htbp]
+\centering
+\includegraphics{imagens-tc2/revisao/coordenadasparalelas.jpg}
+\caption{Exemplo de gráfico com coordenadas paralelas, retirado de RDI \cite{prisma}.}
+\label{fig:coo}
+\end{figure}
+\end{enumerate}
+\section{Gerência de Redes de Computadores}
+\label{secao:gerencia}
+\subsection{Introdução}
+\label{secao:definicao-gerencia}
+A área de GRC foi inicialmente impulsionada pela necessidade de monitoração e controle do universo de dispositivos que compõem as redes de comunicação. O aumento do grau de complexidade das redes e do seu tamanho exige o emprego de um sistema de gerenciamento que proporcione qualidade de serviço, pró-atividade, integração com processos de serviços e de negócios. O contínuo crescimento em número e diversidade dos componentes de redes de computadores tem tornado a atividade de gerenciamento cada vez mais complexa, e o uso dos serviços das redes é afetado pela disponibilidade e eficiência do gerenciamento feito nas redes de computadores \cite{BRISA}.
+\par Atualmente, as redes de computadores e os seus recursos associados têm se tornado fundamentais e de tal importância para uma organização, que elas ``não podem falhar'', sob o risco da organização parar se a rede não estiver funcional. Isto significa que o nível de falhas e de degradação de desempenho considerados aceitáveis está cada vez mais diminuindo, sendo o nível desejado igual ou muito próximo a zero, dependendo da importância da rede para a instituição \cite{BRISA}.
+\par Para resolver os problemas associados da GRC a ISO (\textit{International Organization for Standardization})\abbrev{ISO} {\emph{International Organization for Standardization}} propôs três modelos para o gerenciamento de redes \cite{BRISA}:
+\begin{enumerate}
+\item Modelo Organizacional --- estabelece a hierarquia entre sistemas de GRC em um domínio de gerência, dividindo o ambiente a ser gerenciado em vários domínios.
+\item Modelo Informacional --- define os objetos de gerência, as relações e as operações sobre esses objetos. Uma MIB (\textit{Management Information Base})\abbrev{MIB} {\emph{Management Information Base}} é necessária para armazenar os objetos gerenciados. 
+\item Modelo Funcional --- descreve as funcionalidades de gerência: Gerenciamento de Falhas, Gerenciamento de Configuração, Gerenciamento de Contabilização, Gerenciamento de Desempenho e Gerenciamento de Segurança.
+\end{enumerate}
+\par Uma forma simples de caracterizar as funções de gerenciamento é através das funcionalidades que envolvem o modelo FCAPS, sigla formada a partir das iniciais de cada área de gerenciamento em inglês (\textit{Fault, Configuration, Accounting, Performance} e \textit{Security}). Este modelo serve de base para os demais por definir as áreas funcionais da GRC \cite{BRISA}. 
+\par O Gerenciamento de Falhas é o responsável pelo desenvolvimento de aplicações que identifiquem as falhas e informem a um gerente a ocorrência dessas, para que decisões e atitudes sejam tomadas para resolver o problema ocorrido. Com as informações sobre falhas ocorridas, a qualidade de serviço acertada com um usuário tende a ser mantida, uma vez que o setor responsável pela operação e/ou manutenção da rede antecipa-se aos usuários na solução de problemas de rede \cite{slides}.
+\par O Gerenciamento de Configuração é a área responsável pela análise, estudo e gerenciamento da topologia e do fluxo de dados da rede através de ferramentas gráficas. 
+\par O Gerenciamento de Contabilização é importante para a identificação e registro de custos e do volume de recursos utilizados pelos usuários de uma rede. 
+\par O Gerenciamento de Desempenho é importante não para garantir apenas a qualidade de serviço acordada com os usuários, mas também para assegurar que seja atingida com os menores custos possíveis. Pode-se por meio do Gerenciamento de Desempenho, adequar os meios de comunicação utilizados pelos usuários às suas reais necessidades, auxiliando o setor responsável pela administração da rede, e se antecipado aos usuários na manutenção dos níveis de desempenho dos serviços oferecidos, como, por exemplo, o tempo de resposta.
+\par O Gerenciamento de Segurança é o responsável pela monitoração e controle dos mecanismos de segurança de uma rede. Estes mecanismos envolvem desde os mecanismos de controle de acesso aos sistemas computacionais até o controle de informações sigilosas que trafegam na rede. Exemplos destes mecanismos incluem desde proteção de senhas, com uso de criptografia até a obrigatoriedade de troca de senha periodicamente. 
+\par A Figura \ref{fig:fcaps} apresenta uma forma de integração entre as 5 áreas funcionais de GRC \cite{WIKI-pt}. Se as áreas de Segurança, de Contabilização, de Falhas e de Configuração funcionarem de forma adequada, a área de Desempenho será beneficiada, pois o desempenho de uma rede é diretamente influenciado por problemas ocasionados em uma ou mais das quatro áreas mencionadas.
+\begin{figure}[htbp]
+\centering
+\includegraphics{imagens-proposta/fcaps.jpg}
+\caption{Integração entre as áreas funcionais de Gerência de Redes \cite{WIKI-pt}.}
+\label{fig:fcaps}
+\end{figure}
+\subsection{Arquitetura de Gerenciamento}
+\label{secao:arquitetura-informacao}
+Os componentes essenciais de uma arquitetura de gerenciamento de redes são \cite{BRISA}:
+\begin{itemize}
+\item Descrição da Estrutura de Gerenciamento --- relacionada com as informações que podem ser efetuadas sobre os objetos gerenciados (SMI - \textit{Structure Management Information}\abbrev{SMI} {\emph{Structure Management Information}}).
+\item Definição da Base de Informação de Gerenciamento --- lista inicial dos objetos gerenciados (MIB).
+\item Protocolos e serviços --- utilização de protocolos e serviços de gerenciamento sobre os protocolos de transporte TCP (\textit{Transmission Control Protocol})\abbrev{TCP} {\emph{Transmission Control Protocol}} ou UDP (\textit{User Datagram Protocol})\abbrev{UDP} {\emph{User Datagram Protocol}}.
+\end{itemize}
+\par Uma SMI define como são identificadas e descritas as informações gerenciadas. A MIB é especificada utilizando a SMI e contém os objetos a serem gerenciados.
+\par Um exemplo de SMI é a SMI Internet, projetada para ser uma estrutura de informação dependente de um protocolo, por exemplo, o protocolo SNMP (\textit{Simple Network Management Protocol})\abbrev{SNMP} {\emph{Simple Network Management Protocol}} \cite{BRISA}.
+\subsection{MIB}
+\label{secao:mib}
+Um objeto gerenciado é a visão abstrata de um recurso real do sistema. Assim, todos os recursos da rede que devem ser gerenciados são modelados, e as estruturas de dados resultantes são os objetos gerenciados. Os objetos gerenciados podem ter permissões para serem lidos ou alterados, sendo que cada leitura representará o estado real do recurso e, cada alteração também será refletida no próprio recurso \cite{artola}.
+\par Dessa forma, a MIB é o conjunto dos objetos gerenciados, que procura abranger todas as informações necessárias para a gerência da rede, possibilitando assim, a automatização de grande parte das tarefas de gerência.
+\par O RFC (\textit{Request for Comments})\abbrev{RFC} {\emph{Request for Comments}} 1066 \cite{rfc} apresentou a primeira versão da MIB para uso com o protocolo TCP/IP, a MIB-1. Este padrão explicou e definiu a base de informação necessária para monitorar e controlar redes baseadas no protocolo TCP/IP. O RFC 1066 foi aceito pela IAB (\textit{Internet Activities Board})\abbrev{IAB} {\emph{Internet Activities Board}} como padrão no RFC 1156. O RFC 1158 propôs uma segunda MIB, a MIB-2, para uso com o protocolo TCP/IP, sendo aceita e formalizada como padrão no RFC 1213. A MIB-2 expandiu a base de informações definidas na MIB-1.
+\par A MIB-2 usa uma arquitetura de árvore, definida na ISO ASN.1 (\textit{Abstract Syntax Notation.1})\abbrev{ASN.1} {\emph{Abstract Syntax Notation.1}}, para organizar todas as suas informações. Cada parte da informação da árvore é um nó rotulado que contém um OID (\textit{Object IDentifier})\abbrev{OID} {\emph{Object IDentifier}}, ou seja, uma sequência de números separados por pontos e uma pequena descrição textual \cite{artola}. Um exemplo de objeto está descrito a seguir:
+\begin{verbatim}
+directory(1)
+identificador de objetos: 1.3.6.1.1
+descrição textual: {internet 1}
+\end{verbatim}
+\par Um nó rotulado pode ter subárvores contendo outros nós rotulados. Caso não tenha subárvores, ele é um nó folha e será um objeto que contém um valor. Na Figura \ref{fig:mib2} é apresentada a árvore que representa a MIB-2.
+\begin{figure}[height=4cm,width=4cm]
+\centering
+\includegraphics{imagens-relatorio/mib2-this.jpg}
+\caption{A MIB-2.}
+\label{fig:mib2}
+\end{figure}
+\par O nó raiz da árvore MIB-2 não tem nome ou número, mas tem três subárvores:
+\begin{enumerate}
+\item \textit{ccitt(0)}, administrada pelo CCITT (Comitê Consultivo Internacional de Telegrafia e Telefonia)\abbrev{CCITT} {Comitê Consultivo Internacional de Telegrafia e Telefonia}.
+\item \textit{iso(1)}, administrada pela ISO.
+\item \textit{joint-iso-ccitt(2)}, administrada pela ISO juntamente com o CCITT.
+\end{enumerate}
+Sob o nó \textit{iso(1)}, estão outras subárvores, como é o caso da subárvore \textit{org(3)}, definida pela ISO para conter outras organizações. Uma das organizações que está sob a subárvore \textit{org(3)} é o DOD (\textit{Departament of Defense of USA})\abbrev{DOD} {\emph{Departament of Defense of USA}}, no nó \textit{dod(6)}. A \textit{Internet(1)} está sob o \textit{dod(6)}, e possui quatro subárvores:
+\begin{enumerate}
+\item \textit{directory(1)}: contém informações sobre o serviço de diretórios OSI (\textit{Open Systems Interconnection})\abbrev{OSI} {\emph{Open Systems Interconnection}}.
+\item \textit{mgmt(2)}: contém informações de gerenciamento, é sob esta subárvore que está o nó da \textit{mib-2}, com o identificador de objeto 1.3.6.1.2.1 ou \verb!{ mgmt 1 }!.
+\item \textit{experimental(3)}: contém os objetos que ainda estão sendo pesquisados pela IAB.
+\item \textit{private(4)}: contém objetos definidos por outras organizações.
+\end{enumerate}
+\par Abaixo da subárvore \textit{mib-2} estão os objetos usados para obter informações específicas dos dispositivos da rede. Esses objetos são divididos em 11 grupos, que são apresentados na Tabela \ref{tab3} e detalhados a seguir, com as respectivas áreas FCAPS que cada grupo abrange \cite{artola}. Na Tabela \ref{tab:exemplos} são apresentados alguns exemplos de objetos pertencentes a cada um dos grupos.
+\begin{table}[h]
+\begin{center}
+\caption{Áreas FCAPS dos grupos da subárvore \textit{mib-2}.}
+\begin{tabular}{|l||c|c|c|c|c|c|}
+\hline
+\multicolumn{7}{|c|}{MIB-2} \\ \hline \hline
+\multicolumn{1}{|c||}{Grupos} & Informação & F & C & A & P & S \\ \hline
+\textit{system}(1) & Sistema de operação & $\bullet$ & $\bullet$ & & & \\
+\textit{interfaces}(2) & Interface da rede & $\bullet$ & $\bullet$ & $\bullet$ &$\bullet$ & \\ 
+\textit{address translation}(3) & Mapeamento de endereços IP & & & & & \\
+\textit{ip}(4) & Protocolo IP & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ & \\
+\textit{icmp}(5) & Protocolo ICMP & & & & $\bullet$ & \\
+\textit{tcp}(6) & Protocolo TCP & & $\bullet$ &$\bullet$ & $\bullet$ & $\bullet$\\
+\textit{udp}(7) & Protocolo UDP & & $\bullet$ & $\bullet$ & $\bullet$ & \\
+\textit{egp}(8) & Protocolo EGP & $\bullet$ & $\bullet$ & $\bullet$ &$\bullet$ & \\
+\textit{cmot}(9) & Protocolo CMOT & & & & & \\
+\textit{transmission}(10) & Meios de transmissão & & & & & \\
+\textit{snmp}(11) & Protocolo SNMP & $\bullet$ &$\bullet$ & $\bullet$ &$\bullet$ & $\bullet$ \\
+\hline
+\end{tabular}
+\label{tab3}
+\end{center}
+\end{table}
+%\begin{enumerate}
+%\item \textit{system(1)}: O grupo \textit{system} contém informações básicas sobre o sistema gerenciado. Muitos dos objetos desse grupo são usados no gerenciamento de configuração e gerenciamento de falhas. 
+%\item \textit{interfaces(2)}: O grupo \textit{interfaces} oferece dados sobre cada interface de um dispositivo gerenciável da rede. Essas informações são úteis para o gerenciamento de falhas, de configuração, de desempenho e de contabilização.
+%\item \textit{at(3)}: O grupo \textit{address translation} não constitui mais um grupo separado. Seus objetos foram incorporados aos grupos de outros protocolos.
+%\item \textit{ip(4)}: O IP é um protocolo de rede que utiliza um modo de serviço sem conexão para entregar datagramas. O grupo IP provê informações sobre o protocolo IP no dispositivo. Estas informações são subdivididas em quatro grupos: erros e tipos de pacotes IP, endereços IP, tabela de roteamento e mapeamento de endereços IP (substituindo o grupo \textit{address translation}). Os objetos do grupo \textit{ip} podem ser aplicados ao gerenciamento de falhas, de configuração, de desempenho e de contabilização.
+%\item \textit{icmp(5)}: O ICMP é um protocolo que carrega mensagens de erro e controle para dispositivos IP. O grupo \textit{icmp} contém objetos que fornecem informações sobre o protocolo ICMP na dispositivo gerenciado. Todos os seus objetos são aplicados ao gerenciamento de desempenho. 
+%\item \textit{tcp(6)}: O TCP é um protocolo de transporte que provê conexões confiáveis entre aplicações. Muitas implementações do TCP incluem recursos adicionais para lidar com controle de fluxo, congestionamento da rede, e a retransmissão de segmentos perdidos. O grupo \textit{tcp} é utilizado no gerenciamento de configuração, de desempenho, de contabilização e de segurança.
+%\item \textit{udp(7)}: O UDP é um protocolo de transporte que, ao contrário do TCP, não garante segurança e nem estabelece conexões. Ao invés disso, ele usa um fluxo de datagramas para transportar as informações. O grupo \textit{udp} possui um número limitado de objetos e é usado no gerenciamento de desempenho, de contabilização e de configuração.
+%\item \textit{egp(8)}: O EGP (\textit{Exterior Gateway Protocol})\abbrev{EGP} {\emph{Exterior Gateway Protocol}} é um protocolo que informa a um dispositivo de rede IP como alcançar outras redes IP. Ele não informa a rota completa para a outra rede, mas ela permite que um dispositivo saiba em que direção que a rede existe. Redes IP podem ser agrupadas em áreas lógicas chamadas sistemas autônomos. Um sistema autônomo geralmente é uma rede e suas sub-redes associadas ou uma coleção de redes e sub-redes sob uma mesma administração. Dois dispositivos de rede em dois sistemas autônomos distintos podem compartilhar informações de alcance via EGP. Os objetos do grupo EGP podem ser aplicados ao gerenciamento de falhas, de configuração, de desempenho e de contabilização.
+%\item \textit{cmot(9)}: O grupo \textit{cmot} existe somente por razões históricas. Para efetuar a transição do SNMP para outro protocolo de gerenciamento, o CMIP (\textit{Common Management Information Protocol})\abbrev{CMIP} {\emph{Common Management Information Protocol}}, foi criado o protocolo CMOP (\textit{CMIP Over TCP/IP})\abbrev{CMOP} {\emph{CMIP Over TCP/IP}} para auxiliar nesta tarefa. No entanto, embora a definição para o CMOT exista, nenhum trabalho significativo tem sido feito em cima deste protocolo há algum tempo, e logo não há nenhum objeto neste grupo. O principal problema do CMIP se tornar um padrão na indústria é o fato dele ser orientado à conexão, ao contrário do SNMP que envia dados sem solicitar explicitamente uma conexão.
+%\item \textit{transmission(10)}: O grupo \textit{transmission} provê informações sobre o meio específico que forma a base das interfaces no sistema. Quando os padrões Internet para gerenciar vários tipos de meios forem definidos, este grupo será o prefixo para estas informações.
+%\item \textit{snmp(11)}: O grupo \textit{snmp} informa desde erros referentes a mensagens SNMP até objetos que informam a porcentagem que uma entidade está utilizando para manipular o SNMP. Os erros que ocorrem neste protocolo não constituem erros de rede em si, mas podem informar que a entidade não está manipulando os pacotes apropriadamente.
+%Os objetos do grupo \textit{snmp} podem ser aplicados em todas as cinco áreas de gerenciamento. Aplicações de gerenciamento de falhas observando problemas SNMP podem achar útil conhecer o número de erros e sua frequência, enquanto aplicações de gerenciamento de desempenho podem calcular a taxa de pacotes entrando e deixando a entidade. Já aplicações de gerenciamento de contabilização podem usar os objetos SNMP para encontrar o número de pacotes enviados ou recebidos pela entidade. E por fim, alguns objetos do grupo \textit{snmp} podem ajudar no gerenciamento de configuração e segurança. 
+%\end{enumerate}
+\begin{table}[htb]
+\begin{center}
+\caption{Exemplos de objetos da \textit{mib-2} e seus respectivos grupos.}
+\begin{tabular}{|c|c|c|}
+\hline
+Grupo & \multicolumn{2}{|c|}{Objeto --- Informação (descrição) utilizada no gerenciamento} \\
+\hline
+1 & \textit{sysDescr} & Descrição do sistema \\ 
+& \textit{sysLocation} & Localização física do sistema \\
+& \textit{sysUpTime} & Quanto tempo o sistema está operacional \\
+\hline 
+2 & \textit{ifDescr} & Nome da interface \\
+& \textit{ifSpeed} & Largura de banda da interface \\ 
+\hline 
+% 3 & & \\
+% \hline
+4 & \textit{ipInReceives} & Taxa de datagramas de recebidos \\ 
+& \textit{ipInAddrErrors} & Taxa de erros de endereço de entrada \\
+& \textit{ipForwDatagrams} & Taxa de datagramas repassados \\
+\hline 
+5 & \textit{icmpInMsgs} & Taxa de recebimento de mensagens \\
+& \textit{icmpInErrors} & Taxa de erros de entrada \\
+\hline
+6 & \textit{tcpInErrs} & Número de pacotes recebidos com erro\\
+& \textit{tcpInSegs} & Taxa de segmentos TCP recebidos\\
+& \textit{tcpOutSegs} & Taxa de segmentos TCP enviados \\
+\hline 
+7 & \textit{udpInDatagrams} & Taxa de datagramas recebidos \\
+& \textit{udpInErrors} & Taxa de datagramas UDP recebidos com erro\\
+\hline 
+8 & \textit{egpInMsgs} & Taxa de mensagens recebidas \\
+& \textit{egpInErrors} & Taxa de mensagens recebidas com erro \\
+& \textit{egpOutMsgs} & Taxa de mensagens enviadas \\
+\hline 
+% 9 & & \\
+% \hline 
+% 10 & & \\
+% \hline
+11 & \textit{snmpInPkts} & Taxa de pacotes SNMP recebidos \\
+& \textit{snmpOutPkts} & Taxa de pacotes SNMP enviados \\
+\hline
+\end{tabular}
+\label{tab:exemplos}
+\end{center}
+\end{table}
+\par Cada objeto contido nos grupos apresentados na Tabela \ref{tab:exemplos} é descrito no RFC 1213. A descrição dos objetos é dividida em cinco partes: o nome do objeto, a sintaxe abstrata do objeto, a descrição textual do significado do objeto (nome completo, versão, etc.), o tipo de acesso permitido ao objeto (\textit{read-only}, \textit{read-write}, \textit{write-only} ou não acessível) e o estado do objeto (obrigatório, opcional ou obsoleto). 
+O exemplo a seguir apresenta a descrição do objeto \verb!sysDescr { Internet 1 }!.
+\begin{verbatim}
+ OBJECT
+  sysDescr {Internet 1}
+  Syntax: DisplayString(SIZE(0..255))
+  Description: "A textual description of the entity. 
+  This value should include the full name and version identification of the 
+  system's hardware type, software operating-system and networking software.
+  It is mandatory that this only contain printable ASCII characters."
+  Access: read-only
+  Status: mandatory
+\end{verbatim}
+\subsection{Protocolo SNMP}
+\label{secao:snmp}
+\par Com a crescente necessidade de Gerenciamento de Redes de Computadores, fez-se necessário que padrões para o desenvolvimento de protocolos fossem estabelecidos. O SNMP é um protocolo de gerência de redes TCP/IP (\textit{Transmission Control Protocol/ Internet Protocol})\abbrev{TCP/IP} {\emph{Transmission Control Protocol/Internet Protocol}}, da camada de aplicação que facilita o intercâmbio de informações entre os dispositivos de rede, como placas e \textit{switches}, possibilitando aos administradores de rede encontrar e resolver eventuais problemas na rede e prover informações sobre os equipamentos gerenciados \cite{WIKI-pt}. O SNMP é usado para administrar o desempenho de uma rede, encontrar e resolver problemas de rede e planejar o crescimento da mesma. É utilizado em servidores, roteadores, \textit{firewalls}, \textit{switches}, \textit{hubs}, impressoras, \textit{modens}, equipamentos remotos, multiplexadores, etc.
+\par Os componentes chaves de uma rede gerenciada pelo protocolo SNMP são os seguintes:
+\begin{itemize}
+\item Estação de Gerenciamento;
+\item Agente de Gerenciamento;
+\item MIB;
+\item Protocolo de Gerenciamento de Redes.
+\end{itemize}
+\par A estação de gerenciamento serve como interface para o gerente humano em um sistema de gerenciamento de rede.
+O agente de gerenciamento responde às solicitações de informações e de ações da estação de gerenciamento e deve também prover assincronamente informações importantes que não foram solicitadas por esta estação.
+Os recursos a serem gerenciados são representados como objetos, e a coleção de objetos é referenciada como uma MIB.
+A forma de comunicação entre a estação de gerenciamento e o agente é definida por um protocolo de gerenciamento de rede, por exemplo, o SNMP.
+\par No escopo deste protocolo, definem-se os elementos de rede classificados como cliente (ou gerente) responsável pela monitoração e controle dos \textit{gateways} e \textit{hosts}, que correspondem aos servidores (ou agentes).
+\par O protocolo SNMP é baseado no paradigma conhecido como ``busca-armazenamento'' (\textit{fetch-store}), isto é, todas as operações previstas por este protocolo são derivadas de operações básicas de busca e armazenamento. As mensagens desse protocolo não possuem campos fixos e são especificadas na notação ASN.1. O SNMP sugere que a lógica do servidor de objetos de um equipamento seja colocada no agente e este execute operações elementares, como estabelecer e obter valores das variáveis. O programa que analisa, manipula, combina ou aplica algum algoritmo sobre os dados deve residir no gerente \cite{BRISA}. 
+\par Geralmente, o SNMP é executado sobre o UDP e o IP (\textit{Internet Protocol})\abbrev{IP} {\emph{Internet Protocol}}, e não sobre o TCP, mas é importante ressaltar que o gerenciamento de redes não é semelhante às outras aplicações de rede. Quando tudo falha, o gerenciamento da rede deve continuar funcionando e deve ser capaz de usar a parte mais simples do protocolo de rede (um protocolo de datagrama não-confirmado) para chegar ao equipamento gerenciado. Os projetistas do SNMP optaram pelo uso de protocolos não orientados a conexão por medo, em caso de falha, de ser impossível estabelecer uma conexão \cite{BRISA}, além de considerarem o desempenho do protocolo UDP \textit{versus} o protocolo TCP.
+\par O gerenciamento de rede através do SNMP permite o acompanhamento simples e fácil do estado, em tempo real, da rede, podendo ser usado para gerenciar diferentes tipos de sistemas. Cada máquina gerenciada pelo SNMP deve possuir um agente e uma base de informações MIB, que é um conjunto de variáveis que representam informações referentes ao seu estado atual, estas informações ficam disponíveis ao gerente através de consulta e podem ser alteradas por ele.
+\par No protocolo SNMPv1 existem as operações: \textit{set}, \textit{get}, \textit{get-next} e \textit{trap}. Já o protocolo SNMPv2 inseriu melhorias nas operações de \textit{trap} e inseriu duas novas operações: \textit{get-bulk} e \textit{inform}.
+\begin{itemize}
+\item A operação \textit{set} é utilizada para alterar o valor da instância de um objeto em um cliente;
+\item A operação \textit{get} é utilizada para ler o valor de uma instância de um objeto; o gerente solicita que o agente obtenha e retorne o valor;
+\item A operação de \textit{get-next} é utilizada para ler o valor da próxima instância de um objeto; o gerente fornece o
+nome de uma variável e o cliente obtém o valor e o nome da próxima instância de um objeto; também é
+utilizado para obter valores e nomes de objetos de uma tabela de tamanho desconhecido;
+\item A operação \textit{trap} é utilizada para comunicar um evento; o agente comunica ao gerente o acontecimento de um evento, previamente determinado. No SNMPv2, a operação de \textit{trap} possui a mesma função que no SNMPv1, porém, usa diferentes formatos de mensagens e foi implementada com o objetivo de substituir a primeira versão. 
+\item A operação \textit{get-bulk} é usada para a busca de uma grande quantidade de dados, como informações presentes em uma tabela. Esta operação é uma otimização em relação à operação de \textit{get}. 
+\item A operação \textit{inform} no SNMPv2 permite a comunicação entre os gerentes em uma rede.
+\end{itemize}
+\subsection{Gerenciamento de Desempenho}
+\label{secao:gerenciamento-desempenho}
+\par O Gerenciamento de Desempenho consiste em um conjunto de funções responsáveis pela manutenção e exame dos registros que contém o histórico dos estados de um sistema. Seu objetivo é analisar as tendências do uso dos componentes e definir um planejamento através do dimensionamento dos recursos que devem ser alocados para o sistema. Isto é feito através da monitoração das atividades da rede e do controle dos recursos através de ajustes e trocas. Assim, são atendidos os requisitos dos usuários deste sistema, satisfazendo as suas demandas, ou seja, garantindo que não ocorram insuficiências de recursos quando sua utilização se aproximar da capacidade total do sistema.
+\par As funções de Gerenciamento de Desempenho podem ser divididas em dois grupos \cite{BRISA}:
+\begin{itemize}
+\item Medidas de Tráfego: estas funções possibilitam ao usuário definir e controlar a entrega de relatórios de medidas de tráfego.
+\item Monitoração de Desempenho: são informações que permitem ao usuário obter, avaliar e relatar parâmetros de desempenho da rede. Tais informações podem ser utilizadas como apoio ao diagnóstico de falhas, ao planejamento da rede e à qualidade do serviço.
+\end{itemize}
+\par Para atingir os objetivos de desempenho desejáveis, deve-se monitorar a taxa de utilização dos recursos, a taxa em que estes recursos são pedidos e a taxa em que os pedidos a um recurso são rejeitados. Para cada tipo de monitoração, é definido um valor máximo aceitável (\textit{threshold}), um valor de alerta e um valor em que se remove a situação de alerta.
+\par Na Gerência de Desempenho tem-se a possibilidade de avaliar o comportamento dos recursos em um ambiente de gerenciamento para verificar se este comportamento é eficiente, ou seja, preocupa-se com o desempenho corrente da rede, através de parâmetros estatísticos como atrasos, vazão, disponibilidade e o número de retransmissões realizadas. 
+\par Algumas das questões relativas ao gerenciamento do desempenho são \cite{especial}:
+\begin{itemize}
+\item Qual é o nível de capacidade de utilização?
+\item O \textit{throughput} foi reduzido para níveis aceitáveis?
+\item O tráfego é excessivo?
+\item Existem gargalos?
+\item O tempo de resposta está aumentando?
+\end{itemize}
+Para tratar estas questões, o gerente de uma rede de computadores deve focar em um conjunto inicial de recursos a serem monitorados, a fim de estabelecer níveis de desempenho. Isto inclui associar métricas e valores apropriados aos recursos de rede que possam fornecer indicadores de diferentes níveis de desempenho. Muitos recursos devem ser monitorados para se obter informações sobre o nível de operação da rede. Colecionando e analisando estas informações, o gerente da rede pode ficar mais e mais capacitado no reconhecimento de situações indicativas de degradação de desempenho.
+Estatísticas de desempenho podem ajudar no planejamento, administração e manutenção de grandes redes. Estas informações podem ser utilizadas para reconhecer situações de gargalo antes que elas causem problemas para o usuário final. Ações corretivas podem ser executadas, tais como, trocar tabelas de roteamento para balancear ou redistribuir a carga de tráfego durante horários de pico, ou ainda, a longo prazo, indicar a necessidade de expansão de linhas para uma determinada área \cite{especial}.
+%--------------------------------------------------------------------------------------------
+\chapter{Trabalhos Relacionados}
+\label{capitulo:relacionados}
+Dentre os trabalhos relacionados com o Desview (apresentado no Capítulo \ref{capitulo:trab}) são apresentadas neste capítulo quatro ferramentas utilizadas largamente na indústria e três trabalhos acadêmicos:
+\begin{itemize}
+\item Cacti;
+\item Nagios;
+\item MRTG;
+\item OpenNMS;
+\item \textit{Management Traffic Analyzer};
+\item Prisma;
+\item Visualização e Análise de Dados de Monitoramento de Sistemas usando Multi-resolução.
+\end{itemize}
+\section{Cacti}
+\label{secao:cacti}
+O Cacti \cite{CACTI} é uma ferramenta industrial que coleta informações sobre o estado de uma rede de computadores e as exibe através de gráficos. Foi desenvolvido para ser flexível, de modo a se adaptar facilmente a diversas necessidades, bem como ser robusto e fácil de usar. Dentre as funcionalidades do Cacti estão a monitoração do estado de elementos de rede e programas, bem como largura de banda utilizada e uso de CPU (\textit{Central Processing Unit})\abbrev{CPU} {\emph{Central Processing Unit}}.
+\par O Cacti utiliza a ferramenta \textit{RRDTool} \cite{rrdtool}, ou seja, uma ferramenta para criar bases de dados responsáveis por armazenar os dados recolhidos e por gerar os gráficos. O RRD (\textit{Round Robin Database})\abbrev{RRD} {\emph{Round Robin Database}} foi desenvolvido para armazenar séries de dados numéricos sobre o estado de uma rede de computadores, porém pode ser empregado no armazenamento de qualquer outra série de dados como temperatura, uso de CPU, etc. As informações são repassadas para a ferramenta através de \textit{scripts} ou outros programas escolhidos pelo usuário que devem se encarregar de obter os dados. Pode-se utilizar também o protocolo SNMP para consultar informações em elementos de redes e/ou programas que suportam tal protocolo.
+\par O Cacti é uma solução gráfica de rede projetada para aproveitar as funcionalidades do \textit{RRDTool} como armazenamento de dados e gráficos. O Cacti proporciona modelos gráficos avançados, vários métodos de aquisição de dados, gerenciamento de usuários e de recursos. Todas essas funcionalidades são acessadas através de uma interface gráfica \textit{web} podendo ser utilizado desde redes pequenas até redes complexas, com centenas de dispositivos.
+\par Um exemplo de gráfico gerado pelo Cacti pode ser observado na Figura \ref{fig:cacti}. Nessa figura é apresentada a quantidade de memória utilizada, em \textit{kilobytes}, por um elemento de rede, em um intervalo de tempo (no caso 5 em 5 minutos, padrão no Cacti).
+\begin{figure}[h] %Outros parametros: t=top, b=bottom
+\centering
+\includegraphics[width=10cm, height=10cm]{imagens-proposta/cacti.png}
+\caption{Exemplo de gráfico gerado pelo Cacti \cite{CACTI}.}
+\label{fig:cacti}
+\end{figure}
+\section{MRTG}
+\label{secao:mrtg}
+O MRTG (\textit{Multi Router Traffic Grapher})\abbrev{MRTG}{\emph{Multi Router Traffic Grapher}} \cite{mrtg} é uma ferramenta de monitoração que gera páginas \abbrev{HTML}{\emph{HyperText Markup Language}} com gráficos de dados coletados a partir de SNMP ou \textit{scripts} externos. É conhecido principalmente pelo seu uso na monitoração de tráfego de rede, utilizando dados solicitados via comandos SNMP a um determinado \textit{host}.
+\par Foi desenvolvido por Tobias Oetiker e Dave Rand em Perl utilizando um módulo em C para gerar os gráficos. O MRTG é uma ferramenta comumente utilizada para monitorar tráfego em interfaces de rede, mas pode monitorar muitas outras variáveis, tais como utilização de disco rígido, temperatura de \textit{hardware} e uso de processador, podendo gerar alertas a partir de \textit{thresholds}, facilitando, assim, o gerenciamento da rede. 
+O princípio de funcionamento do MRTG é relativamente simples: o programa é executado periodicamente para consultar as informações do banco de dados (MIB) dos equipamentos de acordo com um arquivo de configuração. O resultado desta consulta é usado para construir gráficos que são armazenadas em uma página do diretório \textit{web}. Feito isto, o MRTG permite analisar graficamente através de um navegador, a tendência do tráfego de entrada e saída de um \textit{host}. 
+\par O MRTG tem como propósito apresentar na forma de gráficos 2D medidas estatísticas dos dados de dispositivos de rede (\textit{switches}, roteadores e \textit{hubs}), utilizando o protocolo de captura de dados de rede SNMP.
+\par São algumas características do MRTG \cite{mrtg}:
+\begin{itemize}
+\item Possuir opções que permitem personalizar a forma como ela opera;
+\item Coleta dados a cada 5 minutos por padrão, mas este tempo pode ser alterado;
+\item Cria uma página HTML com 4 gráficos (diário, semanal, mensal e anual). Se algum deles não for necessário pode ser eliminado;
+\item Pode avisar caso o valor do gráfico atinja um valor pré-estabelecido. Por exemplo: se determinado servidor atinge 95\% do espaço do disco, o MRTG pode mandar um \textit{email} para o administrador informando o ocorrido;
+\item Possui uma ferramenta para gerar os arquivos de configuração: o CFGMAKER e outra ferramenta para gerar uma página de índice para os casos em que muitos itens são monitorados: o INDEXMAKER.
+\end{itemize}
+\par Exemplos de gráficos diário, semanal, mensal e anual gerados pelo MRTG podem ser observados na Figura \ref{fig:mrtg}, retirados de Switch \cite{switch}. Nos gráficos são mostrados a média de \textit{bits} recebidos e enviados em gráficos com os valores diários, semanais, mensais e anuais coletados da rede.
+\begin{figure}
+\centering
+\includegraphics{imagens-relatorio/mrtg.jpg}
+\caption{Imagens geradas pelo MRTG, retiradas de Switch \cite{switch}.}
+\label{fig:mrtg}
+\end{figure}
+\section{Nagios}
+\label{secao:nagios}
+O Nagios \cite{NAGIOS} é uma aplicação, também industrial, de monitoração de rede de código aberto e licenciado pelo sistema GPL (\textit{GNU General Public License})\abbrev{GPL}{\emph{GNU General Public License}}. Ele pode monitorar tanto \textit{hosts} quanto serviços, gerando alertas quando ocorrerem problemas e também quando os problemas forem resolvidos.
+O Nagios foi originalmente desenvolvido com o nome de Netsaint, foi escrito e é atualmente mantido por Ethan Galstad, juntamente com um conjunto de desenvolvedores que ativamente disponibilizam \textit{plugins} oficiais e não-oficiais.
+\par As principais funcionalidades que o Nagios oferece são:
+\begin{itemize}
+\item Monitoração de diversos serviços de rede (SNMP, ICMP\abbrev{ICMP}{\emph{Internet Control Message Protocol}}, TCP, HTTP\abbrev{HTTP}{\emph{Hypertext Transfer Protocol}} e outros);
+\item Monitoração de recursos de computadores ou equipamentos de rede (carga do processador, uso de disco e \textit{logs} do sistema);
+\item Capacidade de notificar quando um serviço ou equipamento apresenta problemas e quando o problema é resolvido (via \textit{email}, mensagem de texto no celular ou qualquer outro meio definido pelo usuário através de um \textit{plugin});
+\item Interface \textit{web} para visualização do atual \textit{status} da rede, notificações, histórico de problemas, arquivos de \textit{log}, etc.
+\end{itemize}
+\par Um exemplo de gráfico gerado pela ferramenta Nagios pode ser observado na Figura \ref{fig:nagios}. Nessa figura é apresentado o uso de CPU, com valores máximos, média e último valor lido pelos diversos processos de um elemento de rede em um intervalo de tempo.
+\begin{figure}[h]
+\centering
+\includegraphics[width=10cm]{imagens-tc2/revisao/nagios.png}
+\caption{Exemplo de gráfico gerado pelo Nagios \cite{NAGIOS}.}
+\label{fig:nagios}
+\end{figure}
+\section{OpenNMS}
+\label{secao:trabalho-opensource-1}
+O OpenNMS \cite{opennms} é um projeto \textit{open-source} desenvolvido em Java, dedicado à criação de uma plataforma de gerência de rede voltada principalmente para a camada de aplicação. Nele é possível visualizar as informações do tipo \cite{opennms-pdf}:
+\begin{itemize}
+\item estado dos serviços e interfaces de rede;
+\item disponibilidade geral dos serviços;
+\item eventos gerados;
+\item gráficos de desempenho;
+\item informações sobre equipamentos.
+\end{itemize}
+\par Dentre as funcionalidades do OpenNMS pode-se citar a descoberta de recursos e serviços, o \textit{polling} configurável dos equipamentos, calendário de manutenção onde se pode definir períodos em que haverá manutenções que possam afetar a disponibilidade de serviço, coleta de dados através de leituras SNMP, execução de comandos quando determinados \textit{thresholds} forem violados, gráficos estatísticos de utilização, de falhas de \textit{buffer}, de erros \textit{in/out}, de descartes, dentre outros \cite{opennms-pdf}.
+\par Na Figura \ref{fig:opennms}, tem-se um exemplo de gráfico que a ferramenta OpenNMS gera, onde é possível verificar 4 variáveis da MIB-2 sendo tendo seus valores monitorados e plotados em um gráfico.
+\begin{figure}[!h]
+\centering
+\includegraphics[width=8cm, height=5cm]{imagens-tc2/opennms.png}
+\caption{Exemplo de gráfico gerado pelo OpenNMS.}
+\label{fig:opennms}
+\end{figure}
+\section{Ferramenta \textit{Management Traffic Analyzer}}
+\label{secao:trabalho-academico-1}
+O trabalho realizado por Salvador e Granville \cite{SALVADOR} tem por objetivo apresentar através de técnicas de VISINFO, os resultados de análises obtidos com medições do tráfego SNMP, utilizando a ferramenta \textit{Management Traffic Analyzer}, desenvolvida para automatizar este processo. A ferramenta foi implementada sobre SNMPDUMP (programa que analisa tráfego SNMP), invocando as funções de SNMP quando necessário. As análises são realizadas por \textit{scripts} escritos em Perl, e o resultado dessas análises são armazenadas em um banco de dados MySQL. A seguir, técnicas de visualização implementadas como aplicativos usando \textit{Macromedia Flash ActionScript} permitem a visualização gráfica das informações armazenadas. De acordo com Salvador e Granville \cite{SALVADOR}, o uso de técnicas de visualizações foi importante porque elas permitiram explorar e obter visões do tráfego SNMP, facilitando a descoberta de padrões de tráfego, anomalias e disparidades. No trabalho foram apresentadas visualizações baseadas em técnicas visuais, como a apresentada na Figura \ref{fig:acad1}, na qual é demonstrado através de um histograma o número de mensagens SNMP que trafegaram pela rede em cada hora durante determinado dia.
+\par A ferramenta apresentada propõe um conjunto limitado de técnicas para visualizar informações específicas relacionadas com o SNMP através de medições de tráfego. Estas visualizações são capazes de gerar gráficos, porém seria necessário aumentar o conjunto de técnicas de visualização disponíveis na ferramenta, a fim de melhorar o potencial de visão sobre o tráfego SNMP, já que a enorme quantidade de informações geradas por vários dispositivos e sistemas que compõem as redes modernas demanda cada vez mais esforços para o entendimento dessas informações.
+\begin{figure}[h]
+\centering
+\includegraphics[width=10cm]{imagens-proposta/mta.jpg}
+\caption{Gráfico gerado pela ferramenta \textit{Management Traffic Analyzer} \cite{SALVADOR}.}
+\label{fig:acad1}
+\end{figure}
+\section{Ferramenta Prisma}
+\label{secao:trabalho-academico-2}
+A ferramenta Prisma, desenvolvida por Kauer \cite{KAUER}, é uma aplicação que utiliza VISINFO através de técnicas de múltiplas coordenadas para explorar conjuntos de dados de uma rede de computadores. Três técnicas conhecidas de visualização são usadas: \textit{treemap}, dispersão e coordenadas paralelas \cite{HABER}. A ferramenta utiliza um conjunto de dados proveniente de \textit{logs} de elementos de rede contendo informações como endereço IP, porta e protocolo utilizado, quantidade de \textit{bytes} enviados e recebidos e estado da operação (sucesso, redirecionamento, falha, etc.).
+\par O Prisma foi desenvolvido para ajudar na análise de situações em que grandes volumes de dados são envolvidos. A ferramenta é composta por várias formas de visualização gráfica que permitem aos usuários a análise dos dados e das relações entre eles.
+\par A Figura \ref{fig:acad2} apresenta um exemplo de gráfico gerado pela ferramenta que, de acordo com Kauer \cite{KAUER}, possui as seguintes características:
+\begin{itemize}
+\item Extensível, portátil e de fácil manutenção uma vez que foi desenvolvida em Java utilizando \textit{design patterns};
+\item A interface gráfica é automaticamente personalizada de acordo com o tipo e o intervalo de valores de dados de cada conjunto;
+\item Possui filtros que possibilitam ao usuário analisar informações que ele deseja em determinado momento;
+\item Oferece relatórios de barras, linhas e outras formas gráficas que são gerados automaticamente pela ferramenta.
+\end{itemize}
+\begin{figure}[h] 
+\centering
+\includegraphics[width=15cm]{imagens-tc2/revisao/prisma.png}
+\caption{Gráfico com as três técnicas utilizadas no Prisma (\textit{treemap}, dispersão e coordenadas paralelas) para o mesmo conjunto de dados de entrada \cite{KAUER}.}
+\label{fig:acad2}
+\end{figure}
+\section{Visualização e Análise de Dados de Monitoramento de Sistemas usando Multi-resolução}
+\label{secao:nayak}
+O trabalho realizado por Nayak, Neogi e Kothari \cite{nayak} explora a natureza multi-resolução do monitoramento de dados 
+e representações de eventos de dados para a construção de uma topologia que preserve visões para o monitoramento de informações. De acordo com Nayak, Neogi e Kothari \cite{nayak}, o sistema desenvolvido é um \textit{framework} que representa
+eventos de dados ocorridos. Eventos são normalmente produzidos em certas operações de monitoramento de dados, por
+exemplo, um evento pode corresponder ao fato de o espaço livre em um disco estar abaixo de 10\%. Ao invés de 
+serem observados os pontos máximos ocorridos de eventos, o que normalmente ocorre, é desejável que seja visualizado
+e entendido o comportamento das complexas infraestruturas que compõem os sistemas atuais. O \textit{framework} proposto
+é baseado em arranjos e cada fonte de dados monitorada é organizada de forma hierárquica para refletir as inter-relações
+entre as diferentes fontes de dados monitoradas. No trabalho apresentado são utilizadas redes neurais \cite{rdn} baseadas em Mapas Auto-Organizáveis \cite{som} para gerar as visualizações a partir dos 
+eventos gerados pelos elementos monitorados, assim, os Mapas Auto-Organizáveis produzem uma topologia preservando o mapeamento em diversas dimensões.
+\par A Figura \ref{fig:som} mostra um exemplo de Mapa Auto-Organizável apresentado no trabalho, no qual se mostra a construção de um mapa topológico onde os nodos mais próximos respondem de forma semelhante a padrões de entrada semelhantes a eles, já a Figura \ref{fig:acad3} apresenta uma representação da organização baseada em arranjos, retirada de Nayak \cite{nayak}. Nela é demonstrado o resultado obtido do mapeamento de dados em 6D para 2D no \textit{framework} desenvolvido.
+\begin{figure}[h] 
+\centering
+\includegraphics[width=4cm, height=4cm]{imagens-relatorio/som.jpg}
+\caption{Exemplo de um Mapa Auto-Organizável retirado de Germano \cite{som}. O mapa bi-dimensional gerado representa as posições dos nodos em relação aos nodos vizinhos. O objetivo é que os nodos que forem topologicamente próximos respondam de maneira semelhante a entradas semelhantes.}
+\label{fig:som}
+\end{figure}
+\begin{figure}[h]
+\centering
+\includegraphics[width=11cm]{imagens-relatorio/mul.png}
+\caption{Mapeamento de dados de entrada 6-D em 2-D através de Mapas Auto-Organizáveis, onde os dados de entrada correspondem a 6 diferentes vetores com apenas um número `1' em cada vetor. Figura retirada de Nayak \cite{nayak}.}
+\label{fig:acad3}
+\end{figure}

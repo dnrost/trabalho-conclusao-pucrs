@@ -1,0 +1,212 @@
+\chapter{Descrição do Desview}
+\label{capitulo:trab} 
+Neste capítulo são apresentados os objetivos, o ambiente de desenvolvimento utilizado, a modelagem, a interface e as funcionalidades, a implementação do protótipo e um estudo de caso do trabalho que foi desenvolvido.
+\section{Introdução}
+\label{secao:introducao-trab}
+O objetivo deste trabalho é o projeto e o desenvolvimento de um sistema de monitoração de desempenho de elementos em uma rede de computadores que a partir de dados coletados por monitorações via protocolo SNMP, utilizando técnicas de VISINFO sobre os mesmos, de modo que o usuário verifique os estados e dados de variáveis em equipamentos com base nas visualizações que são apresentadas. Assim, caso os valores de variáveis que estão em monitoramento passem de valores pré-definidos, as visualizações informem de maneira fácil ao usuário que a variável em monitoração saiu do intervalo do qual é considerado dentro do desempenho considerado normal.
+\par São requisitos do protótipo que foi desenvolvido:
+\begin{itemize}
+\item Permitir a definição de quais parâmetros serão monitorados;
+\item Estabelecer parâmetros das medidas de desempenho a serem realizadas;
+\item Agendar o monitoramento dessas medidas;
+\item Permitir a consulta, a alteração, a inclusão e a exclusão de medidas;
+\item Armazenar os resultados obtidos;
+\item Apresentar os dados obtidos durante as medições através de diferentes 
+representações visuais.
+\end{itemize}
+\section{Ambiente de desenvolvimento}
+\label{secao:ambiente}
+Para a implementação do sistema proposto foi utilizada a linguagem de programação Java, a biblioteca OpenGL para a geração das representações visuais, e a biblioteca SNMP4J para a comunicação com o protocolo SNMP dos elementos de rede monitorados.
+\par A biblioteca OpenGL é composta por um conjunto de funções, que fornecem acesso a praticamente todos os recursos do \textit{hardware} de vídeo. 
+Internamente, ela age como uma máquina de estados, que de maneira bem específica diz à placa de vídeo o que deve ser feito. Usando as funções da biblioteca, pode-se especificar, ligar ou desligar vários aspectos dessa máquina, tais como a cor atual, a transparência que será usada, os parâmetros de iluminação, efeitos de neblina, entre outros \cite{manssour}.
+\par Para a implementação de gráficos onde é usada seleção de objetos em OpenGL foi utilizada a biblioteca \textit{Graphic Engine API} \cite{Jouvieje}, que possui métodos que facilitam a seleção e manipulação de formas gráficas em OpenGL. Escolheu-se utilizar esta API devido a problemas encontrados durante o desenvolvimento de gráficos que necessitavam de seleção de objetos, e esta mostrou-se ser uma biblioteca simples com maior facilidade de implementação da funcionalidade desejada.
+\par A linguagem Java foi utilizada para o desenvolvimento por ser uma linguagem livre utilizada em larga escala na indústria, possuir uma grande variedade de \textit{frameworks} que facilitam a programação além de ser portável e orientada a objeto. Foi utilizada a biblioteca OpenGL para Java (JOGL \cite{JOGL}), devido ao fato de ela ter implementação para \textit{hardware} de vídeo, permitindo desenhar, criar superfícies e imagens 3D em 
+tempo real. Já a biblioteca SNMP4J \cite{SNMP4J} é uma implementação \textit{open source} das primitivas SNMP para a linguagem Java, fornecendo várias funcionalidades para facilitar a comunicação entre uma aplicação e um agente SNMP de determinado elemento de rede.
+\par Também foi utilizado o PostgreSQL \cite{Postgres} como banco de dados para o armazenamento das informações, por ser de código aberto, de alta performance, estável e que possui inúmeros recursos como integridade transacional, controle de concorrência e suporte para chaves estrangeiras e gatilhos. Além disso, possui capacidade de lidar com grandes volumes de dados, o que é normalmente gerado pelas redes de computadores atuais. Os gráficos 2D são implementados utilizando as bibliotecas JFreeChart \cite{jfreechart} e ChartDirector \cite{chartdirector}.
+\par Como ferramentas de desenvolvimento foram utilizados os seguintes \textit{softwares}: plataforma de programação \textit{NetBeans} \cite{netbeans}, ferramentas de modelagem \textit{UML}\abbrev{UML} {\emph{Unified Modeling Language}} \textit{Jude Community} \cite{jude} e de banco de dados \textit{Power*Architect} \cite{db}. 
+\par Foram utilizados, também, a biblioteca Swingx \cite{swingx}, a biblioteca Quartz \cite{quartz} e o \textit{framework} Hibernate \cite{hibernate} no desenvolvimento das interfaces gráficas, escalonamento e persistência de dados, respectivamente. A Swingx é uma extensão da biblioteca Swing do Java que contém componentes aprimorados com inúmeras funcionalidades no desenvolvimento de aplicações, contendo componentes como 
+calendários, painéis ``dobráveis'', componentes que informam que o sistema está processando alguma requisição, dentre outros. A biblioteca Quartz é um escalonador de tarefas, no qual se pode indicar a data e hora exata na qual se deseja executar um trabalho. O Hibernate é um \textit{framework} para o mapeamento objeto-relacional escrito na linguagem Java que facilita o mapeamento dos atributos entre uma base tradicional de dados relacionais e o modelo objeto de uma aplicação. O objetivo do Hibernate é diminuir a complexidade entre os programas Java, baseado no modelo orientado a objeto, que precisam trabalhar com um banco de dados do modelo relacional (presente na maioria dos sistemas de bancos de dados), principalmente no desenvolvimento de consultas e atualizações dos dados \cite{hibernate}.
+\section{Modelagem do protótipo}
+\label{secao:modelagem}
+Nesta seção são apresentados os diagramas UML que foram modelados para a implementação do protótipo, utilizando a ferramenta \textit{Jude Community} \cite{jude}. A Figura \ref{casos-de-uso} apresenta os casos de uso, ou seja, uma análise dos requisitos levantados para o sistema, que são os seguintes:
+\begin{itemize}
+\item Criar, excluir e atualizar tarefas e equipamentos;
+\item Inserir, excluir e atualizar variáveis de tarefas;
+\item Parar e iniciar tarefas;
+\item Exportar dados estatísticos;
+\item Consultar dados persistidos em banco;
+\item Estabelecer e atualizar parâmetros de desempenho para as variáveis 
+monitoradas;
+\item Gerar gráficos e visualizações sobre os dados coletados.
+\end{itemize}
+\begin{figure}
+\centering
+\includegraphics[width=17cm, height=20cm]{imagens-tc2/usecase.jpg}
+\caption{Casos de uso do sistema.}
+\label{casos-de-uso}
+\end{figure}
+\par Os diagramas de atividades que detalham os casos de uso apresentados encontram-se no Anexo A e modelo conceitual de classes do protótipo encontra-se no Anexo B. 
+\par O sistema foi implementado utilizando o padrão de arquitetura de \textit{software} \textit{MVC} (\textit{model-view-controller})\abbrev{MVC} {\emph{Model-view-controller}}, onde os dados (\textit{model}) são separados da interface (\textit{view}) do sistema. Assim, alterações feitas na interface não interferem na 
+manipulação dos dados, assim como estes também podem ser reorganizados sem alterar a interface. O MVC resolve este problema através da separação das tarefas de acesso aos dados e lógica de negócio, lógica de apresentação e de interação com o usuário, introduzindo um componente entre os dois: o \textit{controller}. Outros padrões de projetos utilizados na implementação foram: o padrão \textit{facade} para o acesso SNMP e o padrão \textit{DAO} (\textit{Data Access Object})\abbrev{DAO} {\emph{Data Access Object}} para acesso ao banco de dados.
+\par O protótipo possui os seguintes pacotes principais: \textit{model}, \textit{controller}, \textit{util}, \textit{graphics}, \textit{charts} e \textit{view}. Os pacotes são apresentados brevemente a seguir e os diagramas de classes destes encontram-se no Anexo B.
+\par O pacote \textit{model} contém as entidades do sistema, respectivas classes DAO de cada entidade e classes de utilidades usadas nas entidades.
+\par São características das entidades:
+\begin{itemize}
+\item \textsl{Equipment}: entidade que representa um equipamento a ser monitorado na rede, possui atributos como endereço IP, nome, comunidade de escrita e de leitura, \textit{timeout} nas chamadas SNMP, quantidades de \textit{retries} de acesso ao equipamento.
+\item \textsl{Variable}: entidade que representa uma variável da MIB, como atributos possui \textit{oid}, nome, \textit{thresholds}, tipo da variável e tipo de acesso.
+\item \textsl{Task}: entidade que representa uma tarefa que é executada. Cada tarefa possui variáveis associadas, um equipamento, data de início, data de fim e frequência de leitura.
+\item \textsl{Reading}: entidade que representa as leituras efetuadas pelas tarefas. Cada leitura contém data em que foi realizada, valor lido, tarefa e variável associada.
+\item \textsl{Historic}: é uma entidade que representa o histórico de leituras já efetuadas.
+\item \textsl{Search}: é uma entidade que guarda todas as pesquisas efetuadas no sistema.
+\item \textsl{Users}: é uma entidade que contém os usuários do sistema. Somente usuários cadastrados podem acessar o sistema.
+\end{itemize}
+\par O pacote \textit{model} contém, também, as classes DAO do sistema e enumerações utilizadas nas entidades. 
+O modelo DAO é um modelo para persistir dados em banco de dados relacional que permite separar regras de negócio das regras de acesso a banco de dados. 
+As classes de utilidades são enumerações para tipos de dados das entidades, como estado de uma tarefa, tipos de usuário, etc.
+\par As classes do pacote \textit{controller}, são as classes de controle a cada uma das entidades e às classes DAO. O pacote SNMP contém fachadas de acesso aos métodos SNMP (\textit{get}, \textit{set}, \textit{getNext} e \textit{walk}) e um leitor que lê variáveis de uma MIB em formato XML.\abbrev{XML} {\emph{Extensible Markup Language}} 
+\par O pacote \textit{util} do sistema contém as classes de escalonamento de leituras do sistema, de exportação de dados e classes de mensagens de erros e de avisos.
+\par O pacote \textit{graphics} contém as visualizações em OpenGL do sistema, são apresentadas janelas de escolha dos dados a serem visualizados e a seguir os dados são renderizados nas classes \textit{Renderers} de cada pacote; são apresentadas visualizações em linhas, em espirais e em esferas.
+\par O pacote \textit{charts} contém os gráficos implementados utilizando as ferramentas ChartDirector e JFreeChart. São apresentados gráficos convencionais de tempo real e gráficos polar, de linhas e de barras estáticos com dados armazenados no banco de dados.
+\par E o pacote \textit{view} contém as janelas e interfaces gráficas do sistema, como inserção de equipamentos e de tarefas, edição de dados, consulta, alteração de senha, exportação de dados coletados de leituras SNMP e demais operações do sistema.
+\par Na Figura \ref{banco} é apresentado o diagrama do banco de dados relacional gerado na ferramenta \textit{Power*Architect} \cite{db}, mostrando as tabelas e relacionamentos. As tabelas apresentadas ilustram como foram representadas as tabelas do banco de dados através do mapeamento das entidades (classes) do Hibernate. 
+Cada entidade gerou uma tabela do banco de dados, além de uma tabela de relacionamento entre as entidades \textit{Task} e \textit{Variable}.
+\begin{figure}
+\centering
+\includegraphics[width=15cm, height=20cm]{imagens-tc2/banco.jpg}
+\caption{Modelagem do banco de dados do sistema.}
+\label{banco}
+\end{figure}
+\newpage
+\section{Interface e funcionalidades}
+\label{secao:interface}
+Nesta seção são apresentadas as interfaces gráficas e funcionalidades do sistema desenvolvido.
+\par A Figura \ref{fig:telaprincipal1} mostra a janela principal do protótipo, a qual se tem acesso às tarefas que estão sendo monitoradas, criar, editar, parar e iniciar tarefas. Também se tem acesso as visualizações do sistema: visualizações OpenGL e gráficos convencionais. Na Figura \ref{fig:insercaovariaveisetarefas}, é possível visualizar a tela de inserção de tarefas e de variáveis associadas que serão lidas pelo escalonador de tarefas. Cada tarefa possui uma data de início, uma data de fim e uma frequência na qual será efetuada a leitura de todas as variáveis que forem associadas a ela.
+\par Outras funcionalidades do protótipo são: a alteração e exclusão de tarefas, de variáveis e de equipamentos monitorados, a definição e alteração de valores de \textit{thresholds} de cada variável, busca de dados no sistema, inserção e atualização de usuários, além da exportação de dados de leituras.
+\par A Figura \ref{fig:insercaoeq} apresenta a tela de inserção de equipamentos e a Figura \ref{fig:insercaovariaveisetarefas} mostra a tela de inserção de tarefas e variáveis a serem monitoradas.
+\par O anexo C apresenta o manual de utilização do protótipo e as visualizações são explicadas em detalhes na seção \ref{visualizacoes}.
+\begin{figure}[!h]
+\centering
+\includegraphics[width=15cm, height=10cm]{imagens-tc2/telas/telaprincipal.jpg}
+\caption{Tela principal do protótipo.}
+\label{fig:telaprincipal1}
+\end{figure}
+\begin{figure}[!h]
+\centering
+\includegraphics[width=14cm, height=6cm]{imagens-tc2/telas/inserireqtexto.jpg}
+\caption{Tela de inserção de equipamentos.}
+\label{fig:insercaoeq}
+\end{figure}
+\begin{figure}[!h]
+\centering
+\includegraphics[width=15cm, height=10cm]{imagens-tc2/telas/insercaovariaveisetarefas.jpg}
+\caption{Tela de inserção de tarefas e de variáveis associadas.}
+\label{fig:insercaovariaveisetarefas}
+\end{figure}
+%----------------------------
+\section{Implementação}
+\label{secao:implementacao}
+Nesta seção é apresentado como foi implementado o protótipo, ou seja, 
+desde como foi implementada a infraestrutura de banco de dados, as fachadas 
+de obtenção de dados SNMP, o escalonador de leituras e as visualizações 
+implementadas no protótipo.
+\subsection{Infraestrutura do sistema}
+A infraestrutura do sistema implementado é composta dos seguintes mecanismos 
+principais:
+\begin{itemize}
+\item Entidades que correspondem aos objetos armazenados no banco de dados. As classes são mapeadas utilizando o Hibernate que controla a inserção, a atualização e remoção de dados do banco de dados de cada uma das entidades.
+\item Fachada SNMP com os métodos de acesso às variáveis de MIB. O acesso às variáveis de uma MIB é feito através da biblioteca SNMP4J;
+\item Gerenciador de tarefas, que realiza o escalonamento, a leitura do valor das variáveis e posterior inserção no banco de dados. Como alternativa a este gerenciador de tarefas poderia ter sido utilizado um sistema RRDTool já implementado, tal como o Cacti, por exemplo, porém, seria necessário um estudo da forma de busca dos dados que são armazenados pelo Cacti, o que poderia ser inviável para o escopo apresentado. Além de utilizar como base de dados o MySQL, também foi observado que o armazenamento que o Cacti realiza das leituras ocorre em inúmeras tabelas com grande número de tabelas de relacionamentos. Por isso, optou-se por implementar uma base de dados mais simples e que se adequasse melhor ao trabalho desenvolvido. Como vantagem do uso de um RRDTool, pode-se citar o controle sobre o ``estouro'' da quantidade de dados e informações armazenadas no banco de dados, característica a qual o sistema implementado não possui;
+\item Janelas que permitem a inserção, a alteração e a exclusão de equipamentos, de tarefas e de variáveis, além da especificação e da atualização dos valores de \textit{thresholds} das variáveis em monitoração. Também, a pesquisa dos dados armazenados, além de janelas que filtram dados para a geração das visualizações;
+\item Exportação de dados lidos em formato texto e em formato PDF (\textit{Portable Document Format})\abbrev{PDF} {\emph{Portable Document Format}};
+\item Sistema de \textit{login}, com alterações de dados de usuários.
+\end{itemize}
+\subsection{Visualizações}
+\label{visualizacoes}
+Nesta seção são apresentadas as visualizações que foram implementadas sobre 
+os dados que são lidos pelas tarefas do protótipo implementado.
+\subsubsection{Gráfico convencionais}
+Os gráficos convencionais implementados no protótipo são detalhados a seguir e exemplos são apresentados na seção \ref{secao:estudo-de-caso} - estudo de caso.
+\begin{itemize}
+\item Gráfico de barras: exibe as séries como conjuntos de barras horizontais. No protótipo, os dados que podem ser visualizados são a média, o valor mínimo e o valor máximo de cada uma das variáveis que estão em monitoração.
+\item Gráfico polar: exibe uma série como um conjunto de pontos agrupados por categoria em um círculo de 360º. É um gráfico ideal para representar séries temporais cíclicas, isto é, séries temporais que apresentam em seu desenvolvimento determinada periodicidade. Quanto mais distante o segmento de reta está do centro, maior é o seu valor. No protótipo, os dados que podem ser visualizados através de gráfico polar são a média dos valores lidos de uma variável durante determinado mês de um ano.
+\item Gráfico de linhas: um gráfico de linha é usado para representar grandes quantidades de dados que variam em um período de tempo contínuo. No protótipo, os dados que podem ser visualizados através de gráfico de linhas são a média dos valores lidos de uma variável em um ano de monitoração.
+\end{itemize}
+%------------
+\subsubsection{Gráfico 2D em linhas}
+O gráfico em OpenGL em linhas tem o seguinte objetivo: dado um conjunto de variáveis sendo monitoradas por uma tarefa, deseja-se a partir dos \textit{thresholds} inferior e superior de cada uma, verificar através de linhas coloridas quando uma das variáveis passa dos intervalos definidos. Assim, a cor da linha informa se o valor atual lido está abaixo, no intervalo, ou acima dos valores definidos como \textit{thresholds}.
+\subsubsection{Gráfico 2D em espiral}
+Durante o desenvolvimento do gráfico 2D em linhas verificou-se que o desenho de linhas não se adequava à grande quantidade de dados que precisam ser plotados, dessa forma, desenvolveu-se o gráfico OpenGL em espirais que tem o mesmo objetivo do gráfico 2D em formato de linhas, porém, o gráfico em espiral se propõe a mostrar grande quantidade de dados num espaço relativamente pequeno. Assim, caso se deseje acompanhar o andamento do gráfico em linhas é necessário acompanhar o desenho movimentando a câmera ou então redesenhando novamente, o gráfico em espiral facilita essa atualização, pois ao terminar o espaço de desenho do gráfico, apenas inicia-se novamente a espiral.
+\subsubsection{Gráfico 3D em esferas}
+O gráfico 3D de esferas implementado no protótipo tem por objetivo, a partir de uma tarefa que se deseja visualizar, plotar um gráfico 3D informando as médias das variáveis nos meses do ano e o estado da média em relação aos \textit{thresholds}, ao clicar em uma das variáveis em determinado mês do ano é aberto um novo gráfico com média dos dias do mês informando a média em relação aos \textit{thresholds}.
+%----------------------- estudo de caso -------------------
+\section{Estudo de caso}
+\label{secao:estudo-de-caso}
+O sistema implementado poderia ser utilizado em alguns casos como: controle de taxas de erros (BERT - \textit{bit error rate test}) em equipamentos de redes, que possui um \textit{threshold} superior e se deseja observar se o valor corrente ultrapassa o valor máximo desejado durante a realização do teste. Outro caso útil é a monitoração de sensores de temperaturas, por exemplo. Cada sensor ao conter um agente SNMP embutido, torna-se apto a ser monitorado por um sistema de desempenho que controle a temperatura do mesmo.
+\par Assim, nesta seção são apresentados alguns estudos de caso que poderiam ser utilizados como o sistema de gerenciamento de desempenho desenvolvido e que mostrem a utilidade do protótipo. São utilizadas variáveis da MIB-2 para ilustrar a sua monitoração, mas seria interessante usar variáveis de MIBs proprietárias, tal como variáveis de BERT, ou então temperaturas e outros sensores.
+\par Dada a seguinte situação: utilizando-se um equipamento de rede, deseja-se monitorar o desempenho da variável \textit{icmpInMsgs} da MIB-2. Assim, define-se um \textit{threshold} inferior de 100 e um \textit{threshold} superior de 200 pacotes. Dessa forma será utilizado o gráfico de tempo real para monitorar esta variável, e caso o valor lido ultrapasse o \textit{threshold} estabelecido, uma espécie de alarme é mostrado no gráfico.
+Dessa forma, um exemplo do gráfico obtido monitorando essa variável é apresentado na Figura \ref{fig:graficort}, tornando fácil verificar que determinada variável passou o \textit{threshold} superior definido, ou ainda está abaixo do valor definido. Neste trabalho, foi utilizado o desempenho com métricas de \textit{thresholds}, mas seria interessante poder monitorar, também, métricas através de sequências de cálculos os quais gerariam taxas e frequências como métricas, por exemplo, taxa de \textit{bytes} que entram em determinada interface de um equipamento de rede, mas por limitação de tempo e de escopo, optou-se por utilizar métricas mais simples com o objetivo de validar o trabalho, mesmo não sendo tão significativas.
+
+\begin{figure}
+\centering
+\includegraphics[width=14cm, height=6cm]{imagens-tc2/estudo-caso/graficort.jpg}
+\caption{Gráfico de tempo real obtido, informando que a variável em monitoração passou do \textit{threshold} informado.}
+\label{fig:graficort}
+\end{figure}
+Utilizando-se a mesma variável apresentada se pode verificar agora qual foi a média de valores lidos durante um mês de determinado ano. Assim, foi gerado o gráfico polar da Figura \ref{fig:graficopolar}, contendo a média de cada um dos dias do mês, no qual é possível verificar em quais dias do mês o sistema esteve mais sobrecarregado respondendo a requisições. Na Figura \ref{fig:graficobarra} tem-se a média, o valor máximo e o valor mínimo dentre as leituras efetuadas. Já a Figura \ref{fig:graficolinha}, apresenta durante os meses de determinado ano, qual foi a média dos valores lidos. Dessa forma, consegue-se por meio dos gráficos convencionais apresentados verificar quais foram os pontos em que determinado equipamento foi muito requisitado durante os meses de um ano, e a seguir verificar dentro deste mês qual foram os dias mais críticos.
+\begin{figure}[!h]
+\centering
+\includegraphics[width=11cm, height=5cm]{imagens-tc2/estudo-caso/polar.jpg}
+\caption{Gráfico polar obtido a partir de leituras efetuadas em uma variável durante um mês.}
+\label{fig:graficopolar}
+\end{figure}
+\begin{figure}[!h]
+\centering
+\includegraphics[width=10cm, height=6cm]{imagens-tc2/revisao/bar.png}
+\caption{Gráfico de barras contendo o valor mínimo, o valor máximo e a média dos valores lidos de três variáveis.}
+\label{fig:graficobarra}
+\end{figure}
+\begin{figure}[!h]
+\centering
+\includegraphics[width=10cm, height=6cm]{imagens-tc2/estudo-caso/linhas.jpg}
+\caption{Gráfico de linhas contendo a média de todos os valores lidos durante os meses de determinado ano.}
+\label{fig:graficolinha}
+\end{figure}
+\par Com os gráficos em OpenGL implementados deseja-se verificar como eles podem auxiliar na monitoração do desempenho da variável em relação aos gráficos convencionais. Os gráficos em OpenGL implementados monitoram variáveis a partir do seu valor atual com os \textit{thresholds} superior e inferior definidos para cada uma em cada tarefa, ou seja, uma variável pode ter diferentes valores de \textit{thresholds} em diferentes tarefas. As cores presentes nos gráficos tem o seguinte significado:
+\begin{itemize}
+\item Se o valor atual lido for menor que o \textit{threshold} inferior, então desenha o gráfico com a cor amarela.
+\item Se o valor atual lido for maior que o \textit{threshold} superior, então desenha o gráfico com a cor vermelha.
+\item Se o valor atual lido for maior ou igual que o \textit{threshold} inferior e menor ou igual que o \textit{threshold} superior então desenha o gráfico com a cor verde.
+\end{itemize} 
+Assim, inicialmente temos o gráfico 2D de linhas (Figura \ref{fig:2dlinhas}), no qual é possível verificar em um gráfico que determinada variável saiu de um intervalo de \textit{threshold} e entrou em outro. O mesmo exemplo foi monitorado utilizando o gráfico em espiral e pode-se observar que a espiral se comportou de forma muito mais satisfatória frente a essas mudanças de estado, principalmente devido ao fato de ela comportar muito mais dados em um espaço menor (Figura \ref{fig:espiriais}).
+\begin{figure}[!h]
+\centering
+\includegraphics[width=10cm, height=6cm]{imagens-tc2/estudo-caso/2dlinhas1.jpg}
+\caption{Gráfico OpenGL 2D - linhas.}
+\label{fig:2dlinhas}
+\end{figure}
+\begin{figure}[!h]
+\centering
+\includegraphics[width=10cm, height=6cm]{imagens-tc2/estudo-caso/espiriais.jpg}
+\caption{Gráfico OpenGL 2D - espirais.}
+\label{fig:espiriais}
+\end{figure}
+\par O objetivo do gráfico de 3D é a partir de uma tarefa mostrar todas as variáveis da tarefa em uma linha de tempo contendo os 12 meses do ano. A seguir é analisada a média dos dados coletados em cada um dos meses e a cor da esfera relativa à variável no mês é colorida de acordo com os critérios apresentados anteriormente. Assim, como no exemplo mostrado na Figura \ref{fig:3d1}, na qual se tem um mês com a média acima dos valores desejados, pode-se clicar na esfera correspondente e passar a verificar o estado da variável nos dias do mês (Figura \ref{fig:3d2}). Dessa forma, é verificado em que dia a média dos valores foi superior ou inferior aos valores de \textit{thresholds}. Este tipo de gráfico não utiliza dados de leituras em tempo real como os outros gráficos OpenGL, ele utiliza a média de todos os valores presentes no banco de dados para as variáveis que estão sendo visualizadas. No exemplo apresentado, foram adicionadas mais duas variáveis de forma a visualizar como ficaria o gráfico com mais de uma variável.
+\begin{figure}[H]
+\centering
+\includegraphics[width=10cm, height=6cm]{imagens-tc2/estudo-caso/3d2.jpg}
+\caption{Gráfico OpenGL 3D - esferas nível de varíaveis distribuídas nos meses do ano.}
+\label{fig:3d1}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=10cm, height=6cm]{imagens-tc2/revisao/3d2.png}
+\caption{Gráfico OpenGL 3D - esferas mostrando os dias do mês para a variável selecionada.}
+\label{fig:3d2}
+\end{figure}
+
+\chapter{Conclusões e trabalhos futuros}
+\label{capitulo:conclusoes}
+Ao finalizar este Trabalho de Conclusão pode-se concluir que os conhecimentos adquiridos a partir deste trabalho, foram muito importantes para o desenvolvimento profissional e acadêmico, pois foi possível explorar bibliotecas e tecnologias que não haviam sido exploradas em sala de aula. Assim, com a implementação deste protótipo, iniciou-se um estudo mais aprofundado de uma área da Gerência de redes de computadores pouco explorada frente a outras áreas, que são consideradas, algumas vezes, mais importantes no gerenciamento de redes, tais como gerenciamento de falhas e de configuração. \par Com base no problema apresentado, as visualizações implementadas têm por objetivo ilustrar formas de tornar o gerenciamento de desempenho mais fácil de ser ``gerenciado'', ou seja, sem a necessidade de visualizar grandes quantidades de dados tabulados, mas sim, visualizar os mesmos dados através de gráficos e visualizações 2D e 3D que facilitem e auxiliem a verificação de que determinada variável está fora dos padrões de desempenho considerados aceitáveis.
+\par Como trabalhos futuros, pode-se apontar como tarefas, aprofundar o tema em relação às visualizações implementadas, além de utilizar variáveis de MIBs que retornem dados relevantes ao gerenciamento de desempenho, presentes na maioria de vezes em MIBs proprietárias. Além disso, pode-se indicar, a implementação de novas formas de visualizações e o processamento de informações vindas da MIB e através desse processamento obter dados estatísticos sem utilizar variáveis específicas de desempenho.
+\par Pode-se citar como semelhanças do protótipo implementado com os trabalhos relacionados apresentados: possuir um escalonador de leituras, utilizar visualizações através de gráficos convencionais. Como diferencial neste sistema, apresentamos algumas ideias de gráficos utilizando a biblioteca OpenGL como apoio para o desenvolvimento de gráficos mais elaborados e com possibilidade de mais interação, além disso, foram exploradas diversas formas geométricas proporcionadas pela VISINFO, na busca por melhores formas de representar os dados coletados da rede e que são plotados em diversas formas geométricas apresentadas. Como desvantagens da protótipo desenvolvido, pode-se citar a falta de um agente de descoberta automático, ou seja, toda rede tem que ser adicionada manualmente e também o fato de não ser um sistema Web, ou seja, por ser um aplicativo Java, dificulta o acesso por múltiplos usuários.

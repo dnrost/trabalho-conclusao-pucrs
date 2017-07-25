@@ -1,0 +1,152 @@
+\chapter*{Anexo A --- Diagramas de Atividades}
+\label{anexo}
+%\addtocontents{toc}{\protect\contentsline {chapter}{Anexo A --- Diagramas de Atividades}{58}}
+Neste anexo são apresentados os diagramas de atividades UML modelados para a implementação do sistema. São apresentados os diagrama de atividade detalhando, assim, cada caso de uso do sistema.
+\begin{figure}[!h]
+\centering
+\includegraphics[width=14cm, height=15cm]{imagens-tc2/atividades/atualizarequipamentos.jpg}
+%\caption{Diagrama de atividade - Atualizar Equipamentos}
+\label{fig:Diagrama de atividade - Atualizar Equipamentos}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=15cm, height=20cm]{imagens-tc2/atividades/atualizarparametros.jpg}
+%\caption{Diagrama de atividade - Atualizar parâmetros de desempenho para variáveis monitoradas}
+\label{fig:Diagrama de atividade - Atualizar parâmetros de desempenho para variáveis monitoradas}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=15cm, height=20cm]{imagens-tc2/atividades/atualizartarefas.jpg}
+%\caption{Diagrama de atividade - Atualizar tarefas}
+\label{fig:Diagrama de atividade - Atualizar tarefas}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=15cm, height=20cm]{imagens-tc2/atividades/atualizarvariaveis.jpg}
+%\caption{Diagrama de atividade - Atualizar variáveis monitoradas}
+\label{fig:Diagrama de atividade - Atualizar variáveis monitoradas}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=15cm, height=20cm]{imagens-tc2/atividades/cadastrarvariaveis.jpg}
+%\caption{Diagrama de atividade - Cadastrar variáveis monitoradas}
+\label{fig:Diagrama de atividade - Cadastrar variáveis monitoradas}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=15cm, height=20cm]{imagens-tc2/atividades/consultardados.jpg}
+%\caption{Diagrama de atividade - Consultar dados}
+\label{fig:Diagrama de atividade - Consultar dados}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=15cm, height=20cm]{imagens-tc2/atividades/criartarefas.jpg}
+%\caption{Diagrama de atividade - Criar tarefas}
+\label{fig:Diagrama de atividade - Criar tarefas}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=15cm, height=20cm]{imagens-tc2/atividades/estabelecerparametros.jpg}
+%\caption{Diagrama de atividade - Estabelecer parâmetros de desempenho para variáveis monitoradas}
+\label{fig:Diagrama de atividade - Estabelecer parâmetros de desempenho para variáveis monitoradas}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=15cm, height=20cm]{imagens-tc2/atividades/excluirequipamentos.jpg}
+%\caption{Diagrama de atividade - Excluir Equipamentos}
+\label{fig:Diagrama de atividade - Excluir Equipamentos}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=15cm, height=20cm]{imagens-tc2/atividades/excluirtarefas.jpg}
+%\caption{Diagrama de atividade - Excluir tarefas}
+\label{fig:Diagrama de atividade - Excluir tarefas}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=15cm, height=20cm]{imagens-tc2/atividades/excluirvariaveis.jpg}
+%\caption{Diagrama de atividade - Excluir variáveis monitoradas}
+\label{fig:Diagrama de atividade - Excluir variáveis monitoradas}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=15cm, height=20cm]{imagens-tc2/atividades/exportardados.jpg}
+%\caption{Diagrama de atividade - Exportar dados estatísticos}
+\label{fig:Diagrama de atividade - Exportar dados estatísticos}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=15cm, height=20cm]{imagens-tc2/atividades/gerargraficos.jpg}
+%\caption{Diagrama de atividade - Gerar gráficos e visualizações}
+\label{fig:Diagrama de atividade - Gerar gráficos e visualizações}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=15cm, height=20cm]{imagens-tc2/atividades/iniciartarefas.jpg}
+%\caption{Diagrama de atividade - Iniciar tarefas}
+\label{fig:Diagrama de atividade - Iniciar tarefas}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=15cm, height=20cm]{imagens-tc2/atividades/inserirequipamentos.jpg}
+%\caption{Diagrama de atividade - Inserir equipamentos}
+\label{fig:Diagrama de atividade - Inserir equipamentos}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=15cm, height=20cm]{imagens-tc2/atividades/parartarefas.jpg}
+%\caption{Diagrama de atividade - Parar tarefas}
+\label{fig:Diagrama de atividade - Parar tarefas}
+\end{figure}
+
+\chapter*{Anexo B --- Diagramas de Classes}
+\label{anexo}
+%\addtocontents{toc}{\protect\contentsline {chapter}{Anexo B --- Diagramas de Classes}{74}}
+Neste anexo são apresentados os diagramas de classes UML modelados para a implementação do sistema. São apresentados os diagrama de classes, inicialmente uma figura contendo todos os pacotes e classes (Figura \ref{classes:all}). A seguir cada um dos pacotes é melhor detalhado nas demais figuras.
+\par O pacote \textit{model} contém as classes que são as entidades do programa, os DAOs de acesso às entidades e enumerações utilizadas nas classes entidades (Figura \ref{classes:model}).
+\par O pacote \textit{controller} contém as classes de controle de acesso às classes DAOs e classes de acesso ao protocolo SNMP (Figura \ref{classes:controller}).
+\par O pacote \textit{util} contém as classes de utilidades do sistema, como configuração de acesso ao banco de dados, exportação de dados, mensagens de erros do sistema, escalonador de leituras e classe inicial do sistema (Figura \ref{classes:util}).
+\par Os pacotes \textit{graphics} e \textit{charts} contém as classes que geram as visualizações do sistema (Figura \ref{classes:graphics} e Figura \ref{classes:charts}).
+\par E, o pacote \textit{view} contém as classes que representam as janelas e interfaces gráficas do sistema (Figura \ref{classes:view}).
+\begin{figure}
+\centering
+\includegraphics[width=16cm, height=20cm]{imagens-tc2/classes/allclasses.jpg}
+\caption{Modelo conceitual de classes do sistema}
+\label{classes:all}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=15cm, height=20cm]{imagens-tc2/classes/model.jpg}
+\caption{Modelo conceitual de classes: parte 1 - pacote \textit{model}.}
+\label{classes:model}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=15cm, height=20cm]{imagens-tc2/classes/controller.jpg}
+\caption{Modelo conceitual de classes: parte 2 - pacote \textit{controller}.}
+\label{classes:controller}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=15cm, height=20cm]{imagens-tc2/classes/util.jpg}
+\caption{Modelo conceitual de classes: parte 3 - pacote \textit{util}.}
+\label{classes:util}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=15cm, height=20cm]{imagens-tc2/classes/graphics.jpg}
+\caption{Modelo conceitual de classes: parte 4 - pacote \textit{graphics}.}
+\label{classes:graphics}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=15cm, height=20cm]{imagens-tc2/classes/charts.jpg}
+\caption{Modelo conceitual de classes: parte 5 - pacote \textit{chart}s.}
+\label{classes:charts}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=15cm, height=20cm]{imagens-tc2/classes/view.jpg}
+\caption{Modelo conceitual de classes: parte 6 - pacote \textit{view}.}
+\label{classes:view}
+\end{figure}

@@ -1,0 +1,1425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<file name="RFC1213-MIB" type="mib" version="1.0">
+    <module name="RFC1213-MIB" descriptorType="NODETYPE">
+        <node name="org" descriptorType="NODETYPE">
+        <node name="dod" descriptorType="NODETYPE">
+        <node name="internet" descriptorType="NODETYPE">
+        <node name="directory" descriptorType="NODETYPE"/>
+        <node name="mgmt" descriptorType="NODETYPE">
+            <node name="mib-2" descriptorType="NODETYPE">
+                <node name="system" descriptorType="NODETYPE">
+                    <attribute name="sysDescr" descriptorType="ATTRIBUTE" description="A textual description of the entity.  This value&#10;should include the full name and version&#10;identification of the system's hardware type,&#10;software operating-system, and networking&#10;software.  It is mandatory that this only contain&#10;printable ASCII characters." type="java.lang.String" default="Test Agent Simulator" access="READ" indexRequired="false">
+                        <typeInfo subType="DisplayString" enumerated="false" range="true">
+                            <range min="0" max="255"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="4" identifier="1.3.6.1.2.1.1.1.0"></protocolMap>
+                    </attribute>
+                    <attribute name="sysObjectID" descriptorType="ATTRIBUTE" description="The vendor's authoritative identification of the&#10;network management subsystem contained in the&#10;entity.  This value is allocated within the SMI&#10;enterprises subtree (1.3.6.1.4.1) and provides an&#10;easy and unambiguous means for determining `what&#10;kind of box' is being managed.  For example, if&#10;vendor `Flintstones, Inc.' was assigned the&#10;subtree 1.3.6.1.4.1.4242, it could assign the&#10;identifier 1.3.6.1.4.1.4242.1.1 to its `Fred&#10;Router'." type="java.lang.String" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="OBJECT IDENTIFIER"/>
+                        <protocolMap name="SNMP" type="6" identifier="1.3.6.1.2.1.1.2.0"></protocolMap>
+                    </attribute>
+                    <attribute name="sysUpTime" descriptorType="ATTRIBUTE" description="The time (in hundredths of a second) since the&#10;network management portion of the system was last&#10;re-initialized." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="TimeTicks" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="67" identifier="1.3.6.1.2.1.1.3.0"></protocolMap>
+                    </attribute>
+                    <attribute name="sysContact" descriptorType="ATTRIBUTE" description="The textual identification of the contact person&#10;for this managed node, together with information&#10;on how to contact this person." type="java.lang.String" default="" access="READWRITE" indexRequired="false">
+                        <typeInfo subType="DisplayString" enumerated="false" range="true">
+                            <range min="0" max="255"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="4" identifier="1.3.6.1.2.1.1.4.0"></protocolMap>
+                    </attribute>
+                    <attribute name="sysName" descriptorType="ATTRIBUTE" description="An administratively-assigned name for this&#10;managed node.  By convention, this is the node's&#10;fully-qualified domain name." type="java.lang.String" default="" access="READWRITE" indexRequired="false">
+                        <typeInfo subType="DisplayString" enumerated="false" range="true">
+                            <range min="0" max="255"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="4" identifier="1.3.6.1.2.1.1.5.0"></protocolMap>
+                    </attribute>
+                    <attribute name="sysLocation" descriptorType="ATTRIBUTE" description="The physical location of this node (e.g.,&#10;`telephone closet, 3rd floor')." type="java.lang.String" default="" access="READWRITE" indexRequired="false">
+                        <typeInfo subType="DisplayString" enumerated="false" range="true">
+                            <range min="0" max="255"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="4" identifier="1.3.6.1.2.1.1.6.0"></protocolMap>
+                    </attribute>
+                    <attribute name="sysServices" descriptorType="ATTRIBUTE" description="A value which indicates the set of services that&#10;this entity primarily offers.&#10;&#10;The value is a sum.  This sum initially takes the&#10;value zero, Then, for each layer, L, in the range&#10;1 through 7, that this node performs transactions&#10;for, 2 raised to (L - 1) is added to the sum.  For&#10;example, a node which performs primarily routing&#10;functions would have a value of 4 (2^(3-1)).  In&#10;contrast, a node which is a host offering&#10;application services would have a value of 72&#10;(2^(4-1) + 2^(7-1)).  Note that in the context of&#10;the Internet suite of protocols, values should be&#10;calculated accordingly:&#10;&#10;     layer  functionality&#10;         1  physical (e.g., repeaters)&#10;         2  datalink/subnetwork (e.g., bridges)&#10;         3  internet (e.g., IP gateways)&#10;         4  end-to-end  (e.g., IP hosts)&#10;         7  applications (e.g., mail relays)&#10;&#10;For systems including OSI protocols, layers 5 and&#10;6 may also be counted." type="int" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="INTEGER" enumerated="false" range="true">
+                            <range min="0" max="127"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.1.7.0"></protocolMap>
+                    </attribute>
+                </node>
+                <node name="interfaces" descriptorType="NODETYPE">
+                    <attribute name="ifNumber" descriptorType="ATTRIBUTE" description="The number of network interfaces (regardless of&#10;their current state) present on this system." type="int" default="1" access="READ" indexRequired="false">
+                        <typeInfo subType="INTEGER" enumerated="false" range="true">
+                            <range min="-2147483648" max="2147483647"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.2.1.0"></protocolMap>
+                    </attribute>
+                    <combinedAttribute name="ifTable" descriptorType="ATTRIBUTE" description="A list of interface entries.  The number of&#10;entries is given by the value of ifNumber." type="Table" default="" access="READ" indexRequired="false">
+                        <protocolMap name="SNMP" type="TABLE" identifier="1.3.6.1.2.1.2.2"></protocolMap>
+                        <attribute name="ifIndex" descriptorType="ATTRIBUTE" description="A unique value for each interface.  Its value&#10;ranges between 1 and the value of ifNumber.  The&#10;value for each interface must remain constant at&#10;least from one re-initialization of the entity's&#10;network management system to the next re-&#10;initialization." type="int[]" default="" access="READ" key="PRIMARY" indexRequired="false">
+                            <typeInfo subType="INTEGER" componentType="int"/>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.2.2.1.1"></protocolMap>
+                            <attribute name="ifIndexInstance" descriptorType="ATTRIBUTE" description="A unique value for each interface.  Its value&#10;ranges between 1 and the value of ifNumber.  The&#10;value for each interface must remain constant at&#10;least from one re-initialization of the entity's&#10;network management system to the next re-&#10;initialization." type="int" default="" access="READ" key="PRIMARY" indexRequired="true">
+                                <typeInfo subType="INTEGER" enumerated="false" range="true">
+                                    <range min="-2147483648" max="2147483647"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.2.2.1.1"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ifDescr" descriptorType="ATTRIBUTE" description="A textual string containing information about the&#10;interface.  This string should include the name of&#10;the manufacturer, the product name and the version&#10;of the hardware interface." type="String[]" default="Test Interface" access="READ" indexRequired="false">
+                            <typeInfo subType="DisplayString" componentType="java.lang.String"/>
+                            <protocolMap name="SNMP" type="4" identifier="1.3.6.1.2.1.2.2.1.2"></protocolMap>
+                            <attribute name="ifDescrInstance" descriptorType="ATTRIBUTE" description="A textual string containing information about the&#10;interface.  This string should include the name of&#10;the manufacturer, the product name and the version&#10;of the hardware interface." type="java.lang.String" default="Test Interface" access="READ" indexRequired="true">
+                                <typeInfo subType="DisplayString" enumerated="false" range="true">
+                                    <range min="0" max="255"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="4" identifier="1.3.6.1.2.1.2.2.1.2"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ifType" descriptorType="ATTRIBUTE" description="The type of interface, distinguished according to&#10;the physical/link protocol(s) immediately `below'&#10;the network layer in the protocol stack." type="int[]" default="32" access="READ" indexRequired="false">
+                            <typeInfo subType="INTEGER" componentType="int"/>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.2.2.1.3"></protocolMap>
+                            <attribute name="ifTypeInstance" descriptorType="ATTRIBUTE" description="The type of interface, distinguished according to&#10;the physical/link protocol(s) immediately `below'&#10;the network layer in the protocol stack." type="int" default="32" access="READ" indexRequired="true">
+                                <typeInfo subType="INTEGER" enumerated="true" range="false">
+                                    <enum name="other" value="1"/>
+                                    <enum name="regular1822" value="2"/>
+                                    <enum name="hdh1822" value="3"/>
+                                    <enum name="ddn-x25" value="4"/>
+                                    <enum name="rfc877-x25" value="5"/>
+                                    <enum name="ethernet-csmacd" value="6"/>
+                                    <enum name="iso88023-csmacd" value="7"/>
+                                    <enum name="iso88024-tokenBus" value="8"/>
+                                    <enum name="iso88025-tokenRing" value="9"/>
+                                    <enum name="iso88026-man" value="10"/>
+                                    <enum name="starLan" value="11"/>
+                                    <enum name="proteon-10Mbit" value="12"/>
+                                    <enum name="proteon-80Mbit" value="13"/>
+                                    <enum name="hyperchannel" value="14"/>
+                                    <enum name="fddi" value="15"/>
+                                    <enum name="lapb" value="16"/>
+                                    <enum name="sdlc" value="17"/>
+                                    <enum name="ds1" value="18"/>
+                                    <enum name="e1" value="19"/>
+                                    <enum name="basicISDN" value="20"/>
+                                    <enum name="primaryISDN" value="21"/>
+                                    <enum name="propPointToPointSerial" value="22"/>
+                                    <enum name="ppp" value="23"/>
+                                    <enum name="softwareLoopback" value="24"/>
+                                    <enum name="eon" value="25"/>
+                                    <enum name="ethernet-3Mbit" value="26"/>
+                                    <enum name="nsip" value="27"/>
+                                    <enum name="slip" value="28"/>
+                                    <enum name="ultra" value="29"/>
+                                    <enum name="ds3" value="30"/>
+                                    <enum name="sip" value="31"/>
+                                    <enum name="frame-relay" value="32"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.2.2.1.3"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ifMtu" descriptorType="ATTRIBUTE" description="The size of the largest datagram which can be&#10;sent/received on the interface, specified in&#10;octets.  For interfaces that are used for&#10;transmitting network datagrams, this is the size&#10;of the largest network datagram that can be sent&#10;on the interface." type="int[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="INTEGER" componentType="int"/>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.2.2.1.4"></protocolMap>
+                            <attribute name="ifMtuInstance" descriptorType="ATTRIBUTE" description="The size of the largest datagram which can be&#10;sent/received on the interface, specified in&#10;octets.  For interfaces that are used for&#10;transmitting network datagrams, this is the size&#10;of the largest network datagram that can be sent&#10;on the interface." type="int" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="INTEGER" enumerated="false" range="true">
+                                    <range min="-2147483648" max="2147483647"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.2.2.1.4"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ifSpeed" descriptorType="ATTRIBUTE" description="An estimate of the interface's current bandwidth&#10;in bits per second.  For interfaces which do not&#10;vary in bandwidth or for those where no accurate&#10;estimation can be made, this object should contain&#10;the nominal bandwidth." type="long[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Gauge" componentType="long"/>
+                            <protocolMap name="SNMP" type="66" identifier="1.3.6.1.2.1.2.2.1.5"></protocolMap>
+                            <attribute name="ifSpeedInstance" descriptorType="ATTRIBUTE" description="An estimate of the interface's current bandwidth&#10;in bits per second.  For interfaces which do not&#10;vary in bandwidth or for those where no accurate&#10;estimation can be made, this object should contain&#10;the nominal bandwidth." type="long" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="Gauge" enumerated="false" range="true">
+                                    <range min="0" max="4294967295"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="66" identifier="1.3.6.1.2.1.2.2.1.5"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ifPhysAddress" descriptorType="ATTRIBUTE" description="The interface's address at the protocol layer&#10;immediately `below' the network layer in the&#10;protocol stack.  For interfaces which do not have&#10;such an address (e.g., a serial line), this object&#10;should contain an octet string of zero length." type="String[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="PhysAddress" componentType="java.lang.String"/>
+                            <protocolMap name="SNMP" type="4" identifier="1.3.6.1.2.1.2.2.1.6"></protocolMap>
+                            <attribute name="ifPhysAddressInstance" descriptorType="ATTRIBUTE" description="The interface's address at the protocol layer&#10;immediately `below' the network layer in the&#10;protocol stack.  For interfaces which do not have&#10;such an address (e.g., a serial line), this object&#10;should contain an octet string of zero length." type="java.lang.String" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="PhysAddress"/>
+                                <protocolMap name="SNMP" type="4" identifier="1.3.6.1.2.1.2.2.1.6"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ifAdminStatus" descriptorType="ATTRIBUTE" description="The desired state of the interface.  The&#10;testing(3) state indicates that no operational&#10;packets can be passed." type="int[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="INTEGER" componentType="int"/>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.2.2.1.7"></protocolMap>
+                            <attribute name="ifAdminStatusInstance" descriptorType="ATTRIBUTE" description="The desired state of the interface.  The&#10;testing(3) state indicates that no operational&#10;packets can be passed." type="int" default="" access="READWRITE" indexRequired="true">
+                                <typeInfo subType="INTEGER" enumerated="true" range="false">
+                                    <enum name="up" value="1"/>
+                                    <enum name="down" value="2"/>
+                                    <enum name="testing" value="3"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.2.2.1.7"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ifOperStatus" descriptorType="ATTRIBUTE" description="The current operational state of the interface.&#10;The testing(3) state indicates that no operational&#10;packets can be passed." type="int[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="INTEGER" componentType="int"/>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.2.2.1.8"></protocolMap>
+                            <attribute name="ifOperStatusInstance" descriptorType="ATTRIBUTE" description="The current operational state of the interface.&#10;The testing(3) state indicates that no operational&#10;packets can be passed." type="int" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="INTEGER" enumerated="true" range="false">
+                                    <enum name="up" value="1"/>
+                                    <enum name="down" value="2"/>
+                                    <enum name="testing" value="3"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.2.2.1.8"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ifLastChange" descriptorType="ATTRIBUTE" description="The value of sysUpTime at the time the interface&#10;entered its current operational state.  If the&#10;current state was entered prior to the last re-&#10;initialization of the local network management&#10;subsystem, then this object contains a zero&#10;value." type="long[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="TimeTicks" componentType="long"/>
+                            <protocolMap name="SNMP" type="67" identifier="1.3.6.1.2.1.2.2.1.9"></protocolMap>
+                            <attribute name="ifLastChangeInstance" descriptorType="ATTRIBUTE" description="The value of sysUpTime at the time the interface&#10;entered its current operational state.  If the&#10;current state was entered prior to the last re-&#10;initialization of the local network management&#10;subsystem, then this object contains a zero&#10;value." type="long" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="TimeTicks" enumerated="false" range="true">
+                                    <range min="0" max="4294967295"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="67" identifier="1.3.6.1.2.1.2.2.1.9"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ifInOctets" descriptorType="ATTRIBUTE" description="The total number of octets received on the&#10;interface, including framing characters." type="long[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" componentType="long"/>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.2.2.1.10"></protocolMap>
+                            <attribute name="ifInOctetsInstance" descriptorType="ATTRIBUTE" description="The total number of octets received on the&#10;interface, including framing characters." type="long" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="Counter" enumerated="false" range="true">
+                                    <range min="0" max="4294967295"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.2.2.1.10"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ifInUcastPkts" descriptorType="ATTRIBUTE" description="The number of subnetwork-unicast packets&#10;delivered to a higher-layer protocol." type="long[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" componentType="long"/>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.2.2.1.11"></protocolMap>
+                            <attribute name="ifInUcastPktsInstance" descriptorType="ATTRIBUTE" description="The number of subnetwork-unicast packets&#10;delivered to a higher-layer protocol." type="long" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="Counter" enumerated="false" range="true">
+                                    <range min="0" max="4294967295"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.2.2.1.11"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ifInNUcastPkts" descriptorType="ATTRIBUTE" description="The number of non-unicast (i.e., subnetwork-&#10;broadcast or subnetwork-multicast) packets&#10;delivered to a higher-layer protocol." type="long[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" componentType="long"/>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.2.2.1.12"></protocolMap>
+                            <attribute name="ifInNUcastPktsInstance" descriptorType="ATTRIBUTE" description="The number of non-unicast (i.e., subnetwork-&#10;broadcast or subnetwork-multicast) packets&#10;delivered to a higher-layer protocol." type="long" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="Counter" enumerated="false" range="true">
+                                    <range min="0" max="4294967295"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.2.2.1.12"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ifInDiscards" descriptorType="ATTRIBUTE" description="The number of inbound packets which were chosen&#10;to be discarded even though no errors had been&#10;detected to prevent their being deliverable to a&#10;higher-layer protocol.  One possible reason for&#10;discarding such a packet could be to free up&#10;buffer space." type="long[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" componentType="long"/>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.2.2.1.13"></protocolMap>
+                            <attribute name="ifInDiscardsInstance" descriptorType="ATTRIBUTE" description="The number of inbound packets which were chosen&#10;to be discarded even though no errors had been&#10;detected to prevent their being deliverable to a&#10;higher-layer protocol.  One possible reason for&#10;discarding such a packet could be to free up&#10;buffer space." type="long" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="Counter" enumerated="false" range="true">
+                                    <range min="0" max="4294967295"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.2.2.1.13"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ifInErrors" descriptorType="ATTRIBUTE" description="The number of inbound packets that contained&#10;errors preventing them from being deliverable to a&#10;higher-layer protocol." type="long[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" componentType="long"/>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.2.2.1.14"></protocolMap>
+                            <attribute name="ifInErrorsInstance" descriptorType="ATTRIBUTE" description="The number of inbound packets that contained&#10;errors preventing them from being deliverable to a&#10;higher-layer protocol." type="long" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="Counter" enumerated="false" range="true">
+                                    <range min="0" max="4294967295"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.2.2.1.14"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ifInUnknownProtos" descriptorType="ATTRIBUTE" description="The number of packets received via the interface&#10;which were discarded because of an unknown or&#10;unsupported protocol." type="long[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" componentType="long"/>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.2.2.1.15"></protocolMap>
+                            <attribute name="ifInUnknownProtosInstance" descriptorType="ATTRIBUTE" description="The number of packets received via the interface&#10;which were discarded because of an unknown or&#10;unsupported protocol." type="long" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="Counter" enumerated="false" range="true">
+                                    <range min="0" max="4294967295"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.2.2.1.15"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ifOutOctets" descriptorType="ATTRIBUTE" description="The total number of octets transmitted out of the&#10;interface, including framing characters." type="long[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" componentType="long"/>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.2.2.1.16"></protocolMap>
+                            <attribute name="ifOutOctetsInstance" descriptorType="ATTRIBUTE" description="The total number of octets transmitted out of the&#10;interface, including framing characters." type="long" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="Counter" enumerated="false" range="true">
+                                    <range min="0" max="4294967295"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.2.2.1.16"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ifOutUcastPkts" descriptorType="ATTRIBUTE" description="The total number of packets that higher-level&#10;protocols requested be transmitted to a&#10;subnetwork-unicast address, including those that&#10;were discarded or not sent." type="long[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" componentType="long"/>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.2.2.1.17"></protocolMap>
+                            <attribute name="ifOutUcastPktsInstance" descriptorType="ATTRIBUTE" description="The total number of packets that higher-level&#10;protocols requested be transmitted to a&#10;subnetwork-unicast address, including those that&#10;were discarded or not sent." type="long" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="Counter" enumerated="false" range="true">
+                                    <range min="0" max="4294967295"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.2.2.1.17"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ifOutNUcastPkts" descriptorType="ATTRIBUTE" description="The total number of packets that higher-level&#10;protocols requested be transmitted to a non-&#10;unicast (i.e., a subnetwork-broadcast or&#10;subnetwork-multicast) address, including those&#10;that were discarded or not sent." type="long[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" componentType="long"/>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.2.2.1.18"></protocolMap>
+                            <attribute name="ifOutNUcastPktsInstance" descriptorType="ATTRIBUTE" description="The total number of packets that higher-level&#10;protocols requested be transmitted to a non-&#10;unicast (i.e., a subnetwork-broadcast or&#10;subnetwork-multicast) address, including those&#10;that were discarded or not sent." type="long" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="Counter" enumerated="false" range="true">
+                                    <range min="0" max="4294967295"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.2.2.1.18"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ifOutDiscards" descriptorType="ATTRIBUTE" description="The number of outbound packets which were chosen&#10;to be discarded even though no errors had been&#10;detected to prevent their being transmitted.  One&#10;possible reason for discarding such a packet could&#10;be to free up buffer space." type="long[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" componentType="long"/>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.2.2.1.19"></protocolMap>
+                            <attribute name="ifOutDiscardsInstance" descriptorType="ATTRIBUTE" description="The number of outbound packets which were chosen&#10;to be discarded even though no errors had been&#10;detected to prevent their being transmitted.  One&#10;possible reason for discarding such a packet could&#10;be to free up buffer space." type="long" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="Counter" enumerated="false" range="true">
+                                    <range min="0" max="4294967295"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.2.2.1.19"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ifOutErrors" descriptorType="ATTRIBUTE" description="The number of outbound packets that could not be&#10;transmitted because of errors." type="long[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" componentType="long"/>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.2.2.1.20"></protocolMap>
+                            <attribute name="ifOutErrorsInstance" descriptorType="ATTRIBUTE" description="The number of outbound packets that could not be&#10;transmitted because of errors." type="long" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="Counter" enumerated="false" range="true">
+                                    <range min="0" max="4294967295"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.2.2.1.20"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ifOutQLen" descriptorType="ATTRIBUTE" description="The length of the output packet queue (in&#10;packets)." type="long[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Gauge" componentType="long"/>
+                            <protocolMap name="SNMP" type="66" identifier="1.3.6.1.2.1.2.2.1.21"></protocolMap>
+                            <attribute name="ifOutQLenInstance" descriptorType="ATTRIBUTE" description="The length of the output packet queue (in&#10;packets)." type="long" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="Gauge" enumerated="false" range="true">
+                                    <range min="0" max="4294967295"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="66" identifier="1.3.6.1.2.1.2.2.1.21"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ifSpecific" descriptorType="ATTRIBUTE" description="A reference to MIB definitions specific to the&#10;particular media being used to realize the&#10;interface.  For example, if the interface is&#10;realized by an ethernet, then the value of this&#10;object refers to a document defining objects&#10;specific to ethernet.  If this information is not&#10;present, its value should be set to the OBJECT&#10;IDENTIFIER { 0 0 }, which is a syntatically valid&#10;object identifier, and any conformant&#10;implementation of ASN.1 and BER must be able to&#10;generate and recognize this value." type="String[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="OBJECT IDENTIFIER" componentType="java.lang.String"/>
+                            <protocolMap name="SNMP" type="6" identifier="1.3.6.1.2.1.2.2.1.22"></protocolMap>
+                            <attribute name="ifSpecificInstance" descriptorType="ATTRIBUTE" description="A reference to MIB definitions specific to the&#10;particular media being used to realize the&#10;interface.  For example, if the interface is&#10;realized by an ethernet, then the value of this&#10;object refers to a document defining objects&#10;specific to ethernet.  If this information is not&#10;present, its value should be set to the OBJECT&#10;IDENTIFIER { 0 0 }, which is a syntatically valid&#10;object identifier, and any conformant&#10;implementation of ASN.1 and BER must be able to&#10;generate and recognize this value." type="java.lang.String" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="OBJECT IDENTIFIER"/>
+                                <protocolMap name="SNMP" type="6" identifier="1.3.6.1.2.1.2.2.1.22"></protocolMap>
+                            </attribute>
+                        </attribute>
+                    </combinedAttribute>
+                </node>
+                <node name="at" descriptorType="NODETYPE">
+                    <combinedAttribute name="atTable" descriptorType="ATTRIBUTE" description="The Address Translation tables contain the&#10;NetworkAddress to `physical' address equivalences.&#10;Some interfaces do not use translation tables for&#10;determining address equivalences (e.g., DDN-X.25&#10;has an algorithmic method); if all interfaces are&#10;of this type, then the Address Translation table&#10;is empty, i.e., has zero entries." type="Table" default="" access="READ" indexRequired="false">
+                        <protocolMap name="SNMP" type="TABLE" identifier="1.3.6.1.2.1.3.1"></protocolMap>
+                        <attribute name="atIfIndex" descriptorType="ATTRIBUTE" description="The interface on which this entry's equivalence&#10;is effective.  The interface identified by a&#10;particular value of this index is the same&#10;interface as identified by the same value of&#10;ifIndex." type="int[]" default="" access="READ" key="PRIMARY" indexRequired="false">
+                            <typeInfo subType="INTEGER" componentType="int"/>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.3.1.1.1"></protocolMap>
+                            <attribute name="atIfIndexInstance" descriptorType="ATTRIBUTE" description="The interface on which this entry's equivalence&#10;is effective.  The interface identified by a&#10;particular value of this index is the same&#10;interface as identified by the same value of&#10;ifIndex." type="int" default="" access="READWRITE" key="PRIMARY" indexRequired="true">
+                                <typeInfo subType="INTEGER" enumerated="false" range="true">
+                                    <range min="-2147483648" max="2147483647"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.3.1.1.1"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="atPhysAddress" descriptorType="ATTRIBUTE" description="The media-dependent `physical' address.&#10;&#10;Setting this object to a null string (one of zero&#10;length) has the effect of invaliding the&#10;corresponding entry in the atTable object.  That&#10;is, it effectively dissasociates the interface&#10;identified with said entry from the mapping&#10;identified with said entry.  It is an&#10;implementation-specific matter as to whether the&#10;agent removes an invalidated entry from the table.&#10;Accordingly, management stations must be prepared&#10;to receive tabular information from agents that&#10;corresponds to entries not currently in use.&#10;Proper interpretation of such entries requires&#10;examination of the relevant atPhysAddress object." type="String[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="PhysAddress" componentType="java.lang.String"/>
+                            <protocolMap name="SNMP" type="4" identifier="1.3.6.1.2.1.3.1.1.2"></protocolMap>
+                            <attribute name="atPhysAddressInstance" descriptorType="ATTRIBUTE" description="The media-dependent `physical' address.&#10;&#10;Setting this object to a null string (one of zero&#10;length) has the effect of invaliding the&#10;corresponding entry in the atTable object.  That&#10;is, it effectively dissasociates the interface&#10;identified with said entry from the mapping&#10;identified with said entry.  It is an&#10;implementation-specific matter as to whether the&#10;agent removes an invalidated entry from the table.&#10;Accordingly, management stations must be prepared&#10;to receive tabular information from agents that&#10;corresponds to entries not currently in use.&#10;Proper interpretation of such entries requires&#10;examination of the relevant atPhysAddress object." type="java.lang.String" default="" access="READWRITE" indexRequired="true">
+                                <typeInfo subType="PhysAddress"/>
+                                <protocolMap name="SNMP" type="4" identifier="1.3.6.1.2.1.3.1.1.2"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="atNetAddress" descriptorType="ATTRIBUTE" description="The NetworkAddress (e.g., the IP address)&#10;corresponding to the media-dependent `physical'&#10;address." type="String[]" default="" access="READ" key="PRIMARY" indexRequired="false">
+                            <typeInfo subType="NetworkAddress" componentType="java.lang.String"/>
+                            <protocolMap name="SNMP" type="64" identifier="1.3.6.1.2.1.3.1.1.3"></protocolMap>
+                            <attribute name="atNetAddressInstance" descriptorType="ATTRIBUTE" description="The NetworkAddress (e.g., the IP address)&#10;corresponding to the media-dependent `physical'&#10;address." type="java.lang.String" default="" access="READWRITE" key="PRIMARY" indexRequired="true">
+                                <typeInfo subType="NetworkAddress"/>
+                                <protocolMap name="SNMP" type="64" identifier="1.3.6.1.2.1.3.1.1.3"></protocolMap>
+                            </attribute>
+                        </attribute>
+                    </combinedAttribute>
+                </node>
+                <node name="ip" descriptorType="NODETYPE">
+                    <attribute name="ipForwarding" descriptorType="ATTRIBUTE" description="The indication of whether this entity is acting&#10;as an IP gateway in respect to the forwarding of&#10;datagrams received by, but not addressed to, this&#10;entity.  IP gateways forward datagrams.  IP hosts&#10;do not (except those source-routed via the host).&#10;&#10;Note that for some managed nodes, this object may&#10;take on only a subset of the values possible.&#10;Accordingly, it is appropriate for an agent to&#10;return a `badValue' response if a management&#10;station attempts to change this object to an&#10;inappropriate value." type="int" default="" access="READWRITE" indexRequired="false">
+                        <typeInfo subType="INTEGER" enumerated="true" range="false">
+                            <enum name="forwarding" value="1"/>
+                            <enum name="not-forwarding" value="2"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.1.0"></protocolMap>
+                    </attribute>
+                    <attribute name="ipDefaultTTL" descriptorType="ATTRIBUTE" description="The default value inserted into the Time-To-Live&#10;field of the IP header of datagrams originated at&#10;this entity, whenever a TTL value is not supplied&#10;by the transport layer protocol." type="int" default="" access="READWRITE" indexRequired="false">
+                        <typeInfo subType="INTEGER" enumerated="false" range="true">
+                            <range min="-2147483648" max="2147483647"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.2.0"></protocolMap>
+                    </attribute>
+                    <attribute name="ipInReceives" descriptorType="ATTRIBUTE" description="The total number of input datagrams received from&#10;interfaces, including those received in error." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.4.3.0"></protocolMap>
+                    </attribute>
+                    <attribute name="ipInHdrErrors" descriptorType="ATTRIBUTE" description="The number of input datagrams discarded due to&#10;errors in their IP headers, including bad&#10;checksums, version number mismatch, other format&#10;errors, time-to-live exceeded, errors discovered&#10;in processing their IP options, etc." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.4.4.0"></protocolMap>
+                    </attribute>
+                    <attribute name="ipInAddrErrors" descriptorType="ATTRIBUTE" description="The number of input datagrams discarded because&#10;the IP address in their IP header's destination&#10;field was not a valid address to be received at&#10;this entity.  This count includes invalid&#10;addresses (e.g., 0.0.0.0) and addresses of&#10;unsupported Classes (e.g., Class E).  For entities&#10;which are not IP Gateways and therefore do not&#10;forward datagrams, this counter includes datagrams&#10;discarded because the destination address was not&#10;a local address." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.4.5.0"></protocolMap>
+                    </attribute>
+                    <attribute name="ipForwDatagrams" descriptorType="ATTRIBUTE" description="The number of input datagrams for which this&#10;entity was not their final IP destination, as a&#10;result of which an attempt was made to find a&#10;route to forward them to that final destination.&#10;In entities which do not act as IP Gateways, this&#10;counter will include only those packets which were&#10;Source-Routed via this entity, and the Source-&#10;Route option processing was successful." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.4.6.0"></protocolMap>
+                    </attribute>
+                    <attribute name="ipInUnknownProtos" descriptorType="ATTRIBUTE" description="The number of locally-addressed datagrams&#10;received successfully but discarded because of an&#10;unknown or unsupported protocol." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.4.7.0"></protocolMap>
+                    </attribute>
+                    <attribute name="ipInDiscards" descriptorType="ATTRIBUTE" description="The number of input IP datagrams for which no&#10;problems were encountered to prevent their&#10;continued processing, but which were discarded&#10;(e.g., for lack of buffer space).  Note that this&#10;counter does not include any datagrams discarded&#10;while awaiting re-assembly." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.4.8.0"></protocolMap>
+                    </attribute>
+                    <attribute name="ipInDelivers" descriptorType="ATTRIBUTE" description="The total number of input datagrams successfully&#10;delivered to IP user-protocols (including ICMP)." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.4.9.0"></protocolMap>
+                    </attribute>
+                    <attribute name="ipOutRequests" descriptorType="ATTRIBUTE" description="The total number of IP datagrams which local IP&#10;user-protocols (including ICMP) supplied to IP in&#10;requests for transmission.  Note that this counter&#10;does not include any datagrams counted in&#10;ipForwDatagrams." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.4.10.0"></protocolMap>
+                    </attribute>
+                    <attribute name="ipOutDiscards" descriptorType="ATTRIBUTE" description="The number of output IP datagrams for which no&#10;problem was encountered to prevent their&#10;transmission to their destination, but which were&#10;discarded (e.g., for lack of buffer space).  Note&#10;that this counter would include datagrams counted&#10;in ipForwDatagrams if any such packets met this&#10;(discretionary) discard criterion." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.4.11.0"></protocolMap>
+                    </attribute>
+                    <attribute name="ipOutNoRoutes" descriptorType="ATTRIBUTE" description="The number of IP datagrams discarded because no&#10;route could be found to transmit them to their&#10;destination.  Note that this counter includes any&#10;packets counted in ipForwDatagrams which meet this&#10;`no-route' criterion.  Note that this includes any&#10;datagarms which a host cannot route because all of&#10;its default gateways are down." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.4.12.0"></protocolMap>
+                    </attribute>
+                    <attribute name="ipReasmTimeout" descriptorType="ATTRIBUTE" description="The maximum number of seconds which received&#10;fragments are held while they are awaiting&#10;reassembly at this entity." type="int" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="INTEGER" enumerated="false" range="true">
+                            <range min="-2147483648" max="2147483647"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.13.0"></protocolMap>
+                    </attribute>
+                    <attribute name="ipReasmReqds" descriptorType="ATTRIBUTE" description="The number of IP fragments received which needed&#10;to be reassembled at this entity." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.4.14.0"></protocolMap>
+                    </attribute>
+                    <attribute name="ipReasmOKs" descriptorType="ATTRIBUTE" description="The number of IP datagrams successfully re-&#10;assembled." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.4.15.0"></protocolMap>
+                    </attribute>
+                    <attribute name="ipReasmFails" descriptorType="ATTRIBUTE" description="The number of failures detected by the IP re-&#10;assembly algorithm (for whatever reason: timed&#10;out, errors, etc).  Note that this is not&#10;necessarily a count of discarded IP fragments&#10;since some algorithms (notably the algorithm in&#10;RFC 815) can lose track of the number of fragments&#10;by combining them as they are received." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.4.16.0"></protocolMap>
+                    </attribute>
+                    <attribute name="ipFragOKs" descriptorType="ATTRIBUTE" description="The number of IP datagrams that have been&#10;successfully fragmented at this entity." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.4.17.0"></protocolMap>
+                    </attribute>
+                    <attribute name="ipFragFails" descriptorType="ATTRIBUTE" description="The number of IP datagrams that have been&#10;discarded because they needed to be fragmented at&#10;this entity but could not be, e.g., because their&#10;Don't Fragment flag was set." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.4.18.0"></protocolMap>
+                    </attribute>
+                    <attribute name="ipFragCreates" descriptorType="ATTRIBUTE" description="The number of IP datagram fragments that have&#10;been generated as a result of fragmentation at&#10;this entity." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.4.19.0"></protocolMap>
+                    </attribute>
+                    <combinedAttribute name="ipAddrTable" descriptorType="ATTRIBUTE" description="The table of addressing information relevant to&#10;this entity's IP addresses." type="Table" default="" access="READ" indexRequired="false">
+                        <protocolMap name="SNMP" type="TABLE" identifier="1.3.6.1.2.1.4.20"></protocolMap>
+                        <attribute name="ipAdEntAddr" descriptorType="ATTRIBUTE" description="The IP address to which this entry's addressing&#10;information pertains." type="String[]" default="" access="READ" key="PRIMARY" indexRequired="false">
+                            <typeInfo subType="IpAddress" componentType="java.lang.String"/>
+                            <protocolMap name="SNMP" type="64" identifier="1.3.6.1.2.1.4.20.1.1"></protocolMap>
+                            <attribute name="ipAdEntAddrInstance" descriptorType="ATTRIBUTE" description="The IP address to which this entry's addressing&#10;information pertains." type="java.lang.String" default="" access="READ" key="PRIMARY" indexRequired="true">
+                                <typeInfo subType="IpAddress"/>
+                                <protocolMap name="SNMP" type="64" identifier="1.3.6.1.2.1.4.20.1.1"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ipAdEntIfIndex" descriptorType="ATTRIBUTE" description="The index value which uniquely identifies the&#10;interface to which this entry is applicable.  The&#10;interface identified by a particular value of this&#10;index is the same interface as identified by the&#10;same value of ifIndex." type="int[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="INTEGER" componentType="int"/>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.20.1.2"></protocolMap>
+                            <attribute name="ipAdEntIfIndexInstance" descriptorType="ATTRIBUTE" description="The index value which uniquely identifies the&#10;interface to which this entry is applicable.  The&#10;interface identified by a particular value of this&#10;index is the same interface as identified by the&#10;same value of ifIndex." type="int" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="INTEGER" enumerated="false" range="true">
+                                    <range min="-2147483648" max="2147483647"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.20.1.2"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ipAdEntNetMask" descriptorType="ATTRIBUTE" description="The subnet mask associated with the IP address of&#10;this entry.  The value of the mask is an IP&#10;address with all the network bits set to 1 and all&#10;the hosts bits set to 0." type="String[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="IpAddress" componentType="java.lang.String"/>
+                            <protocolMap name="SNMP" type="64" identifier="1.3.6.1.2.1.4.20.1.3"></protocolMap>
+                            <attribute name="ipAdEntNetMaskInstance" descriptorType="ATTRIBUTE" description="The subnet mask associated with the IP address of&#10;this entry.  The value of the mask is an IP&#10;address with all the network bits set to 1 and all&#10;the hosts bits set to 0." type="java.lang.String" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="IpAddress"/>
+                                <protocolMap name="SNMP" type="64" identifier="1.3.6.1.2.1.4.20.1.3"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ipAdEntBcastAddr" descriptorType="ATTRIBUTE" description="The value of the least-significant bit in the IP&#10;broadcast address used for sending datagrams on&#10;the (logical) interface associated with the IP&#10;address of this entry.  For example, when the&#10;Internet standard all-ones broadcast address is&#10;used, the value will be 1.  This value applies to&#10;both the subnet and network broadcasts addresses&#10;used by the entity on this (logical) interface." type="int[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="INTEGER" componentType="int"/>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.20.1.4"></protocolMap>
+                            <attribute name="ipAdEntBcastAddrInstance" descriptorType="ATTRIBUTE" description="The value of the least-significant bit in the IP&#10;broadcast address used for sending datagrams on&#10;the (logical) interface associated with the IP&#10;address of this entry.  For example, when the&#10;Internet standard all-ones broadcast address is&#10;used, the value will be 1.  This value applies to&#10;both the subnet and network broadcasts addresses&#10;used by the entity on this (logical) interface." type="int" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="INTEGER" enumerated="false" range="true">
+                                    <range min="-2147483648" max="2147483647"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.20.1.4"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ipAdEntReasmMaxSize" descriptorType="ATTRIBUTE" description="The size of the largest IP datagram which this&#10;entity can re-assemble from incoming IP fragmented&#10;datagrams received on this interface." type="int[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="INTEGER" componentType="int"/>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.20.1.5"></protocolMap>
+                            <attribute name="ipAdEntReasmMaxSizeInstance" descriptorType="ATTRIBUTE" description="The size of the largest IP datagram which this&#10;entity can re-assemble from incoming IP fragmented&#10;datagrams received on this interface." type="int" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="INTEGER" enumerated="false" range="true">
+                                    <range min="0" max="65535"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.20.1.5"></protocolMap>
+                            </attribute>
+                        </attribute>
+                    </combinedAttribute>
+                    <combinedAttribute name="ipRouteTable" descriptorType="ATTRIBUTE" description="This entity's IP Routing table." type="Table" default="" access="READ" indexRequired="false">
+                        <protocolMap name="SNMP" type="TABLE" identifier="1.3.6.1.2.1.4.21"></protocolMap>
+                        <attribute name="ipRouteDest" descriptorType="ATTRIBUTE" description="The destination IP address of this route.  An&#10;entry with a value of 0.0.0.0 is considered a&#10;default route.  Multiple routes to a single&#10;destination can appear in the table, but access to&#10;such multiple entries is dependent on the table-&#10;access mechanisms defined by the network&#10;management protocol in use." type="String[]" default="" access="READ" key="PRIMARY" indexRequired="false">
+                            <typeInfo subType="IpAddress" componentType="java.lang.String"/>
+                            <protocolMap name="SNMP" type="64" identifier="1.3.6.1.2.1.4.21.1.1"></protocolMap>
+                            <attribute name="ipRouteDestInstance" descriptorType="ATTRIBUTE" description="The destination IP address of this route.  An&#10;entry with a value of 0.0.0.0 is considered a&#10;default route.  Multiple routes to a single&#10;destination can appear in the table, but access to&#10;such multiple entries is dependent on the table-&#10;access mechanisms defined by the network&#10;management protocol in use." type="java.lang.String" default="" access="READWRITE" key="PRIMARY" indexRequired="true">
+                                <typeInfo subType="IpAddress"/>
+                                <protocolMap name="SNMP" type="64" identifier="1.3.6.1.2.1.4.21.1.1"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ipRouteIfIndex" descriptorType="ATTRIBUTE" description="The index value which uniquely identifies the&#10;local interface through which the next hop of this&#10;route should be reached.  The interface identified&#10;by a particular value of this index is the same&#10;interface as identified by the same value of&#10;ifIndex." type="int[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="INTEGER" componentType="int"/>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.21.1.2"></protocolMap>
+                            <attribute name="ipRouteIfIndexInstance" descriptorType="ATTRIBUTE" description="The index value which uniquely identifies the&#10;local interface through which the next hop of this&#10;route should be reached.  The interface identified&#10;by a particular value of this index is the same&#10;interface as identified by the same value of&#10;ifIndex." type="int" default="" access="READWRITE" indexRequired="true">
+                                <typeInfo subType="INTEGER" enumerated="false" range="true">
+                                    <range min="-2147483648" max="2147483647"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.21.1.2"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ipRouteMetric1" descriptorType="ATTRIBUTE" description="The primary routing metric for this route.  The&#10;semantics of this metric are determined by the&#10;routing-protocol specified in the route's&#10;ipRouteProto value.  If this metric is not used,&#10;its value should be set to -1." type="int[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="INTEGER" componentType="int"/>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.21.1.3"></protocolMap>
+                            <attribute name="ipRouteMetric1Instance" descriptorType="ATTRIBUTE" description="The primary routing metric for this route.  The&#10;semantics of this metric are determined by the&#10;routing-protocol specified in the route's&#10;ipRouteProto value.  If this metric is not used,&#10;its value should be set to -1." type="int" default="" access="READWRITE" indexRequired="true">
+                                <typeInfo subType="INTEGER" enumerated="false" range="true">
+                                    <range min="-2147483648" max="2147483647"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.21.1.3"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ipRouteMetric2" descriptorType="ATTRIBUTE" description="An alternate routing metric for this route.  The&#10;semantics of this metric are determined by the&#10;routing-protocol specified in the route's&#10;ipRouteProto value.  If this metric is not used,&#10;its value should be set to -1." type="int[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="INTEGER" componentType="int"/>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.21.1.4"></protocolMap>
+                            <attribute name="ipRouteMetric2Instance" descriptorType="ATTRIBUTE" description="An alternate routing metric for this route.  The&#10;semantics of this metric are determined by the&#10;routing-protocol specified in the route's&#10;ipRouteProto value.  If this metric is not used,&#10;its value should be set to -1." type="int" default="" access="READWRITE" indexRequired="true">
+                                <typeInfo subType="INTEGER" enumerated="false" range="true">
+                                    <range min="-2147483648" max="2147483647"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.21.1.4"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ipRouteMetric3" descriptorType="ATTRIBUTE" description="An alternate routing metric for this route.  The&#10;semantics of this metric are determined by the&#10;routing-protocol specified in the route's&#10;ipRouteProto value.  If this metric is not used,&#10;its value should be set to -1." type="int[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="INTEGER" componentType="int"/>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.21.1.5"></protocolMap>
+                            <attribute name="ipRouteMetric3Instance" descriptorType="ATTRIBUTE" description="An alternate routing metric for this route.  The&#10;semantics of this metric are determined by the&#10;routing-protocol specified in the route's&#10;ipRouteProto value.  If this metric is not used,&#10;its value should be set to -1." type="int" default="" access="READWRITE" indexRequired="true">
+                                <typeInfo subType="INTEGER" enumerated="false" range="true">
+                                    <range min="-2147483648" max="2147483647"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.21.1.5"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ipRouteMetric4" descriptorType="ATTRIBUTE" description="An alternate routing metric for this route.  The&#10;semantics of this metric are determined by the&#10;routing-protocol specified in the route's&#10;ipRouteProto value.  If this metric is not used,&#10;its value should be set to -1." type="int[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="INTEGER" componentType="int"/>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.21.1.6"></protocolMap>
+                            <attribute name="ipRouteMetric4Instance" descriptorType="ATTRIBUTE" description="An alternate routing metric for this route.  The&#10;semantics of this metric are determined by the&#10;routing-protocol specified in the route's&#10;ipRouteProto value.  If this metric is not used,&#10;its value should be set to -1." type="int" default="" access="READWRITE" indexRequired="true">
+                                <typeInfo subType="INTEGER" enumerated="false" range="true">
+                                    <range min="-2147483648" max="2147483647"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.21.1.6"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ipRouteNextHop" descriptorType="ATTRIBUTE" description="The IP address of the next hop of this route.&#10;(In the case of a route bound to an interface&#10;which is realized via a broadcast media, the value&#10;of this field is the agent's IP address on that&#10;interface.)" type="String[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="IpAddress" componentType="java.lang.String"/>
+                            <protocolMap name="SNMP" type="64" identifier="1.3.6.1.2.1.4.21.1.7"></protocolMap>
+                            <attribute name="ipRouteNextHopInstance" descriptorType="ATTRIBUTE" description="The IP address of the next hop of this route.&#10;(In the case of a route bound to an interface&#10;which is realized via a broadcast media, the value&#10;of this field is the agent's IP address on that&#10;interface.)" type="java.lang.String" default="" access="READWRITE" indexRequired="true">
+                                <typeInfo subType="IpAddress"/>
+                                <protocolMap name="SNMP" type="64" identifier="1.3.6.1.2.1.4.21.1.7"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ipRouteType" descriptorType="ATTRIBUTE" description="The type of route.  Note that the values&#10;direct(3) and indirect(4) refer to the notion of&#10;direct and indirect routing in the IP&#10;architecture.&#10;&#10;Setting this object to the value invalid(2) has&#10;the effect of invalidating the corresponding entry&#10;in the ipRouteTable object.  That is, it&#10;effectively dissasociates the destination&#10;identified with said entry from the route&#10;identified with said entry.  It is an&#10;implementation-specific matter as to whether the&#10;agent removes an invalidated entry from the table.&#10;Accordingly, management stations must be prepared&#10;to receive tabular information from agents that&#10;corresponds to entries not currently in use.&#10;Proper interpretation of such entries requires&#10;examination of the relevant ipRouteType object." type="int[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="INTEGER" componentType="int"/>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.21.1.8"></protocolMap>
+                            <attribute name="ipRouteTypeInstance" descriptorType="ATTRIBUTE" description="The type of route.  Note that the values&#10;direct(3) and indirect(4) refer to the notion of&#10;direct and indirect routing in the IP&#10;architecture.&#10;&#10;Setting this object to the value invalid(2) has&#10;the effect of invalidating the corresponding entry&#10;in the ipRouteTable object.  That is, it&#10;effectively dissasociates the destination&#10;identified with said entry from the route&#10;identified with said entry.  It is an&#10;implementation-specific matter as to whether the&#10;agent removes an invalidated entry from the table.&#10;Accordingly, management stations must be prepared&#10;to receive tabular information from agents that&#10;corresponds to entries not currently in use.&#10;Proper interpretation of such entries requires&#10;examination of the relevant ipRouteType object." type="int" default="" access="READWRITE" indexRequired="true">
+                                <typeInfo subType="INTEGER" enumerated="true" range="false">
+                                    <enum name="other" value="1"/>
+                                    <enum name="invalid" value="2"/>
+                                    <enum name="direct" value="3"/>
+                                    <enum name="indirect" value="4"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.21.1.8"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ipRouteProto" descriptorType="ATTRIBUTE" description="The routing mechanism via which this route was&#10;learned.  Inclusion of values for gateway routing&#10;protocols is not intended to imply that hosts&#10;should support those protocols." type="int[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="INTEGER" componentType="int"/>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.21.1.9"></protocolMap>
+                            <attribute name="ipRouteProtoInstance" descriptorType="ATTRIBUTE" description="The routing mechanism via which this route was&#10;learned.  Inclusion of values for gateway routing&#10;protocols is not intended to imply that hosts&#10;should support those protocols." type="int" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="INTEGER" enumerated="true" range="false">
+                                    <enum name="other" value="1"/>
+                                    <enum name="local" value="2"/>
+                                    <enum name="netmgmt" value="3"/>
+                                    <enum name="icmp" value="4"/>
+                                    <enum name="egp" value="5"/>
+                                    <enum name="ggp" value="6"/>
+                                    <enum name="hello" value="7"/>
+                                    <enum name="rip" value="8"/>
+                                    <enum name="is-is" value="9"/>
+                                    <enum name="es-is" value="10"/>
+                                    <enum name="ciscoIgrp" value="11"/>
+                                    <enum name="bbnSpfIgp" value="12"/>
+                                    <enum name="ospf" value="13"/>
+                                    <enum name="bgp" value="14"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.21.1.9"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ipRouteAge" descriptorType="ATTRIBUTE" description="The number of seconds since this route was last&#10;updated or otherwise determined to be correct.&#10;Note that no semantics of `too old' can be implied&#10;except through knowledge of the routing protocol&#10;by which the route was learned." type="int[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="INTEGER" componentType="int"/>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.21.1.10"></protocolMap>
+                            <attribute name="ipRouteAgeInstance" descriptorType="ATTRIBUTE" description="The number of seconds since this route was last&#10;updated or otherwise determined to be correct.&#10;Note that no semantics of `too old' can be implied&#10;except through knowledge of the routing protocol&#10;by which the route was learned." type="int" default="" access="READWRITE" indexRequired="true">
+                                <typeInfo subType="INTEGER" enumerated="false" range="true">
+                                    <range min="-2147483648" max="2147483647"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.21.1.10"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ipRouteMask" descriptorType="ATTRIBUTE" description="Indicate the mask to be logical-ANDed with the&#10;destination address before being compared to the&#10;value in the ipRouteDest field.  For those systems&#10;that do not support arbitrary subnet masks, an&#10;agent constructs the value of the ipRouteMask by&#10;determining whether the value of the correspondent&#10;ipRouteDest field belong to a class-A, B, or C&#10;network, and then using one of:&#10;&#10;     mask           network&#10;     255.0.0.0      class-A&#10;     255.255.0.0    class-B&#10;     255.255.255.0  class-C&#10;&#10;If the value of the ipRouteDest is 0.0.0.0 (a&#10;default route), then the mask value is also&#10;0.0.0.0.  It should be noted that all IP routing&#10;subsystems implicitly use this mechanism." type="String[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="IpAddress" componentType="java.lang.String"/>
+                            <protocolMap name="SNMP" type="64" identifier="1.3.6.1.2.1.4.21.1.11"></protocolMap>
+                            <attribute name="ipRouteMaskInstance" descriptorType="ATTRIBUTE" description="Indicate the mask to be logical-ANDed with the&#10;destination address before being compared to the&#10;value in the ipRouteDest field.  For those systems&#10;that do not support arbitrary subnet masks, an&#10;agent constructs the value of the ipRouteMask by&#10;determining whether the value of the correspondent&#10;ipRouteDest field belong to a class-A, B, or C&#10;network, and then using one of:&#10;&#10;     mask           network&#10;     255.0.0.0      class-A&#10;     255.255.0.0    class-B&#10;     255.255.255.0  class-C&#10;&#10;If the value of the ipRouteDest is 0.0.0.0 (a&#10;default route), then the mask value is also&#10;0.0.0.0.  It should be noted that all IP routing&#10;subsystems implicitly use this mechanism." type="java.lang.String" default="" access="READWRITE" indexRequired="true">
+                                <typeInfo subType="IpAddress"/>
+                                <protocolMap name="SNMP" type="64" identifier="1.3.6.1.2.1.4.21.1.11"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ipRouteMetric5" descriptorType="ATTRIBUTE" description="An alternate routing metric for this route.  The&#10;semantics of this metric are determined by the&#10;routing-protocol specified in the route's&#10;ipRouteProto value.  If this metric is not used,&#10;its value should be set to -1." type="int[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="INTEGER" componentType="int"/>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.21.1.12"></protocolMap>
+                            <attribute name="ipRouteMetric5Instance" descriptorType="ATTRIBUTE" description="An alternate routing metric for this route.  The&#10;semantics of this metric are determined by the&#10;routing-protocol specified in the route's&#10;ipRouteProto value.  If this metric is not used,&#10;its value should be set to -1." type="int" default="" access="READWRITE" indexRequired="true">
+                                <typeInfo subType="INTEGER" enumerated="false" range="true">
+                                    <range min="-2147483648" max="2147483647"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.21.1.12"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ipRouteInfo" descriptorType="ATTRIBUTE" description="A reference to MIB definitions specific to the&#10;particular routing protocol which is responsible&#10;for this route, as determined by the value&#10;specified in the route's ipRouteProto value.  If&#10;this information is not present, its value should&#10;be set to the OBJECT IDENTIFIER { 0 0 }, which is&#10;a syntatically valid object identifier, and any&#10;conformant implementation of ASN.1 and BER must be&#10;able to generate and recognize this value." type="String[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="OBJECT IDENTIFIER" componentType="java.lang.String"/>
+                            <protocolMap name="SNMP" type="6" identifier="1.3.6.1.2.1.4.21.1.13"></protocolMap>
+                            <attribute name="ipRouteInfoInstance" descriptorType="ATTRIBUTE" description="A reference to MIB definitions specific to the&#10;particular routing protocol which is responsible&#10;for this route, as determined by the value&#10;specified in the route's ipRouteProto value.  If&#10;this information is not present, its value should&#10;be set to the OBJECT IDENTIFIER { 0 0 }, which is&#10;a syntatically valid object identifier, and any&#10;conformant implementation of ASN.1 and BER must be&#10;able to generate and recognize this value." type="java.lang.String" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="OBJECT IDENTIFIER"/>
+                                <protocolMap name="SNMP" type="6" identifier="1.3.6.1.2.1.4.21.1.13"></protocolMap>
+                            </attribute>
+                        </attribute>
+                    </combinedAttribute>
+                    <combinedAttribute name="ipNetToMediaTable" descriptorType="ATTRIBUTE" description="The IP Address Translation table used for mapping&#10;from IP addresses to physical addresses." type="Table" default="" access="READ" indexRequired="false">
+                        <protocolMap name="SNMP" type="TABLE" identifier="1.3.6.1.2.1.4.22"></protocolMap>
+                        <attribute name="ipNetToMediaIfIndex" descriptorType="ATTRIBUTE" description="The interface on which this entry's equivalence&#10;is effective.  The interface identified by a&#10;particular value of this index is the same&#10;interface as identified by the same value of&#10;ifIndex." type="int[]" default="" access="READ" key="PRIMARY" indexRequired="false">
+                            <typeInfo subType="INTEGER" componentType="int"/>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.22.1.1"></protocolMap>
+                            <attribute name="ipNetToMediaIfIndexInstance" descriptorType="ATTRIBUTE" description="The interface on which this entry's equivalence&#10;is effective.  The interface identified by a&#10;particular value of this index is the same&#10;interface as identified by the same value of&#10;ifIndex." type="int" default="" access="READWRITE" key="PRIMARY" indexRequired="true">
+                                <typeInfo subType="INTEGER" enumerated="false" range="true">
+                                    <range min="-2147483648" max="2147483647"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.22.1.1"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ipNetToMediaPhysAddress" descriptorType="ATTRIBUTE" description="The media-dependent `physical' address." type="String[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="PhysAddress" componentType="java.lang.String"/>
+                            <protocolMap name="SNMP" type="4" identifier="1.3.6.1.2.1.4.22.1.2"></protocolMap>
+                            <attribute name="ipNetToMediaPhysAddressInstance" descriptorType="ATTRIBUTE" description="The media-dependent `physical' address." type="java.lang.String" default="" access="READWRITE" indexRequired="true">
+                                <typeInfo subType="PhysAddress"/>
+                                <protocolMap name="SNMP" type="4" identifier="1.3.6.1.2.1.4.22.1.2"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ipNetToMediaNetAddress" descriptorType="ATTRIBUTE" description="The IpAddress corresponding to the media-&#10;dependent `physical' address." type="String[]" default="" access="READ" key="PRIMARY" indexRequired="false">
+                            <typeInfo subType="IpAddress" componentType="java.lang.String"/>
+                            <protocolMap name="SNMP" type="64" identifier="1.3.6.1.2.1.4.22.1.3"></protocolMap>
+                            <attribute name="ipNetToMediaNetAddressInstance" descriptorType="ATTRIBUTE" description="The IpAddress corresponding to the media-&#10;dependent `physical' address." type="java.lang.String" default="" access="READWRITE" key="PRIMARY" indexRequired="true">
+                                <typeInfo subType="IpAddress"/>
+                                <protocolMap name="SNMP" type="64" identifier="1.3.6.1.2.1.4.22.1.3"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="ipNetToMediaType" descriptorType="ATTRIBUTE" description="The type of mapping.&#10;&#10;Setting this object to the value invalid(2) has&#10;the effect of invalidating the corresponding entry&#10;in the ipNetToMediaTable.  That is, it effectively&#10;dissasociates the interface identified with said&#10;entry from the mapping identified with said entry.&#10;It is an implementation-specific matter as to&#10;whether the agent removes an invalidated entry&#10;from the table.  Accordingly, management stations&#10;must be prepared to receive tabular information&#10;from agents that corresponds to entries not&#10;currently in use.  Proper interpretation of such&#10;entries requires examination of the relevant&#10;ipNetToMediaType object." type="int[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="INTEGER" componentType="int"/>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.22.1.4"></protocolMap>
+                            <attribute name="ipNetToMediaTypeInstance" descriptorType="ATTRIBUTE" description="The type of mapping.&#10;&#10;Setting this object to the value invalid(2) has&#10;the effect of invalidating the corresponding entry&#10;in the ipNetToMediaTable.  That is, it effectively&#10;dissasociates the interface identified with said&#10;entry from the mapping identified with said entry.&#10;It is an implementation-specific matter as to&#10;whether the agent removes an invalidated entry&#10;from the table.  Accordingly, management stations&#10;must be prepared to receive tabular information&#10;from agents that corresponds to entries not&#10;currently in use.  Proper interpretation of such&#10;entries requires examination of the relevant&#10;ipNetToMediaType object." type="int" default="" access="READWRITE" indexRequired="true">
+                                <typeInfo subType="INTEGER" enumerated="true" range="false">
+                                    <enum name="other" value="1"/>
+                                    <enum name="invalid" value="2"/>
+                                    <enum name="dynamic" value="3"/>
+                                    <enum name="static" value="4"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.4.22.1.4"></protocolMap>
+                            </attribute>
+                        </attribute>
+                    </combinedAttribute>
+                    <attribute name="ipRoutingDiscards" descriptorType="ATTRIBUTE" description="The number of routing entries which were chosen&#10;to be discarded even though they are valid.  One&#10;possible reason for discarding such an entry could&#10;be to free-up buffer space for other routing&#10;entries." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.4.23.0"></protocolMap>
+                    </attribute>
+                </node>
+                <node name="icmp" descriptorType="NODETYPE">
+                    <attribute name="icmpInMsgs" descriptorType="ATTRIBUTE" description="The total number of ICMP messages which the&#10;entity received.  Note that this counter includes&#10;all those counted by icmpInErrors." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.5.1.0"></protocolMap>
+                    </attribute>
+                    <attribute name="icmpInErrors" descriptorType="ATTRIBUTE" description="The number of ICMP messages which the entity&#10;received but determined as having ICMP-specific&#10;errors (bad ICMP checksums, bad length, etc.)." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.5.2.0"></protocolMap>
+                    </attribute>
+                    <attribute name="icmpInDestUnreachs" descriptorType="ATTRIBUTE" description="The number of ICMP Destination Unreachable&#10;messages received." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.5.3.0"></protocolMap>
+                    </attribute>
+                    <attribute name="icmpInTimeExcds" descriptorType="ATTRIBUTE" description="The number of ICMP Time Exceeded messages&#10;received." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.5.4.0"></protocolMap>
+                    </attribute>
+                    <attribute name="icmpInParmProbs" descriptorType="ATTRIBUTE" description="The number of ICMP Parameter Problem messages&#10;received." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.5.5.0"></protocolMap>
+                    </attribute>
+                    <attribute name="icmpInSrcQuenchs" descriptorType="ATTRIBUTE" description="The number of ICMP Source Quench messages&#10;received." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.5.6.0"></protocolMap>
+                    </attribute>
+                    <attribute name="icmpInRedirects" descriptorType="ATTRIBUTE" description="The number of ICMP Redirect messages received." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.5.7.0"></protocolMap>
+                    </attribute>
+                    <attribute name="icmpInEchos" descriptorType="ATTRIBUTE" description="The number of ICMP Echo (request) messages&#10;received." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.5.8.0"></protocolMap>
+                    </attribute>
+                    <attribute name="icmpInEchoReps" descriptorType="ATTRIBUTE" description="The number of ICMP Echo Reply messages received." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.5.9.0"></protocolMap>
+                    </attribute>
+                    <attribute name="icmpInTimestamps" descriptorType="ATTRIBUTE" description="The number of ICMP Timestamp (request) messages&#10;received." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.5.10.0"></protocolMap>
+                    </attribute>
+                    <attribute name="icmpInTimestampReps" descriptorType="ATTRIBUTE" description="The number of ICMP Timestamp Reply messages&#10;received." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.5.11.0"></protocolMap>
+                    </attribute>
+                    <attribute name="icmpInAddrMasks" descriptorType="ATTRIBUTE" description="The number of ICMP Address Mask Request messages&#10;received." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.5.12.0"></protocolMap>
+                    </attribute>
+                    <attribute name="icmpInAddrMaskReps" descriptorType="ATTRIBUTE" description="The number of ICMP Address Mask Reply messages&#10;received." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.5.13.0"></protocolMap>
+                    </attribute>
+                    <attribute name="icmpOutMsgs" descriptorType="ATTRIBUTE" description="The total number of ICMP messages which this&#10;entity attempted to send.  Note that this counter&#10;includes all those counted by icmpOutErrors." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.5.14.0"></protocolMap>
+                    </attribute>
+                    <attribute name="icmpOutErrors" descriptorType="ATTRIBUTE" description="The number of ICMP messages which this entity did&#10;not send due to problems discovered within ICMP&#10;such as a lack of buffers.  This value should not&#10;include errors discovered outside the ICMP layer&#10;such as the inability of IP to route the resultant&#10;datagram.  In some implementations there may be no&#10;types of error which contribute to this counter's&#10;value." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.5.15.0"></protocolMap>
+                    </attribute>
+                    <attribute name="icmpOutDestUnreachs" descriptorType="ATTRIBUTE" description="The number of ICMP Destination Unreachable&#10;messages sent." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.5.16.0"></protocolMap>
+                    </attribute>
+                    <attribute name="icmpOutTimeExcds" descriptorType="ATTRIBUTE" description="The number of ICMP Time Exceeded messages sent." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.5.17.0"></protocolMap>
+                    </attribute>
+                    <attribute name="icmpOutParmProbs" descriptorType="ATTRIBUTE" description="The number of ICMP Parameter Problem messages&#10;sent." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.5.18.0"></protocolMap>
+                    </attribute>
+                    <attribute name="icmpOutSrcQuenchs" descriptorType="ATTRIBUTE" description="The number of ICMP Source Quench messages sent." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.5.19.0"></protocolMap>
+                    </attribute>
+                    <attribute name="icmpOutRedirects" descriptorType="ATTRIBUTE" description="The number of ICMP Redirect messages sent.  For a&#10;host, this object will always be zero, since hosts&#10;do not send redirects." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.5.20.0"></protocolMap>
+                    </attribute>
+                    <attribute name="icmpOutEchos" descriptorType="ATTRIBUTE" description="The number of ICMP Echo (request) messages sent." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.5.21.0"></protocolMap>
+                    </attribute>
+                    <attribute name="icmpOutEchoReps" descriptorType="ATTRIBUTE" description="The number of ICMP Echo Reply messages sent." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.5.22.0"></protocolMap>
+                    </attribute>
+                    <attribute name="icmpOutTimestamps" descriptorType="ATTRIBUTE" description="The number of ICMP Timestamp (request) messages&#10;sent." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.5.23.0"></protocolMap>
+                    </attribute>
+                    <attribute name="icmpOutTimestampReps" descriptorType="ATTRIBUTE" description="The number of ICMP Timestamp Reply messages&#10;sent." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.5.24.0"></protocolMap>
+                    </attribute>
+                    <attribute name="icmpOutAddrMasks" descriptorType="ATTRIBUTE" description="The number of ICMP Address Mask Request messages&#10;sent." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.5.25.0"></protocolMap>
+                    </attribute>
+                    <attribute name="icmpOutAddrMaskReps" descriptorType="ATTRIBUTE" description="The number of ICMP Address Mask Reply messages&#10;sent." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.5.26.0"></protocolMap>
+                    </attribute>
+                </node>
+                <node name="tcp" descriptorType="NODETYPE">
+                    <attribute name="tcpRtoAlgorithm" descriptorType="ATTRIBUTE" description="The algorithm used to determine the timeout value&#10;used for retransmitting unacknowledged octets." type="int" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="INTEGER" enumerated="true" range="false">
+                            <enum name="other" value="1"/>
+                            <enum name="constant" value="2"/>
+                            <enum name="rsre" value="3"/>
+                            <enum name="vanj" value="4"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.6.1.0"></protocolMap>
+                    </attribute>
+                    <attribute name="tcpRtoMin" descriptorType="ATTRIBUTE" description="The minimum value permitted by a TCP&#10;implementation for the retransmission timeout,&#10;measured in milliseconds.  More refined semantics&#10;for objects of this type depend upon the algorithm&#10;used to determine the retransmission timeout.  In&#10;particular, when the timeout algorithm is rsre(3),&#10;an object of this type has the semantics of the&#10;LBOUND quantity described in RFC 793." type="int" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="INTEGER" enumerated="false" range="true">
+                            <range min="-2147483648" max="2147483647"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.6.2.0"></protocolMap>
+                    </attribute>
+                    <attribute name="tcpRtoMax" descriptorType="ATTRIBUTE" description="The maximum value permitted by a TCP&#10;implementation for the retransmission timeout,&#10;measured in milliseconds.  More refined semantics&#10;for objects of this type depend upon the algorithm&#10;used to determine the retransmission timeout.  In&#10;particular, when the timeout algorithm is rsre(3),&#10;an object of this type has the semantics of the&#10;UBOUND quantity described in RFC 793." type="int" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="INTEGER" enumerated="false" range="true">
+                            <range min="-2147483648" max="2147483647"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.6.3.0"></protocolMap>
+                    </attribute>
+                    <attribute name="tcpMaxConn" descriptorType="ATTRIBUTE" description="The limit on the total number of TCP connections&#10;the entity can support.  In entities where the&#10;maximum number of connections is dynamic, this&#10;object should contain the value -1." type="int" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="INTEGER" enumerated="false" range="true">
+                            <range min="-2147483648" max="2147483647"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.6.4.0"></protocolMap>
+                    </attribute>
+                    <attribute name="tcpActiveOpens" descriptorType="ATTRIBUTE" description="The number of times TCP connections have made a&#10;direct transition to the SYN-SENT state from the&#10;CLOSED state." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.6.5.0"></protocolMap>
+                    </attribute>
+                    <attribute name="tcpPassiveOpens" descriptorType="ATTRIBUTE" description="The number of times TCP connections have made a&#10;direct transition to the SYN-RCVD state from the&#10;LISTEN state." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.6.6.0"></protocolMap>
+                    </attribute>
+                    <attribute name="tcpAttemptFails" descriptorType="ATTRIBUTE" description="The number of times TCP connections have made a&#10;direct transition to the CLOSED state from either&#10;the SYN-SENT state or the SYN-RCVD state, plus the&#10;number of times TCP connections have made a direct&#10;transition to the LISTEN state from the SYN-RCVD&#10;state." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.6.7.0"></protocolMap>
+                    </attribute>
+                    <attribute name="tcpEstabResets" descriptorType="ATTRIBUTE" description="The number of times TCP connections have made a&#10;direct transition to the CLOSED state from either&#10;the ESTABLISHED state or the CLOSE-WAIT state." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.6.8.0"></protocolMap>
+                    </attribute>
+                    <attribute name="tcpCurrEstab" descriptorType="ATTRIBUTE" description="The number of TCP connections for which the&#10;current state is either ESTABLISHED or CLOSE-&#10;WAIT." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Gauge" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="66" identifier="1.3.6.1.2.1.6.9.0"></protocolMap>
+                    </attribute>
+                    <attribute name="tcpInSegs" descriptorType="ATTRIBUTE" description="The total number of segments received, including&#10;those received in error.  This count includes&#10;segments received on currently established&#10;connections." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.6.10.0"></protocolMap>
+                    </attribute>
+                    <attribute name="tcpOutSegs" descriptorType="ATTRIBUTE" description="The total number of segments sent, including&#10;those on current connections but excluding those&#10;containing only retransmitted octets." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.6.11.0"></protocolMap>
+                    </attribute>
+                    <attribute name="tcpRetransSegs" descriptorType="ATTRIBUTE" description="The total number of segments retransmitted - that&#10;is, the number of TCP segments transmitted&#10;containing one or more previously transmitted&#10;octets." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.6.12.0"></protocolMap>
+                    </attribute>
+                    <combinedAttribute name="tcpConnTable" descriptorType="ATTRIBUTE" description="A table containing TCP connection-specific&#10;information." type="Table" default="" access="READ" indexRequired="false">
+                        <protocolMap name="SNMP" type="TABLE" identifier="1.3.6.1.2.1.6.13"></protocolMap>
+                        <attribute name="tcpConnState" descriptorType="ATTRIBUTE" description="The state of this TCP connection.&#10;&#10;The only value which may be set by a management&#10;station is deleteTCB(12).  Accordingly, it is&#10;appropriate for an agent to return a `badValue'&#10;response if a management station attempts to set&#10;this object to any other value.&#10;&#10;If a management station sets this object to the&#10;value deleteTCB(12), then this has the effect of&#10;deleting the TCB (as defined in RFC 793) of the&#10;corresponding connection on the managed node,&#10;resulting in immediate termination of the&#10;connection.&#10;&#10;As an implementation-specific option, a RST&#10;segment may be sent from the managed node to the&#10;other TCP endpoint (note however that RST segments&#10;are not sent reliably)." type="int[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="INTEGER" componentType="int"/>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.6.13.1.1"></protocolMap>
+                            <attribute name="tcpConnStateInstance" descriptorType="ATTRIBUTE" description="The state of this TCP connection.&#10;&#10;The only value which may be set by a management&#10;station is deleteTCB(12).  Accordingly, it is&#10;appropriate for an agent to return a `badValue'&#10;response if a management station attempts to set&#10;this object to any other value.&#10;&#10;If a management station sets this object to the&#10;value deleteTCB(12), then this has the effect of&#10;deleting the TCB (as defined in RFC 793) of the&#10;corresponding connection on the managed node,&#10;resulting in immediate termination of the&#10;connection.&#10;&#10;As an implementation-specific option, a RST&#10;segment may be sent from the managed node to the&#10;other TCP endpoint (note however that RST segments&#10;are not sent reliably)." type="int" default="" access="READWRITE" indexRequired="true">
+                                <typeInfo subType="INTEGER" enumerated="true" range="false">
+                                    <enum name="closed" value="1"/>
+                                    <enum name="listen" value="2"/>
+                                    <enum name="synSent" value="3"/>
+                                    <enum name="synReceived" value="4"/>
+                                    <enum name="established" value="5"/>
+                                    <enum name="finWait1" value="6"/>
+                                    <enum name="finWait2" value="7"/>
+                                    <enum name="closeWait" value="8"/>
+                                    <enum name="lastAck" value="9"/>
+                                    <enum name="closing" value="10"/>
+                                    <enum name="timeWait" value="11"/>
+                                    <enum name="deleteTCB" value="12"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.6.13.1.1"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="tcpConnLocalAddress" descriptorType="ATTRIBUTE" description="The local IP address for this TCP connection.  In&#10;the case of a connection in the listen state which&#10;is willing to accept connections for any IP&#10;interface associated with the node, the value&#10;0.0.0.0 is used." type="String[]" default="" access="READ" key="PRIMARY" indexRequired="false">
+                            <typeInfo subType="IpAddress" componentType="java.lang.String"/>
+                            <protocolMap name="SNMP" type="64" identifier="1.3.6.1.2.1.6.13.1.2"></protocolMap>
+                            <attribute name="tcpConnLocalAddressInstance" descriptorType="ATTRIBUTE" description="The local IP address for this TCP connection.  In&#10;the case of a connection in the listen state which&#10;is willing to accept connections for any IP&#10;interface associated with the node, the value&#10;0.0.0.0 is used." type="java.lang.String" default="" access="READ" key="PRIMARY" indexRequired="true">
+                                <typeInfo subType="IpAddress"/>
+                                <protocolMap name="SNMP" type="64" identifier="1.3.6.1.2.1.6.13.1.2"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="tcpConnLocalPort" descriptorType="ATTRIBUTE" description="The local port number for this TCP connection." type="int[]" default="" access="READ" key="PRIMARY" indexRequired="false">
+                            <typeInfo subType="INTEGER" componentType="int"/>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.6.13.1.3"></protocolMap>
+                            <attribute name="tcpConnLocalPortInstance" descriptorType="ATTRIBUTE" description="The local port number for this TCP connection." type="int" default="" access="READ" key="PRIMARY" indexRequired="true">
+                                <typeInfo subType="INTEGER" enumerated="false" range="true">
+                                    <range min="0" max="65535"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.6.13.1.3"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="tcpConnRemAddress" descriptorType="ATTRIBUTE" description="The remote IP address for this TCP connection." type="String[]" default="" access="READ" key="PRIMARY" indexRequired="false">
+                            <typeInfo subType="IpAddress" componentType="java.lang.String"/>
+                            <protocolMap name="SNMP" type="64" identifier="1.3.6.1.2.1.6.13.1.4"></protocolMap>
+                            <attribute name="tcpConnRemAddressInstance" descriptorType="ATTRIBUTE" description="The remote IP address for this TCP connection." type="java.lang.String" default="" access="READ" key="PRIMARY" indexRequired="true">
+                                <typeInfo subType="IpAddress"/>
+                                <protocolMap name="SNMP" type="64" identifier="1.3.6.1.2.1.6.13.1.4"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="tcpConnRemPort" descriptorType="ATTRIBUTE" description="The remote port number for this TCP connection." type="int[]" default="" access="READ" key="PRIMARY" indexRequired="false">
+                            <typeInfo subType="INTEGER" componentType="int"/>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.6.13.1.5"></protocolMap>
+                            <attribute name="tcpConnRemPortInstance" descriptorType="ATTRIBUTE" description="The remote port number for this TCP connection." type="int" default="" access="READ" key="PRIMARY" indexRequired="true">
+                                <typeInfo subType="INTEGER" enumerated="false" range="true">
+                                    <range min="0" max="65535"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.6.13.1.5"></protocolMap>
+                            </attribute>
+                        </attribute>
+                    </combinedAttribute>
+                    <attribute name="tcpInErrs" descriptorType="ATTRIBUTE" description="The total number of segments received in error&#10;(e.g., bad TCP checksums)." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.6.14.0"></protocolMap>
+                    </attribute>
+                    <attribute name="tcpOutRsts" descriptorType="ATTRIBUTE" description="The number of TCP segments sent containing the&#10;RST flag." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.6.15.0"></protocolMap>
+                    </attribute>
+                </node>
+                <node name="udp" descriptorType="NODETYPE">
+                    <attribute name="udpInDatagrams" descriptorType="ATTRIBUTE" description="The total number of UDP datagrams delivered to&#10;UDP users." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.7.1.0"></protocolMap>
+                    </attribute>
+                    <attribute name="udpNoPorts" descriptorType="ATTRIBUTE" description="The total number of received UDP datagrams for&#10;which there was no application at the destination&#10;port." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.7.2.0"></protocolMap>
+                    </attribute>
+                    <attribute name="udpInErrors" descriptorType="ATTRIBUTE" description="The number of received UDP datagrams that could&#10;not be delivered for reasons other than the lack&#10;of an application at the destination port." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.7.3.0"></protocolMap>
+                    </attribute>
+                    <attribute name="udpOutDatagrams" descriptorType="ATTRIBUTE" description="The total number of UDP datagrams sent from this&#10;entity." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.7.4.0"></protocolMap>
+                    </attribute>
+                    <combinedAttribute name="udpTable" descriptorType="ATTRIBUTE" description="A table containing UDP listener information." type="Table" default="" access="READ" indexRequired="false">
+                        <protocolMap name="SNMP" type="TABLE" identifier="1.3.6.1.2.1.7.5"></protocolMap>
+                        <attribute name="udpLocalAddress" descriptorType="ATTRIBUTE" description="The local IP address for this UDP listener.  In&#10;the case of a UDP listener which is willing to&#10;accept datagrams for any IP interface associated&#10;with the node, the value 0.0.0.0 is used." type="String[]" default="" access="READ" key="PRIMARY" indexRequired="false">
+                            <typeInfo subType="IpAddress" componentType="java.lang.String"/>
+                            <protocolMap name="SNMP" type="64" identifier="1.3.6.1.2.1.7.5.1.1"></protocolMap>
+                            <attribute name="udpLocalAddressInstance" descriptorType="ATTRIBUTE" description="The local IP address for this UDP listener.  In&#10;the case of a UDP listener which is willing to&#10;accept datagrams for any IP interface associated&#10;with the node, the value 0.0.0.0 is used." type="java.lang.String" default="" access="READ" key="PRIMARY" indexRequired="true">
+                                <typeInfo subType="IpAddress"/>
+                                <protocolMap name="SNMP" type="64" identifier="1.3.6.1.2.1.7.5.1.1"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="udpLocalPort" descriptorType="ATTRIBUTE" description="The local port number for this UDP listener." type="int[]" default="" access="READ" key="PRIMARY" indexRequired="false">
+                            <typeInfo subType="INTEGER" componentType="int"/>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.7.5.1.2"></protocolMap>
+                            <attribute name="udpLocalPortInstance" descriptorType="ATTRIBUTE" description="The local port number for this UDP listener." type="int" default="" access="READ" key="PRIMARY" indexRequired="true">
+                                <typeInfo subType="INTEGER" enumerated="false" range="true">
+                                    <range min="0" max="65535"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.7.5.1.2"></protocolMap>
+                            </attribute>
+                        </attribute>
+                    </combinedAttribute>
+                </node>
+                <node name="egp" descriptorType="NODETYPE">
+                    <attribute name="egpInMsgs" descriptorType="ATTRIBUTE" description="The number of EGP messages received without&#10;error." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.8.1.0"></protocolMap>
+                    </attribute>
+                    <attribute name="egpInErrors" descriptorType="ATTRIBUTE" description="The number of EGP messages received that proved&#10;to be in error." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.8.2.0"></protocolMap>
+                    </attribute>
+                    <attribute name="egpOutMsgs" descriptorType="ATTRIBUTE" description="The total number of locally generated EGP&#10;messages." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.8.3.0"></protocolMap>
+                    </attribute>
+                    <attribute name="egpOutErrors" descriptorType="ATTRIBUTE" description="The number of locally generated EGP messages not&#10;sent due to resource limitations within an EGP&#10;entity." type="long" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="Counter" enumerated="false" range="true">
+                            <range min="0" max="4294967295"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.8.4.0"></protocolMap>
+                    </attribute>
+                    <combinedAttribute name="egpNeighTable" descriptorType="ATTRIBUTE" description="The EGP neighbor table." type="Table" default="" access="READ" indexRequired="false">
+                        <protocolMap name="SNMP" type="TABLE" identifier="1.3.6.1.2.1.8.5"></protocolMap>
+                        <attribute name="egpNeighState" descriptorType="ATTRIBUTE" description="The EGP state of the local system with respect to&#10;this entry's EGP neighbor.  Each EGP state is&#10;represented by a value that is one greater than&#10;the numerical value associated with said state in&#10;RFC 904." type="int[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="INTEGER" componentType="int"/>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.8.5.1.1"></protocolMap>
+                            <attribute name="egpNeighStateInstance" descriptorType="ATTRIBUTE" description="The EGP state of the local system with respect to&#10;this entry's EGP neighbor.  Each EGP state is&#10;represented by a value that is one greater than&#10;the numerical value associated with said state in&#10;RFC 904." type="int" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="INTEGER" enumerated="true" range="false">
+                                    <enum name="idle" value="1"/>
+                                    <enum name="acquisition" value="2"/>
+                                    <enum name="down" value="3"/>
+                                    <enum name="up" value="4"/>
+                                    <enum name="cease" value="5"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.8.5.1.1"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="egpNeighAddr" descriptorType="ATTRIBUTE" description="The IP address of this entry's EGP neighbor." type="String[]" default="" access="READ" key="PRIMARY" indexRequired="false">
+                            <typeInfo subType="IpAddress" componentType="java.lang.String"/>
+                            <protocolMap name="SNMP" type="64" identifier="1.3.6.1.2.1.8.5.1.2"></protocolMap>
+                            <attribute name="egpNeighAddrInstance" descriptorType="ATTRIBUTE" description="The IP address of this entry's EGP neighbor." type="java.lang.String" default="" access="READ" key="PRIMARY" indexRequired="true">
+                                <typeInfo subType="IpAddress"/>
+                                <protocolMap name="SNMP" type="64" identifier="1.3.6.1.2.1.8.5.1.2"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="egpNeighAs" descriptorType="ATTRIBUTE" description="The autonomous system of this EGP peer.  Zero&#10;should be specified if the autonomous system&#10;number of the neighbor is not yet known." type="int[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="INTEGER" componentType="int"/>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.8.5.1.3"></protocolMap>
+                            <attribute name="egpNeighAsInstance" descriptorType="ATTRIBUTE" description="The autonomous system of this EGP peer.  Zero&#10;should be specified if the autonomous system&#10;number of the neighbor is not yet known." type="int" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="INTEGER" enumerated="false" range="true">
+                                    <range min="-2147483648" max="2147483647"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.8.5.1.3"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="egpNeighInMsgs" descriptorType="ATTRIBUTE" description="The number of EGP messages received without error&#10;from this EGP peer." type="long[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" componentType="long"/>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.8.5.1.4"></protocolMap>
+                            <attribute name="egpNeighInMsgsInstance" descriptorType="ATTRIBUTE" description="The number of EGP messages received without error&#10;from this EGP peer." type="long" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="Counter" enumerated="false" range="true">
+                                    <range min="0" max="4294967295"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.8.5.1.4"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="egpNeighInErrs" descriptorType="ATTRIBUTE" description="The number of EGP messages received from this EGP&#10;peer that proved to be in error (e.g., bad EGP&#10;checksum)." type="long[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" componentType="long"/>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.8.5.1.5"></protocolMap>
+                            <attribute name="egpNeighInErrsInstance" descriptorType="ATTRIBUTE" description="The number of EGP messages received from this EGP&#10;peer that proved to be in error (e.g., bad EGP&#10;checksum)." type="long" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="Counter" enumerated="false" range="true">
+                                    <range min="0" max="4294967295"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.8.5.1.5"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="egpNeighOutMsgs" descriptorType="ATTRIBUTE" description="The number of locally generated EGP messages to&#10;this EGP peer." type="long[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" componentType="long"/>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.8.5.1.6"></protocolMap>
+                            <attribute name="egpNeighOutMsgsInstance" descriptorType="ATTRIBUTE" description="The number of locally generated EGP messages to&#10;this EGP peer." type="long" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="Counter" enumerated="false" range="true">
+                                    <range min="0" max="4294967295"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.8.5.1.6"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="egpNeighOutErrs" descriptorType="ATTRIBUTE" description="The number of locally generated EGP messages not&#10;sent to this EGP peer due to resource limitations&#10;within an EGP entity." type="long[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" componentType="long"/>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.8.5.1.7"></protocolMap>
+                            <attribute name="egpNeighOutErrsInstance" descriptorType="ATTRIBUTE" description="The number of locally generated EGP messages not&#10;sent to this EGP peer due to resource limitations&#10;within an EGP entity." type="long" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="Counter" enumerated="false" range="true">
+                                    <range min="0" max="4294967295"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.8.5.1.7"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="egpNeighInErrMsgs" descriptorType="ATTRIBUTE" description="The number of EGP-defined error messages received&#10;from this EGP peer." type="long[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" componentType="long"/>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.8.5.1.8"></protocolMap>
+                            <attribute name="egpNeighInErrMsgsInstance" descriptorType="ATTRIBUTE" description="The number of EGP-defined error messages received&#10;from this EGP peer." type="long" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="Counter" enumerated="false" range="true">
+                                    <range min="0" max="4294967295"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.8.5.1.8"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="egpNeighOutErrMsgs" descriptorType="ATTRIBUTE" description="The number of EGP-defined error messages sent to&#10;this EGP peer." type="long[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" componentType="long"/>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.8.5.1.9"></protocolMap>
+                            <attribute name="egpNeighOutErrMsgsInstance" descriptorType="ATTRIBUTE" description="The number of EGP-defined error messages sent to&#10;this EGP peer." type="long" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="Counter" enumerated="false" range="true">
+                                    <range min="0" max="4294967295"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.8.5.1.9"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="egpNeighStateUps" descriptorType="ATTRIBUTE" description="The number of EGP state transitions to the UP&#10;state with this EGP peer." type="long[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" componentType="long"/>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.8.5.1.10"></protocolMap>
+                            <attribute name="egpNeighStateUpsInstance" descriptorType="ATTRIBUTE" description="The number of EGP state transitions to the UP&#10;state with this EGP peer." type="long" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="Counter" enumerated="false" range="true">
+                                    <range min="0" max="4294967295"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.8.5.1.10"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="egpNeighStateDowns" descriptorType="ATTRIBUTE" description="The number of EGP state transitions from the UP&#10;state to any other state with this EGP peer." type="long[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" componentType="long"/>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.8.5.1.11"></protocolMap>
+                            <attribute name="egpNeighStateDownsInstance" descriptorType="ATTRIBUTE" description="The number of EGP state transitions from the UP&#10;state to any other state with this EGP peer." type="long" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="Counter" enumerated="false" range="true">
+                                    <range min="0" max="4294967295"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.8.5.1.11"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="egpNeighIntervalHello" descriptorType="ATTRIBUTE" description="The interval between EGP Hello command&#10;retransmissions (in hundredths of a second).  This&#10;represents the t1 timer as defined in RFC 904." type="int[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="INTEGER" componentType="int"/>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.8.5.1.12"></protocolMap>
+                            <attribute name="egpNeighIntervalHelloInstance" descriptorType="ATTRIBUTE" description="The interval between EGP Hello command&#10;retransmissions (in hundredths of a second).  This&#10;represents the t1 timer as defined in RFC 904." type="int" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="INTEGER" enumerated="false" range="true">
+                                    <range min="-2147483648" max="2147483647"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.8.5.1.12"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="egpNeighIntervalPoll" descriptorType="ATTRIBUTE" description="The interval between EGP poll command&#10;retransmissions (in hundredths of a second).  This&#10;represents the t3 timer as defined in RFC 904." type="int[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="INTEGER" componentType="int"/>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.8.5.1.13"></protocolMap>
+                            <attribute name="egpNeighIntervalPollInstance" descriptorType="ATTRIBUTE" description="The interval between EGP poll command&#10;retransmissions (in hundredths of a second).  This&#10;represents the t3 timer as defined in RFC 904." type="int" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="INTEGER" enumerated="false" range="true">
+                                    <range min="-2147483648" max="2147483647"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.8.5.1.13"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="egpNeighMode" descriptorType="ATTRIBUTE" description="The polling mode of this EGP entity, either&#10;passive or active." type="int[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="INTEGER" componentType="int"/>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.8.5.1.14"></protocolMap>
+                            <attribute name="egpNeighModeInstance" descriptorType="ATTRIBUTE" description="The polling mode of this EGP entity, either&#10;passive or active." type="int" default="" access="READ" indexRequired="true">
+                                <typeInfo subType="INTEGER" enumerated="true" range="false">
+                                    <enum name="active" value="1"/>
+                                    <enum name="passive" value="2"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.8.5.1.14"></protocolMap>
+                            </attribute>
+                        </attribute>
+                        <attribute name="egpNeighEventTrigger" descriptorType="ATTRIBUTE" description="A control variable used to trigger operator-&#10;initiated Start and Stop events.  When read, this&#10;variable always returns the most recent value that&#10;egpNeighEventTrigger was set to.  If it has not&#10;been set since the last initialization of the&#10;network management subsystem on the node, it&#10;returns a value of `stop'.&#10;&#10;When set, this variable causes a Start or Stop&#10;event on the specified neighbor, as specified on&#10;pages 8-10 of RFC 904.  Briefly, a Start event&#10;causes an Idle peer to begin neighbor acquisition&#10;and a non-Idle peer to reinitiate neighbor&#10;acquisition.  A stop event causes a non-Idle peer&#10;to return to the Idle state until a Start event&#10;occurs, either via egpNeighEventTrigger or&#10;otherwise." type="int[]" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="INTEGER" componentType="int"/>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.8.5.1.15"></protocolMap>
+                            <attribute name="egpNeighEventTriggerInstance" descriptorType="ATTRIBUTE" description="A control variable used to trigger operator-&#10;initiated Start and Stop events.  When read, this&#10;variable always returns the most recent value that&#10;egpNeighEventTrigger was set to.  If it has not&#10;been set since the last initialization of the&#10;network management subsystem on the node, it&#10;returns a value of `stop'.&#10;&#10;When set, this variable causes a Start or Stop&#10;event on the specified neighbor, as specified on&#10;pages 8-10 of RFC 904.  Briefly, a Start event&#10;causes an Idle peer to begin neighbor acquisition&#10;and a non-Idle peer to reinitiate neighbor&#10;acquisition.  A stop event causes a non-Idle peer&#10;to return to the Idle state until a Start event&#10;occurs, either via egpNeighEventTrigger or&#10;otherwise." type="int" default="" access="READWRITE" indexRequired="true">
+                                <typeInfo subType="INTEGER" enumerated="true" range="false">
+                                    <enum name="start" value="1"/>
+                                    <enum name="stop" value="2"/>
+                                </typeInfo>
+                                <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.8.5.1.15"></protocolMap>
+                            </attribute>
+                        </attribute>
+                    </combinedAttribute>
+                    <attribute name="egpAs" descriptorType="ATTRIBUTE" description="The autonomous system number of this EGP entity." type="int" default="" access="READ" indexRequired="false">
+                        <typeInfo subType="INTEGER" enumerated="false" range="true">
+                            <range min="-2147483648" max="2147483647"/>
+                        </typeInfo>
+                        <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.8.6.0"></protocolMap>
+                    </attribute>
+                </node>
+                <node name="transmission" descriptorType="NODETYPE"/>
+                    <node name="snmp" descriptorType="NODETYPE">
+                        <attribute name="snmpInPkts" descriptorType="ATTRIBUTE" description="The total number of Messages delivered to the&#10;SNMP entity from the transport service." type="long" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" enumerated="false" range="true">
+                                <range min="0" max="4294967295"/>
+                            </typeInfo>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.11.1.0"></protocolMap>
+                        </attribute>
+                        <attribute name="snmpOutPkts" descriptorType="ATTRIBUTE" description="The total number of SNMP Messages which were&#10;passed from the SNMP protocol entity to the&#10;transport service." type="long" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" enumerated="false" range="true">
+                                <range min="0" max="4294967295"/>
+                            </typeInfo>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.11.2.0"></protocolMap>
+                        </attribute>
+                        <attribute name="snmpInBadVersions" descriptorType="ATTRIBUTE" description="The total number of SNMP Messages which were&#10;delivered to the SNMP protocol entity and were for&#10;an unsupported SNMP version." type="long" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" enumerated="false" range="true">
+                                <range min="0" max="4294967295"/>
+                            </typeInfo>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.11.3.0"></protocolMap>
+                        </attribute>
+                        <attribute name="snmpInBadCommunityNames" descriptorType="ATTRIBUTE" description="The total number of SNMP Messages delivered to&#10;the SNMP protocol entity which used a SNMP&#10;community name not known to said entity." type="long" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" enumerated="false" range="true">
+                                <range min="0" max="4294967295"/>
+                            </typeInfo>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.11.4.0"></protocolMap>
+                        </attribute>
+                        <attribute name="snmpInBadCommunityUses" descriptorType="ATTRIBUTE" description="The total number of SNMP Messages delivered to&#10;the SNMP protocol entity which represented an SNMP&#10;operation which was not allowed by the SNMP&#10;community named in the Message." type="long" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" enumerated="false" range="true">
+                                <range min="0" max="4294967295"/>
+                            </typeInfo>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.11.5.0"></protocolMap>
+                        </attribute>
+                        <attribute name="snmpInASNParseErrs" descriptorType="ATTRIBUTE" description="The total number of ASN.1 or BER errors&#10;encountered by the SNMP protocol entity when&#10;decoding received SNMP Messages." type="long" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" enumerated="false" range="true">
+                                <range min="0" max="4294967295"/>
+                            </typeInfo>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.11.6.0"></protocolMap>
+                        </attribute>
+                        <attribute name="snmpInTooBigs" descriptorType="ATTRIBUTE" description="The total number of SNMP PDUs which were&#10;delivered to the SNMP protocol entity and for&#10;which the value of the error-status field is&#10;`tooBig'." type="long" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" enumerated="false" range="true">
+                                <range min="0" max="4294967295"/>
+                            </typeInfo>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.11.8.0"></protocolMap>
+                        </attribute>
+                        <attribute name="snmpInNoSuchNames" descriptorType="ATTRIBUTE" description="The total number of SNMP PDUs which were&#10;delivered to the SNMP protocol entity and for&#10;which the value of the error-status field is&#10;`noSuchName'." type="long" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" enumerated="false" range="true">
+                                <range min="0" max="4294967295"/>
+                            </typeInfo>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.11.9.0"></protocolMap>
+                        </attribute>
+                        <attribute name="snmpInBadValues" descriptorType="ATTRIBUTE" description="The total number of SNMP PDUs which were&#10;delivered to the SNMP protocol entity and for&#10;which the value of the error-status field is&#10;`badValue'." type="long" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" enumerated="false" range="true">
+                                <range min="0" max="4294967295"/>
+                            </typeInfo>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.11.10.0"></protocolMap>
+                        </attribute>
+                        <attribute name="snmpInReadOnlys" descriptorType="ATTRIBUTE" description="The total number valid SNMP PDUs which were&#10;delivered to the SNMP protocol entity and for&#10;which the value of the error-status field is&#10;`readOnly'.  It should be noted that it is a&#10;protocol error to generate an SNMP PDU which&#10;contains the value `readOnly' in the error-status&#10;field, as such this object is provided as a means&#10;of detecting incorrect implementations of the&#10;SNMP." type="long" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" enumerated="false" range="true">
+                                <range min="0" max="4294967295"/>
+                            </typeInfo>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.11.11.0"></protocolMap>
+                        </attribute>
+                        <attribute name="snmpInGenErrs" descriptorType="ATTRIBUTE" description="The total number of SNMP PDUs which were&#10;delivered to the SNMP protocol entity and for&#10;which the value of the error-status field is&#10;`genErr'." type="long" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" enumerated="false" range="true">
+                                <range min="0" max="4294967295"/>
+                            </typeInfo>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.11.12.0"></protocolMap>
+                        </attribute>
+                        <attribute name="snmpInTotalReqVars" descriptorType="ATTRIBUTE" description="The total number of MIB objects which have been&#10;retrieved successfully by the SNMP protocol entity&#10;as the result of receiving valid SNMP Get-Request&#10;and Get-Next PDUs." type="long" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" enumerated="false" range="true">
+                                <range min="0" max="4294967295"/>
+                            </typeInfo>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.11.13.0"></protocolMap>
+                        </attribute>
+                        <attribute name="snmpInTotalSetVars" descriptorType="ATTRIBUTE" description="The total number of MIB objects which have been&#10;altered successfully by the SNMP protocol entity&#10;as the result of receiving valid SNMP Set-Request&#10;PDUs." type="long" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" enumerated="false" range="true">
+                                <range min="0" max="4294967295"/>
+                            </typeInfo>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.11.14.0"></protocolMap>
+                        </attribute>
+                        <attribute name="snmpInGetRequests" descriptorType="ATTRIBUTE" description="The total number of SNMP Get-Request PDUs which&#10;have been accepted and processed by the SNMP&#10;protocol entity." type="long" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" enumerated="false" range="true">
+                                <range min="0" max="4294967295"/>
+                            </typeInfo>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.11.15.0"></protocolMap>
+                        </attribute>
+                        <attribute name="snmpInGetNexts" descriptorType="ATTRIBUTE" description="The total number of SNMP Get-Next PDUs which have&#10;been accepted and processed by the SNMP protocol&#10;entity." type="long" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" enumerated="false" range="true">
+                                <range min="0" max="4294967295"/>
+                            </typeInfo>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.11.16.0"></protocolMap>
+                        </attribute>
+                        <attribute name="snmpInSetRequests" descriptorType="ATTRIBUTE" description="The total number of SNMP Set-Request PDUs which&#10;have been accepted and processed by the SNMP&#10;protocol entity." type="long" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" enumerated="false" range="true">
+                                <range min="0" max="4294967295"/>
+                            </typeInfo>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.11.17.0"></protocolMap>
+                        </attribute>
+                        <attribute name="snmpInGetResponses" descriptorType="ATTRIBUTE" description="The total number of SNMP Get-Response PDUs which&#10;have been accepted and processed by the SNMP&#10;protocol entity." type="long" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" enumerated="false" range="true">
+                                <range min="0" max="4294967295"/>
+                            </typeInfo>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.11.18.0"></protocolMap>
+                        </attribute>
+                        <attribute name="snmpInTraps" descriptorType="ATTRIBUTE" description="The total number of SNMP Trap PDUs which have&#10;been accepted and processed by the SNMP protocol&#10;entity." type="long" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" enumerated="false" range="true">
+                                <range min="0" max="4294967295"/>
+                            </typeInfo>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.11.19.0"></protocolMap>
+                        </attribute>
+                        <attribute name="snmpOutTooBigs" descriptorType="ATTRIBUTE" description="The total number of SNMP PDUs which were&#10;generated by the SNMP protocol entity and for&#10;which the value of the error-status field is&#10;`tooBig.'" type="long" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" enumerated="false" range="true">
+                                <range min="0" max="4294967295"/>
+                            </typeInfo>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.11.20.0"></protocolMap>
+                        </attribute>
+                        <attribute name="snmpOutNoSuchNames" descriptorType="ATTRIBUTE" description="The total number of SNMP PDUs which were&#10;generated by the SNMP protocol entity and for&#10;which the value of the error-status is&#10;`noSuchName'." type="long" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" enumerated="false" range="true">
+                                <range min="0" max="4294967295"/>
+                            </typeInfo>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.11.21.0"></protocolMap>
+                        </attribute>
+                        <attribute name="snmpOutBadValues" descriptorType="ATTRIBUTE" description="The total number of SNMP PDUs which were&#10;generated by the SNMP protocol entity and for&#10;which the value of the error-status field is&#10;`badValue'." type="long" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" enumerated="false" range="true">
+                                <range min="0" max="4294967295"/>
+                            </typeInfo>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.11.22.0"></protocolMap>
+                        </attribute>
+                        <attribute name="snmpOutGenErrs" descriptorType="ATTRIBUTE" description="The total number of SNMP PDUs which were&#10;generated by the SNMP protocol entity and for&#10;which the value of the error-status field is&#10;`genErr'." type="long" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" enumerated="false" range="true">
+                                <range min="0" max="4294967295"/>
+                            </typeInfo>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.11.24.0"></protocolMap>
+                        </attribute>
+                        <attribute name="snmpOutGetRequests" descriptorType="ATTRIBUTE" description="The total number of SNMP Get-Request PDUs which&#10;have been generated by the SNMP protocol entity." type="long" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" enumerated="false" range="true">
+                                <range min="0" max="4294967295"/>
+                            </typeInfo>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.11.25.0"></protocolMap>
+                        </attribute>
+                        <attribute name="snmpOutGetNexts" descriptorType="ATTRIBUTE" description="The total number of SNMP Get-Next PDUs which have&#10;been generated by the SNMP protocol entity." type="long" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" enumerated="false" range="true">
+                                <range min="0" max="4294967295"/>
+                            </typeInfo>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.11.26.0"></protocolMap>
+                        </attribute>
+                        <attribute name="snmpOutSetRequests" descriptorType="ATTRIBUTE" description="The total number of SNMP Set-Request PDUs which&#10;have been generated by the SNMP protocol entity." type="long" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" enumerated="false" range="true">
+                                <range min="0" max="4294967295"/>
+                            </typeInfo>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.11.27.0"></protocolMap>
+                        </attribute>
+                        <attribute name="snmpOutGetResponses" descriptorType="ATTRIBUTE" description="The total number of SNMP Get-Response PDUs which&#10;have been generated by the SNMP protocol entity." type="long" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" enumerated="false" range="true">
+                                <range min="0" max="4294967295"/>
+                            </typeInfo>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.11.28.0"></protocolMap>
+                        </attribute>
+                        <attribute name="snmpOutTraps" descriptorType="ATTRIBUTE" description="The total number of SNMP Trap PDUs which have&#10;been generated by the SNMP protocol entity." type="long" default="" access="READ" indexRequired="false">
+                            <typeInfo subType="Counter" enumerated="false" range="true">
+                                <range min="0" max="4294967295"/>
+                            </typeInfo>
+                            <protocolMap name="SNMP" type="65" identifier="1.3.6.1.2.1.11.29.0"></protocolMap>
+                        </attribute>
+                        <attribute name="snmpEnableAuthenTraps" descriptorType="ATTRIBUTE" description="Indicates whether the SNMP agent process is&#10;permitted to generate authentication-failure&#10;traps.  The value of this object overrides any&#10;configuration information; as such, it provides a&#10;means whereby all authentication-failure traps may&#10;be disabled.&#10;&#10;Note that it is strongly recommended that this&#10;object be stored in non-volatile memory so that it&#10;remains constant between re-initializations of the&#10;network management system." type="int" default="" access="READWRITE" indexRequired="false">
+                            <typeInfo subType="INTEGER" enumerated="true" range="false">
+                                <enum name="enabled" value="1"/>
+                                <enum name="disabled" value="2"/>
+                            </typeInfo>
+                            <protocolMap name="SNMP" type="2" identifier="1.3.6.1.2.1.11.30.0"></protocolMap>
+                        </attribute>
+                    </node>
+                </node>
+            </node>
+            <node name="experimental" descriptorType="NODETYPE"/>
+                <node name="private" descriptorType="NODETYPE">
+                    <node name="enterprises" descriptorType="NODETYPE"/>
+                    </node>
+                </node>
+            </node>
+        </node>
+    </module>
+</file>
